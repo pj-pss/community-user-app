@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="glossary:title"></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.4.3/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/2.0.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/calorie_smile.js"></script>
+  <script src="./js/common_personium.js"></script>
+  <script src="./js/user.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+  <link href='./css/user.css' rel='stylesheet' type='text/css'>
+<!--
+  <style type="text/css">
+table {
+    width: 100%;
+}
+
+table tr th,
+table tr td {
+    padding: 0 10px;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+}
+
+table tr th {
+    text-align: center;
+    font-weight: bold;
+}
+  </style>
+-->
+<style type="text/css">
+#top img {
+	float: left;
+}
+
+#profile table th,
+.personalInfo table th {
+	text-align: right;
+}
+
+.personalInfo table,
+#helperOpHistory table,
+#consentHistory table,
+#viewHistory table {
+	width: 100%;
+}
+.personalInfo table td img {
+	width: 128px;
+	height: 128px;
+	vertical-align: middle;
+}
+
+#opHistory img,
+#helperOpHistory img,
+#viewHistory img {
+	width: 48px;
+	height: 48px;
+	float: left;
+}
+
+#consentHistory img {
+	width: 48px;
+	height: 48px;
+}
+
+.yourNews,
+#opHistory table tr th,
+#opHistory table tr td,
+#helperOpHistory table tr th,
+#helperOpHistory table tr td,
+#consentHistory table tr th,
+#consentHistory table tr td,
+#viewHistory table tr th,
+#viewHistory table tr td {
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+}
+
+button.close img {
+	width: 32px;
+	height: 32px;
+}
+
+header h1 {
+	font-size: 16px;
+}
+
+header .helperMsg {
+	font-size: 12px;
+}
+
+</style>
+<script type="text/javascript">
+// 現在表示中のメニューID
+var nowViewMenu = "top";
+// 表示するメニューを切り替える
+// Bootstrap機能使用
+function view(menuId) {
+	$("#" + nowViewMenu).addClass('hidden');
+	$("#" + menuId).removeClass('hidden');
+	nowViewMenu = menuId;
+}
+
+// 操作支援を許可したか
+var helpAuthorized = false;
+
+// NFCリーダダイアログを開く
+function openNfcReader() {
+	helpAuthorized = false
+    $('#modal-nfcReader').modal('show');
+}
+// 人物情報ダイアログを開く
+function openPersonalInfo() {
+    $('#modal-personalInfo').modal('show');
+}
+// 人物情報ダイアログ2を開く
+function openPersonalInfo2() {
+    $('#modal-personalInfo2').modal('show');
+}
+// 人物情報ダイアログ3を開く
+function openPersonalInfo3() {
+    $('#modal-personalInfo3').modal('show');
+}
+
+// NFCリーダをかざしたとき
+function authorizedNfcReader() {
+	helpAuthorized = true;
+	$('body').removeClass('modal-open');
+	$('.modal-backdrop').remove();
+	$('#modal-nfcReader').modal('hide');
+}
+
+// 操作支援終了問い合わせダイアログを開く
+function openHelpConfirm() {
+    $('#modal-helpConfirm').modal('show');
+}
+// 操作支援終了問い合わせダイアログを閉じる
+function closeHelpConfirm(f) {
+	if(f) {
+		$("#endHelpOp").addClass('hidden');
+		$("#startHelpOp").removeClass("hidden");
+		$('header').css('background-color', '#008F00');
+		$('h1').css('background-color', '#008F00');
+		$('#welcomMessage').html(welcomeMessage);
+	}
+	$('body').removeClass('modal-open');
+	$('.modal-backdrop').remove();
+	$('#modal-helpConfirm').modal('hide');
+}
+
+// ようこそメッセージ
+var welcomeMessage = "";
+
+$(function () {
+	// NFCリーダダイアログが閉じたら操作支援開始ダイアログを開く
+	$('#modal-nfcReader').on('hidden.bs.modal', function () {
+		if(helpAuthorized) {
+			$('#modal-startHelpOp').modal('show');
+
+			$("#startHelpOp").addClass('hidden');
+			$("#endHelpOp").removeClass("hidden");
+
+			$('header').css('background-color', '#FF0000');
+			$('h1').css('background-color', '#FF0000');
+
+			welcomeMessage = $('#welcomMessage').html();
+			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
+		}
+	});
+});
+
+</script>
+</head>
+<body>
+  <header>
+    <h1 data-i18n="glossary:calorieSmileCollaboration" id="welcomMessage">ようこそ&nbsp;&nbsp;&nbsp;富士通　太郎さん</h1>
+    <a id="updateGenki" href="#" onclick="cs.getGenkikunData();return false;">
+      <img id="reloadIcon" src="./image/parts_ico_reload.png" alt="user">
+    </a>
+    <a href="#" onclick="cs.openSlide();">
+      <img id="menuIcon" src="./image/parts_menu.png">
+    </a>
+  </header>
+  <div id="dispMsg" style="display:none;">
+  </div>
+  <span id="dvMainArea">
+
+<div id="top">
+	<h2>■あなたへのお知らせ</h2>
+	<div class="main_box">
+		<table>
+			<tr class="yourNews"><td>
+				<table>
+					<tr><td>みんなの掲示板 2017/11/07 13:46</td></tr>
+					<tr><td>&nbsp;&nbsp;<img src="./image/parts_ico_cleaningbucket.png" alt="Cleaning Backet" style="width: 32px;height: 32px;">&nbsp;&nbsp;共有フロアの清掃を次の日程で実施します</td></tr>
+					<tr>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">&nbsp;&nbsp;コメント:0</td>
+					</tr>
+				</table>
+			</td></tr>
+			<tr class="yourNews"><td>
+				<table>
+					<tr><td>みんなの掲示板 2017/11/06 10:08</td></tr>
+					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;">まちのみんなでお祝いしよう！UDCK設立11周年記念パーティ</td></tr>
+					<tr>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">参加します:3</td>
+						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">検討中:2</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:3</td>
+					</tr>
+				</table>
+			</td></tr>
+			<tr class="yourNews"><td>
+				<table>
+					<tr><td>みんなの掲示板 2017/10/28 11:25</td></tr>
+					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;"><a onclick="cs.openExtCellCalSmile();">【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY</a></td></tr>
+					<tr>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">参加します:11</td>
+						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">検討中:4</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:1</td>
+					</tr>
+				</table>
+			</td></tr>
+			<tr class="yourNews"><td>
+				<table>
+					<tr><td>みんなの掲示板 2017/10/25 16:51</td></tr>
+					<tr><td><img src="./image/parts_ico_knivesforks.png" alt="Knives and forks" style="width: 32px;height: 32px;">11月のレストランメニューが決まりました</td></tr>
+					<tr>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:13</td>
+					</tr>
+				</table>
+			</td></tr>
+		</table>
+	</div>
+</div>
+
+<div id="profile" class="hidden">
+	<h2>■プロフィール</h2>
+	<div class="main_box">
+		<form id="profileForm">
+		<table>
+			<tr>
+				<td><img src="./image/parts_ico_gentleman.png" style="width:64px; height:64px;"></td>
+				<td><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
+			</tr>
+		</table>
+		<table>
+			<tr><th>氏名：</th><td>富士通　太郎 (ふじつう　たろう)</td></tr>
+			<tr><th>ニックネーム：</th><td><input type="text" value="ペコ太郎"></td></tr>
+			<tr><th>PDS URL：</th><td><a href="https://******/fujitsu-taro" target="_blank">https://******/fujitsu-taro</a></td></tr>
+			<tr><th>生年月日：</th><td>1955/11/16 62才</td></tr>
+			<tr><th>性別：</th><td><select><option>男性<option>女性<option></option></select></td></tr>
+			<tr><th>血液型：</th><td><select><option>A<option>B<option>O<option>AB</select></td></tr>
+			<tr><th>住居：</th><td>デュオセーヌ 柏の葉キャンパスA棟 201号室</td></tr>
+			<tr><th>居住形態：</th><td><select><option>単身<option>親族あり<option>その他</select></td></tr>
+			<tr><th>ログインID：</th><td>fujitsu-taro</td></tr>
+			<tr><th>パスワード：</th><td><input type="password" value="12345678"></td></tr>
+			<tr><th></th><td></td></tr>
+			<tr><td colspan="2" style="text-align: center"><button>プロフィールを保存する</button></td></tr>
+		</table>
+		</form>
+	</div>
+</div>
+
+<div id="opHistory" class="hidden">
+	<h2>■あなたの操作履歴 最新50件まで</h2>
+	<div class="main_box">
+		<table>
+			<tr><td>2017/11/07 13:23:48<br><img src="./image/parts_ico_gentleman.png">が、メニューより［あなたの操作履歴］を選択しました。</td></tr>
+			<tr><td>2017/10/28 14:31:42<br><img src="./image/parts_ico_gentleman.png">が、みんなの掲示板[【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY]にコメントを残しました。</td></tr>
+			<tr><td>2017/10/28 14:27:16<br><img src="./image/parts_ico_gentleman.png">が、みんなの掲示板[【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY]に参加する!と表明しました。</td></tr>
+			<tr><td>2017/10/28 14:27:16<br><img src="./image/parts_ico_gentleman.png">が、みんなの掲示板[【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY]より外部サイトにアクセスしました。</td></tr>
+		</table>
+	</div>
+</div>
+
+<div id="helperOpHistory" class="hidden">
+	<h2>■支援者の操作履歴 最新50件まで</h2>
+	<div class="main_box">
+		<table>
+			<tr><td>2017/10/03 14:27:53<br><img src="./image/parts_ico_operator.png" onClick="openPersonalInfo();">が、メニューより操作支援終了を選択しました。</td></tr>
+			<tr><td>2017/10/03 14:27:16<br><img src="./image/parts_ico_operator.png" onClick="openPersonalInfo();">が、みんなの掲示板「柏の葉 街まるごとオープンキャンパス2017のお知らせ」に参加する!と表明しました。</td></tr>
+			<tr><td>2017/10/28 14:27:16<br><img src="./image/parts_ico_operator.png" onClick="openPersonalInfo();">が、みんなの掲示板「柏の葉 街まるごとオープンキャンパス2017のお知らせ」より、外部サイトにアクセスしました。</td></tr>
+			<tr><td>2017/10/28 14:27:16<br><img src="./image/parts_ico_operator.png" onClick="openPersonalInfo();">が、トップ画面よりみんなの掲示板「柏の葉 街まるごとオープンキャンパス2017のお知らせ」を開きました。</td></tr>
+		</table>
+	</div>
+</div>
+
+<div id="consentHistory" class="hidden">
+	<h2>■あなたの同意履歴 最新50件まで</h2>
+	<div class="main_box">
+		<table>
+			<tr><td>2017/10/03 10:24:45<br><img src="./image/parts_ico_gentleman.png">が<img src="./image/parts_ico_operator.png" onClick="openPersonalInfo();">に、操作支援を同意しました。</td></tr>
+			<tr><td>2017/09/02 15:36:40<br><img src="./image/parts_ico_gentleman.png">が<img src="./image/parts_ico_detective.png" onClick="openPersonalInfo2();">に、操作支援を同意しました。</td></tr>
+		</table>
+	</div>
+</div>
+
+<div id="viewHistory" class="hidden">
+	<h2>■あなたの情報参照履歴 最新50件まで</h2>
+	<div class="main_box">
+		<table>
+			<tr><td>2018/05/13 11:12:51<br><img src="./image/parts_ico_doctor.png" onClick="openPersonalInfo3();">が、バイタル情報を参照しました。</td></tr>
+			<tr><td>2018/05/13 11:12:51<br><img src="./image/parts_ico_doctor2.png" onClick="openPersonalInfo3();">が、薬歴を参照しました。</td></tr>
+		</table>
+	</div>
+</div>
+
+  </span>
+  <div class="slide-menu">
+    <h1 data-i18n="menu.title"></h1>
+    <table class="menu-title">
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();">メニュー</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('top');">トップ</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('profile');">プロフィール</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('opHistory');">あなたの操作履歴</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('helperOpHistory');">支援者の操作履歴</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('consentHistory');">あなたの同意履歴</a>
+        </h3></td>
+      </tr>
+      <tr id="startHelpOp">
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();openNfcReader();">操作支援</a>
+        </h3></td>
+      </tr>
+      <tr id="endHelpOp" class="hidden">
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();openHelpConfirm();">操作支援終了</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();view('viewHistory');">あなたの情報参照履歴</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();">あなたの情報開示履歴</a>
+        </h3></td>
+      </tr>
+      <tr>
+        <td class="sidemenu-item"><h3>
+          <a onclick="cs.closeSlide();">データポータビリティ</a>
+        </h3></td>
+      </tr>
+    </table>
+  </div>
+  <div class="overlay" id="dvOverlay">
+  </div>
+  <div id="modal-extCellCalSmile" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.lookAtOtherPhotos.header">みんなの掲示板</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <select id="otherAllowedCells"></select> -->
+          <!-- <button type="button" class="btn btn-primary" id="bReadAnotherCell" data-i18n="glossary:menu.lookAtOtherPhotos.btn" disabled></button> -->
+
+			<div class="boradttitle">
+				<img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;">&nbsp;&nbsp;【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY
+				<hr>
+				柏の葉アーバンデザインセンター（UDCK）からのお知らせです。<br>
+				<br>
+				詳しい情報は以下となります。<br>
+				<a href="http://www.udck.jp/event/003504.html" target="_blank">http://www.udck.jp/event/003504.html</a>
+				<hr>
+				<table><tr>
+					<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">&nbsp;&nbsp;参加します:11</td>
+					<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">&nbsp;&nbsp;検討中:4</td>
+				</tr></table>
+				<table>
+					<tr><td colspan="2">&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">&nbsp;&nbsp;コメント:1</td></tr>
+					<tr>
+						<td>&nbsp;1&nbsp;</td>
+						<td>
+							<table>
+								<tr><td colspan="2">ヨガ体験ができて、柏の野菜を使ったカレーも食べれるので非常に楽しみです。</td></tr>
+								<tr><td>2017/10/28&nbsp;14:31:42&nbsp;ペコ太郎</td><td><a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp"  style="width: 32px;height: 32px;">通報する</a></td></tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table>
+					<tr><td colspan="2"><input type="radio" id="wrtier_nickname" name="writer_name" value="nickname" checked="checked"><label for=="wrtier_nickname">ニックネームで投稿</label>&nbsp;<input type="radio" id="writer_realname" name="writer_name" value="realname"><label for="writer_realname">実名で投稿</label>&nbsp;<input type="radio" id="writer_anonymous" name="writer_name" value="anonymous"><label for="writer_anonymous">匿名で投稿</labp>&nbsp;</td></tr>
+					<tr><td>コメント&nbsp;&nbsp</td><td><input type="textarea" name="comment" rows="2"></td></tr>
+					<tr><td colspan="2"><button onclick="alert('コメントが投稿されました');">コメントを投稿する</button></td></tr>
+				</table>
+			</div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-nfcReader" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+        	支援する入居者のNFCタグをNFCリーダにかざしてください。
+        </div>
+        <div class="modal-body" style="text-align: center">
+            <img src="./image/nfcread.png" onClick="authorizedNfcReader()" style="width: 229px; height: 149px">
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-helpConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body" style="text-align: center">
+        	入居者：富士通　太郎さんの<br>操作支援を終了しますか？
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="close" onClick="closeHelpConfirm(true)"  style="text-align: right">&nbsp;はい&nbsp;</button>
+            <button type="button" class="close" onClick="closeHelpConfirm(false)" style="text-align: left">&nbsp;いいえ&nbsp;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-personalInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <span style="text-align: center;">人物情報</span>
+        </div>
+        <div class="modal-body personalInfo">
+        	<table>
+        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_operator.png"></td></tr>
+        		<tr><th>氏名：</th><td>支援者　太郎<br>しえんしゃ　たろう</td></tr>
+        		<tr><th>ニックネーム：</th><td>未設定</td></tr>
+        		<tr><th>付与権限：</th><td>支援者</td></tr>
+        	</table>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-personalInfo2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <span style="text-align: center;">人物情報</span>
+        </div>
+        <div class="modal-body personalInfo">
+        	<table>
+        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_detective.png"></td></tr>
+        		<tr><th>氏名：</th><td>富士通　吾郎<br>ふじつう　ごろう</td></tr>
+        		<tr><th>ニックネーム：</th><td>小五郎</td></tr>
+        		<tr><th>付与権限：</th><td>入居者/支援者</td></tr>
+        	</table>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-personalInfo3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <span style="text-align: center;">人物情報</span>
+        </div>
+        <div class="modal-body personalInfo">
+        	<table>
+        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><th>氏名：</th><td>医師　太郎<br>いし　たろう</td></tr>
+        		<tr><th>ニックネーム：</th><td>Dr.タロウ</td></tr>
+        		<tr><th>付与権限：</th><td>外部事業者<br>診療所クリニック</td></tr>
+        	</table>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-startHelpOp" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+        	入居者：富士通　太郎さんの操作支援を開始します。
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="close" data-dismiss="modal">&nbsp;O&nbsp;K&nbsp;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-sendAllowedMessage" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Ã—</button>
+          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.sendReadPermissionRequest.header"></h4>
+        </div>
+        <div class="modal-body">
+          <select id="requestCells"></select>
+          <button type="button" class="btn btn-primary" id="bSendAllowed" data-i18n="glossary:menu.sendReadPermissionRequest.btn" disabled></button>
+          <span class="popupAlertArea" style="color:red">
+              <aside id="popupSendAllowedErrorMsg"></aside>
+          </span>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="modal-listAllowed" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Ã—</button>
+          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.readPermissionStatus.header"></h4>
+        </div>
+        <div class="modal-body">
+          <table id="allowedCellList">
+          </table>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="modal-receiveMessage" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Ã—</button>
+          <h4 class="modal-title" id="header-public" data-i18n="menu.notification.header"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-group" id="messageList">
+          </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
