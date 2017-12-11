@@ -1,2 +1,5 @@
 # Overview  
-Personium App for tenants.  
+Personium App for tenants/admin.  
+
+# To do  
+Add more information.
