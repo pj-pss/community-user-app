@@ -51,7 +51,9 @@ table tr th {
 .personalInfo table,
 #helperOpHistory table,
 #consentHistory table,
-#viewHistory table {
+#viewHistory table,
+#viewInforDisclosureHistory1 table,
+#viewInforDisclosureHistory2 table {
 	width: 100%;
 }
 .personalInfo table td img {
@@ -62,7 +64,9 @@ table tr th {
 
 #opHistory img,
 #helperOpHistory img,
-#viewHistory img {
+#viewHistory img,
+#viewInforDisclosureHistory1 img,
+#viewInforDisclosureHistory2 img {
 	width: 48px;
 	height: 48px;
 	float: left;
@@ -81,7 +85,11 @@ table tr th {
 #consentHistory table tr th,
 #consentHistory table tr td,
 #viewHistory table tr th,
-#viewHistory table tr td {
+#viewHistory table tr td,
+#viewInforDisclosureHistory1 table tr th,
+#viewInforDisclosureHistory1 table tr td,
+#viewInforDisclosureHistory2 table tr th,
+#viewInforDisclosureHistory2 table tr td{
     padding: 5px 10px;
     border: 1px solid #DDD;
     vertical-align: middle;
@@ -98,6 +106,38 @@ header h1 {
 
 header .helperMsg {
 	font-size: 12px;
+}
+
+
+.rdobtn input {
+	display: none;
+}
+.rdobtn label{
+	display: block;
+	float: left;
+	cursor: pointer;
+	width: 40%;
+	margin: 0;
+	padding: 10px;
+	background: lightgray;
+	color: white;
+	text-align: center;
+	line-height: 1;
+	transition: .2s;
+}
+.rdobtndb label{
+	width: 50%;
+}
+.rdobtn label:first-of-type{
+	border-radius: 3px 0 0 3px;
+}
+.rdobtn label:last-of-type{
+	border-radius: 0 3px 3px 0;
+}
+.rdobtn input[type="radio"]:checked + .onbtn,
+.rdobtn input[type="radio"]:checked + .offbtn {
+	background-color: deepskyblue;
+	color: white;
 }
 
 </style>
@@ -132,7 +172,12 @@ function openPersonalInfo2() {
 function openPersonalInfo3() {
     $('#modal-personalInfo3').modal('show');
 }
-
+function openInforDisclosureHistoryPer() {
+    $('#modal-inforDisclosureHistoryPer').modal('show');
+}
+function openInforDisclosureHistoryDB() {
+    $('#modal-inforDisclosureHistory').modal('show');
+}
 // NFCリーダをかざしたとき
 function authorizedNfcReader() {
 	helpAuthorized = true;
@@ -315,7 +360,120 @@ $(function () {
 		</table>
 	</div>
 </div>
+<div id="viewInforDisclosureHistory1" class="hidden">
+	<h2>■あなたの情報開示状況<img src="./image/idh_psn_act.png" style="
+    position: absolute;
+    right: 2.3em;
+    top: 4.5em;
+    width: 30px;
+    height: 30px;
+">
+<img src="./image/idh_db.png" style="
+    position: absolute;
+    right: .3em;
+    top: 4.5em;
+    width: 30px;
+    height: 30px;
+" onclick="view('viewInforDisclosureHistory2');"></h2>
+	<div class="main_box">
+		<table>
+			<tr><td rowspan="4" style="border-right: none;border-left:none;padding-left: 3px;padding-right: 3px;"><img src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
+			<tr><td style="border-left: none;border-bottom: none;border-right: none;padding: 0px;">患者基本情報</td>
+			<td style="border-left: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">バイタル情報</td>
+			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td style="border-left: none;border-top: none;border-right: none;padding: 0px;">健康情報</td>
+			<td style="border-left: none;border-top: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td rowspan="5" style="border-right: none;border-left:none;padding-left: 3px;padding-right: 3px;"><img src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
+			<tr><td style="border-left: none;border-bottom: none;border-right: none;padding: 0px;">患者基本情報</td>
+			<td style="border-left: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">バイタル情報</td>
+			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">薬歴</td>
+			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+			<tr><td style="border-left: none;border-top: none;border-right: none;padding: 0px;">副作用歴/アレルギー歴
+</td>
+			<td style="border-left: none;border-top: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="viewInforDisclosureHistory2" class="hidden">
+	<h2>■あなたの情報開示状況<img src="./image/idh_psn.png" style="
+    position: absolute;
+    right: 2.3em;
+    top: 4.5em;
+    width: 30px;
+    height: 30px;
+" onclick="view('viewInforDisclosureHistory1');">
+<img src="./image/idh_db_act.png" style="
+    position: absolute;
+    right: .3em;
+    top: 4.5em;
+    width: 30px;
+    height: 30px;
+"></h2>
+	<div class="main_box">
+		<table>
+			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">患者基本情報</td></tr>
+			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
+			<ul style="list-style:none;">
+			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryDB();"></li>
+			<li>2018/04/13</li>
+			<li style="margin-left: 8px;margin-top: -5px;">09:11:35</li>
+			</ul>
+			</td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;">
+			<ul style="list-style:none;">
+			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
+			<li>2018/05/15</li>
+			<li style="margin-left: 8px;margin-top: -5px;">11:12:51</li>
+			</ul>
+			</td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			</tr>
 
+			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">バイタル情報</td></tr>
+			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
+			<ul style="list-style:none;">
+			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryDB();"></li>
+			<li>2018/06/13</li>
+			<li style="margin-left: 8px;margin-top: -5px;">15:31:49</li>
+			</ul>
+			</td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;">
+			<ul style="list-style:none;">
+			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
+			<li>2018/06/13</li>
+			<li style="margin-left: 8px;margin-top: -5px;">15:31:49</li>
+			</ul>
+			</td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			</tr>
+
+			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">薬歴</td></tr>
+			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
+			<ul style="list-style:none;">
+			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
+			<li>2018/05/15</li>
+			<li style="margin-left: 8px;margin-top: -5px;">11:12:51</li>
+			</ul>
+			</td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			</tr>
+		</table>
+	</div>
+</div>
   </span>
   <div class="slide-menu">
     <h1 data-i18n="menu.title"></h1>
@@ -367,7 +525,7 @@ $(function () {
       </tr>
       <tr>
         <td class="sidemenu-item"><h3>
-          <a onclick="cs.closeSlide();">あなたの情報開示履歴</a>
+          <a onclick="cs.closeSlide();view('viewInforDisclosureHistory1');">あなたの情報開示履歴</a>
         </h3></td>
       </tr>
       <tr>
@@ -521,7 +679,92 @@ $(function () {
       </div>
     </div>
   </div>
-
+  <div id="modal-inforDisclosureHistory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="float: left;position: absolute;margin-top: -5px;"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <p style="text-align: center;margin: 0;">開示情報</span>
+        </div>
+        <div class="modal-body personalInfo" style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px; padding-top: 5px;">
+        	<table>
+        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><td style="text-align: right;">氏名：</td><td>医師　太郎<br>いし　たろう</td></tr>
+        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.タロウ</td></tr>
+        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
+			<tr><td colspan="4">
+				<div class="rdobtn">
+				    <input type="radio" name="21" id="2no1" value="0">
+				    <label for="2no1" class="offbtn">OFF</label>
+				    <input type="radio" name="21" id="2yes1" value="1" checked="">
+				    <label for="2yes1" class="onbtn">ON</label>
+				</div>
+			</td></tr>
+        	</table>
+        </div>
+        <div class="modal-footer" style="text-align: center;">
+		<button style="
+		    background: deepskyblue;
+		    padding: 10px;
+		    border-radius: 5px;
+		    color: white;
+		    font-weight: 700;
+		" data-dismiss="modal">開示情報を保存する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="modal-inforDisclosureHistoryPer" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="float: left;position: absolute;margin-top: -5px;"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <p style="text-align: center;margin: 0;">開示情報</span>
+        </div>
+        <div class="modal-body personalInfo">
+        	<table>
+        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><td style="text-align: right;">氏名：</td><td>医師　太郎<br>いし　たろう</td></tr>
+        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.タロウ</td></tr>
+        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
+			<tr><td colspan="4">
+			<table style="margin-top: 10px;">
+				<tr><td style="text-align: right;width: 40%;">患者基本情報</td><td>
+				<div class="rdobtn" style="padding-left: 10px;">
+				    <input type="radio" name="1" id="no1" value="0">
+				    <label for="no1" class="offbtn">OFF</label>
+				    <input type="radio" name="1" id="yes1" value="1" checked="">
+				    <label for="yes1" class="onbtn">ON</label>
+				</div></td></tr>
+				<tr><td style="text-align: right;width: 40%;">バイタル情報</td><td>
+				<div class="rdobtn" style="padding-left: 10px;">
+				    <input type="radio" name="2" id="no2" value="0">
+				    <label for="no2" class="offbtn">OFF</label>
+				    <input type="radio" name="2" id="yes2" value="1" checked="">
+				    <label for="yes2" class="onbtn">ON</label>
+				</div></td></tr>
+				<tr><td style="text-align: right;width: 40%;">健康情報</td><td>
+				<div class="rdobtn" style="padding-left: 10px;">
+				    <input type="radio" name="3" id="no3" value="0">
+				    <label for="no3" class="offbtn">OFF</label>
+				    <input type="radio" name="3" id="yes3" value="1" checked="">
+				    <label for="yes3" class="onbtn">ON</label>
+				</div></td></tr></table>
+			</td></tr>
+        	</table>
+        </div>
+        <div class="modal-footer" style="text-align: center;">
+		<button style="
+		    background: deepskyblue;
+		    padding: 10px;
+		    border-radius: 5px;
+		    color: white;
+		    font-weight: 700;
+		" data-dismiss="modal">開示情報を保存する</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="modal-startHelpOp" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
