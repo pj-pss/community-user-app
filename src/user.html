@@ -64,12 +64,17 @@ table tr th {
 
 #opHistory img,
 #helperOpHistory img,
-#viewHistory img,
-#viewInforDisclosureHistory1 img,
-#viewInforDisclosureHistory2 img {
+#viewHistory img{
 	width: 48px;
 	height: 48px;
 	float: left;
+}
+
+#viewInforDisclosureHistory1 img,
+#viewInforDisclosureHistory2 img {
+   	margin-bottom: 5px;
+	width: 48px;
+	height: 48px;
 }
 
 #consentHistory img {
@@ -140,6 +145,66 @@ header .helperMsg {
 	color: white;
 }
 
+.img_idh_psn{
+    position: absolute;
+    right: 2.3em;
+    top: 4.5em;
+    width: 30px!important;
+    height: 30px!important;
+}
+
+.img_idh_db{
+    position: absolute;
+    right: .3em;
+    top: 4.5em;
+    width: 30px!important;
+    height: 30px!important;
+}
+
+.data_portability_btn{
+    background: royalblue;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    font-size: large;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.img_load{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 100px!important;
+    height: 100px!important;
+}
+
+.img_qrcode{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 180px!important;
+    height: 180px!important;
+}
+
+.main_box_center{
+    text-align: center;
+}
+
+.li_date{
+    text-align:  center;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.kaiji_btn{
+    background: deepskyblue;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+}
 </style>
 <script type="text/javascript">
 // 現在表示中のメニューID
@@ -233,7 +298,7 @@ $(function () {
     <a id="updateGenki" href="#" onclick="cs.getGenkikunData();return false;">
       <img id="reloadIcon" src="./image/parts_ico_reload.png" alt="user">
     </a>
-    <a href="#" onclick="cs.openSlide();">
+    <a href="javascript:void(0)" onclick="cs.openSlide();">
       <img id="menuIcon" src="./image/parts_menu.png">
     </a>
   </header>
@@ -244,7 +309,7 @@ $(function () {
 <div id="top">
 	<h2>■あなたへのお知らせ</h2>
 	<div class="main_box">
-		<table>
+		<table style="width: 100%;">
 			<tr class="yourNews"><td>
 				<table>
 					<tr><td>みんなの掲示板 2017/11/07 13:46</td></tr>
@@ -293,14 +358,14 @@ $(function () {
 	<h2>■プロフィール</h2>
 	<div class="main_box">
 		<form id="profileForm">
-		<table>
+		<table style="width:100%">
 			<tr>
-				<td><img src="./image/parts_ico_gentleman.png" style="width:64px; height:64px;"></td>
-				<td><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
+				<td style="text-align: center;"><img src="./image/parts_ico_gentleman.png" style="width:64px; height:64px;"></td>
+				<td style="width:70%"><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
 			</tr>
 		</table>
-		<table>
-			<tr><th>氏名：</th><td>富士通　太郎 (ふじつう　たろう)</td></tr>
+		<table style="width:100%">
+			<tr><th>氏名：</th><td style="width:70%">富士通　太郎 (ふじつう　たろう)</td></tr>
 			<tr><th>ニックネーム：</th><td><input type="text" value="ペコ太郎"></td></tr>
 			<tr><th>PDS URL：</th><td><a href="https://******/fujitsu-taro" target="_blank">https://******/fujitsu-taro</a></td></tr>
 			<tr><th>生年月日：</th><td>1955/11/16 62才</td></tr>
@@ -361,20 +426,8 @@ $(function () {
 	</div>
 </div>
 <div id="viewInforDisclosureHistory1" class="hidden">
-	<h2>■あなたの情報開示状況<img src="./image/idh_psn_act.png" style="
-    position: absolute;
-    right: 2.3em;
-    top: 4.5em;
-    width: 30px;
-    height: 30px;
-">
-<img src="./image/idh_db.png" style="
-    position: absolute;
-    right: .3em;
-    top: 4.5em;
-    width: 30px;
-    height: 30px;
-" onclick="view('viewInforDisclosureHistory2');"></h2>
+	<h2>■あなたの情報開示状況<img src="./image/idh_psn_act.png" class="img_idh_psn">
+	<img src="./image/idh_db.png" class="img_idh_db" onclick="view('viewInforDisclosureHistory2');"></h2>
 	<div class="main_box">
 		<table>
 			<tr><td rowspan="4" style="border-right: none;border-left:none;padding-left: 3px;padding-right: 3px;"><img src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
@@ -405,68 +458,24 @@ $(function () {
 	</div>
 </div>
 <div id="viewInforDisclosureHistory2" class="hidden">
-	<h2>■あなたの情報開示状況<img src="./image/idh_psn.png" style="
-    position: absolute;
-    right: 2.3em;
-    top: 4.5em;
-    width: 30px;
-    height: 30px;
-" onclick="view('viewInforDisclosureHistory1');">
-<img src="./image/idh_db_act.png" style="
-    position: absolute;
-    right: .3em;
-    top: 4.5em;
-    width: 30px;
-    height: 30px;
-"></h2>
+	<h2>■あなたの情報開示状況<img src="./image/idh_psn.png" class="img_idh_psn" onclick="view('viewInforDisclosureHistory1');">
+	<img src="./image/idh_db_act.png" class="img_idh_db"></h2>
 	<div class="main_box">
 		<table>
 			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">患者基本情報</td></tr>
-			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
-			<ul style="list-style:none;">
-			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryDB();"></li>
-			<li>2018/04/13</li>
-			<li style="margin-left: 8px;margin-top: -5px;">09:11:35</li>
-			</ul>
-			</td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;">
-			<ul style="list-style:none;">
-			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
-			<li>2018/05/15</li>
-			<li style="margin-left: 8px;margin-top: -5px;">11:12:51</li>
-			</ul>
-			</td>
+			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/04/13<br>09:11:35</div></td>
+			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			</tr>
-
 			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">バイタル情報</td></tr>
-			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
-			<ul style="list-style:none;">
-			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryDB();"></li>
-			<li>2018/06/13</li>
-			<li style="margin-left: 8px;margin-top: -5px;">15:31:49</li>
-			</ul>
-			</td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;">
-			<ul style="list-style:none;">
-			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
-			<li>2018/06/13</li>
-			<li style="margin-left: 8px;margin-top: -5px;">15:31:49</li>
-			</ul>
-			</td>
+			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
+			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			</tr>
-
 			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">薬歴</td></tr>
-			<tr><td style="border-top:none;border-right:none;border-left:none;width:25%;">
-			<ul style="list-style:none;">
-			<li><img style="margin-left: 10px;" src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryDB();"></li>
-			<li>2018/05/15</li>
-			<li style="margin-left: 8px;margin-top: -5px;">11:12:51</li>
-			</ul>
-			</td>
+			<td style="border-top:none;border-right:none;border-left:none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
 			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
@@ -474,6 +483,46 @@ $(function () {
 		</table>
 	</div>
 </div>
+
+<div id="viewDataPortability" class="hidden">
+	<h2>■データポータビリティ</h2>
+	<div class="main_box main_box_center">
+		<button class="data_portability_btn" onclick="view('viewDataExport');$({i:0}).animate({i:700}, {
+			duration:5000,easing:'linear',
+			progress:function() {
+				$('.img_load').css({
+					transform:'rotate(' + this.i + 'deg)'
+				});
+			},
+			complete:function() {
+				if($('#viewDataExport').css('display') === 'block'){
+					view('viewQRCode');
+				}
+			}
+		});">データエクスポートを<br>実施する</button>
+		<br>※情報量によって、データエクスポートの<br>
+		完了までの時間が変動します。
+	</div>
+</div>
+
+<div id="viewDataExport" class="hidden">
+	<h2>■データエクスポート</h2>
+	<div class="main_box main_box_center">
+		<img src="./image/load.png" class="img_load">
+		<br>※現在、データエクスポート中です。<br>
+		完了まで暫くお待ち下さい。
+	</div>
+</div>
+
+<div id="viewQRCode" class="hidden">
+	<h2>■データポータビリティ</h2>
+	<div class="main_box main_box_center">
+		<img src="./image/qrcode.png" class="img_qrcode">
+		<br>データエクスポートが完了しました。<br>
+		QRコードからダウンロードを行ってください。
+	</div>
+</div>
+
   </span>
   <div class="slide-menu">
     <h1 data-i18n="menu.title"></h1>
@@ -530,7 +579,7 @@ $(function () {
       </tr>
       <tr>
         <td class="sidemenu-item"><h3>
-          <a onclick="cs.closeSlide();">データポータビリティ</a>
+          <a onclick="cs.closeSlide();view('viewDataPortability');">データポータビリティ</a>
         </h3></td>
       </tr>
     </table>
@@ -684,32 +733,44 @@ $(function () {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" style="float: left;position: absolute;margin-top: -5px;"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <p style="text-align: center;margin: 0;">開示情報</span>
+          <p style="text-align: center;margin: 0;">基本情報：開示情報</span>
         </div>
         <div class="modal-body personalInfo" style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px; padding-top: 5px;">
         	<table>
         		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor.png"></td></tr>
-        		<tr><td style="text-align: right;">氏名：</td><td>医師　太郎<br>いし　たろう</td></tr>
-        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.タロウ</td></tr>
+        		<tr><td style="text-align: right;">氏名：</td><td>医師　鞠夫<br>いし　まりお</td></tr>
+        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.マリオ</td></tr>
         		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
 			<tr><td colspan="4">
-				<div class="rdobtn">
+				<table><tr><td style="width: 20%;"></td><td>
+				<div class="rdobtn rdobtndb">
 				    <input type="radio" name="21" id="2no1" value="0">
 				    <label for="2no1" class="offbtn">OFF</label>
 				    <input type="radio" name="21" id="2yes1" value="1" checked="">
 				    <label for="2yes1" class="onbtn">ON</label>
-				</div>
+				</div></td><td style="width: 20%;"></td></tr></table>
+			</td></tr>
+        	</table>
+        </div>
+        <div class="modal-body personalInfo" style="padding-bottom: 5px; padding-top: 5px;">
+        	<table>
+        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor2.png"></td></tr>
+        		<tr><td style="text-align: right;">氏名：</td><td>薬屋　花子<br>くすりや　はなこ</td></tr>
+        		<tr><td style="text-align: right;">ニックネーム：</td><td>薬剤師.フラワー</td></tr>
+        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>薬局ファーマシー</td></tr>
+			<tr><td colspan="4">
+				<table><tr><td style="width: 20%;"></td><td>
+				<div class="rdobtn rdobtndb">
+				    <input type="radio" name="31" id="3no1" value="0">
+				    <label for="3no1" class="offbtn">OFF</label>
+				    <input type="radio" name="31" id="3yes1" value="1" checked="">
+				    <label for="3yes1" class="onbtn">ON</label>
+				</div></td><td style="width: 20%;"></td></tr></table>
 			</td></tr>
         	</table>
         </div>
         <div class="modal-footer" style="text-align: center;">
-		<button style="
-		    background: deepskyblue;
-		    padding: 10px;
-		    border-radius: 5px;
-		    color: white;
-		    font-weight: 700;
-		" data-dismiss="modal">開示情報を保存する</button>
+		<button class="kaiji_btn" data-dismiss="modal">開示情報を保存する</button>
         </div>
       </div>
     </div>
@@ -754,13 +815,7 @@ $(function () {
         	</table>
         </div>
         <div class="modal-footer" style="text-align: center;">
-		<button style="
-		    background: deepskyblue;
-		    padding: 10px;
-		    border-radius: 5px;
-		    color: white;
-		    font-weight: 700;
-		" data-dismiss="modal">開示情報を保存する</button>
+		<button class="kaiji_btn" data-dismiss="modal">開示情報を保存する</button>
         </div>
       </div>
     </div>
