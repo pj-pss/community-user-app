@@ -18,6 +18,7 @@
   <script src="./js/common_personium.js"></script>
   <script src="./js/user.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
   <link href='./css/user.css' rel='stylesheet' type='text/css'>
 <!--
   <style type="text/css">
@@ -174,13 +175,6 @@ header .helperMsg {
     margin-bottom: 10px;
 }
 
-.img_load{
-    margin-top: 30px;
-    margin-bottom: 10px;
-    width: 100px!important;
-    height: 100px!important;
-}
-
 .img_qrcode{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -296,10 +290,10 @@ $(function () {
   <header>
     <h1 data-i18n="glossary:calorieSmileCollaboration" id="welcomMessage">ようこそ&nbsp;&nbsp;&nbsp;富士通　太郎さん</h1>
     <a id="updateGenki" href="#" onclick="cs.getGenkikunData();return false;">
-      <img id="reloadIcon" src="./image/parts_ico_reload.png" alt="user">
+	<i class="fa fa-refresh fa-2x fa-fw" style="color:white;font-size:24px"></i>
     </a>
     <a href="javascript:void(0)" onclick="cs.openSlide();">
-      <img id="menuIcon" src="./image/parts_menu.png">
+    	<i class="fa fa-bars fa-2x fa-fw" style="color:white;font-size:24px"></i>
     </a>
   </header>
   <div id="dispMsg" style="display:none;">
@@ -487,19 +481,7 @@ $(function () {
 <div id="viewDataPortability" class="hidden">
 	<h2>■データポータビリティ</h2>
 	<div class="main_box main_box_center">
-		<button class="data_portability_btn" onclick="view('viewDataExport');$({i:0}).animate({i:700}, {
-			duration:5000,easing:'linear',
-			progress:function() {
-				$('.img_load').css({
-					transform:'rotate(' + this.i + 'deg)'
-				});
-			},
-			complete:function() {
-				if($('#viewDataExport').css('display') === 'block'){
-					view('viewQRCode');
-				}
-			}
-		});">データエクスポートを<br>実施する</button>
+		<button class="data_portability_btn" onclick="view('viewDataExport');setTimeout(function(){view('viewQRCode');},3000);">データエクスポートを<br>実施する</button>
 		<br>※情報量によって、データエクスポートの<br>
 		完了までの時間が変動します。
 	</div>
@@ -508,7 +490,7 @@ $(function () {
 <div id="viewDataExport" class="hidden">
 	<h2>■データエクスポート</h2>
 	<div class="main_box main_box_center">
-		<img src="./image/load.png" class="img_load">
+		<i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size:100px;    margin-top: 30px;    margin-bottom: 10px;"></i>
 		<br>※現在、データエクスポート中です。<br>
 		完了まで暫くお待ち下さい。
 	</div>
