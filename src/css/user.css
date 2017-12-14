@@ -327,3 +327,277 @@ header > a {
         width: 100%;
     }
 }
+
+#top img {
+	float: left;
+}
+
+#profile table th,
+.personalInfo table th {
+	text-align: right;
+}
+
+.tbl_news,
+.tbl_prof,
+.tbl_prof_photo,
+.personalInfo table,
+#opHistory table,
+#helperOpHistory table,
+#consentHistory table,
+#viewHistory table,
+#viewInforDisclosureHistory1 table,
+#viewInforDisclosureHistory2 table {
+	width: 100%;
+}
+.personalInfo table td img {
+	width: 128px;
+	height: 128px;
+	vertical-align: middle;
+}
+
+#opHistory img,
+#helperOpHistory img,
+#viewHistory img{
+	width: 48px;
+	height: 48px;
+	float: left;
+}
+
+#viewInforDisclosureHistory1 img,
+#viewInforDisclosureHistory2 img {
+   	margin-bottom: 5px;
+	width: 48px;
+	height: 48px;
+}
+
+#consentHistory img {
+	width: 48px;
+	height: 48px;
+}
+
+.yourNews,
+#opHistory table tr th,
+#opHistory table tr td,
+#helperOpHistory table tr th,
+#helperOpHistory table tr td,
+#consentHistory table tr th,
+#consentHistory table tr td,
+#viewHistory table tr th,
+#viewHistory table tr td{
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+}
+
+.tbl_news img,
+.boradttitle img,
+button.close img {
+	width: 32px;
+	height: 32px;
+}
+
+header h1 {
+	font-size: 16px;
+}
+
+header .helperMsg {
+	font-size: 12px;
+}
+
+
+.rdobtn input {
+	display: none;
+}
+.rdobtn label{
+	display: block;
+	float: left;
+	cursor: pointer;
+	width: 40%;
+	margin: 0;
+	padding: 10px;
+	background: lightgray;
+	color: white;
+	text-align: center;
+	line-height: 1;
+	transition: .2s;
+}
+.rdobtndb label{
+	width: 50%;
+}
+.rdobtn label:first-of-type{
+	border-radius: 3px 0 0 3px;
+}
+.rdobtn label:last-of-type{
+	border-radius: 0 3px 3px 0;
+}
+.rdobtn input[type="radio"]:checked + .onbtn,
+.rdobtn input[type="radio"]:checked + .offbtn {
+	background-color: deepskyblue;
+	color: white;
+}
+
+.img_idh_psn{
+    position: fixed;
+    right: 2.3em;
+    width: 30px!important;
+    height: 30px!important;
+    margin-top: -10px;
+}
+
+.img_idh_db{
+    position: fixed;
+    right: .3em;
+    width: 30px!important;
+    height: 30px!important;
+    margin-top: -10px;
+}
+
+.data_portability_btn{
+    background: royalblue;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    font-size: large;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.img_qrcode{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 180px!important;
+    height: 180px!important;
+}
+
+.main_box_center{
+    text-align: center;
+}
+
+.li_date{
+    text-align:  center;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.kaiji_btn{
+    background: deepskyblue;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+}
+
+.fnt_icon{
+    color:white;
+	font-size:24px
+}
+
+table.tbl_prof_photo tr td,
+table.tbl_prof tr td{
+	width:70%;
+}
+
+table.tbl_prof_photo img{
+	width:64px;
+	height:64px;
+}
+
+.cls_center{
+	text-align: center!important;
+}
+
+.cls_right{
+	text-align: right!important;
+}
+
+.cls_left{
+	text-align: left!important;
+}
+
+.tbl_infor_disc tr td,
+.tbl_infor_disc2 tr td{
+	border: none;
+	vertical-align: middle;
+}
+
+.tbl_infor_disc2 .tr_hum_list td{
+	padding: 0;
+	width:25%;
+}
+
+.tr_infor_disc_top{
+	border-top:1px solid #DDD;
+}
+
+.tr_infor_disc_bottom{
+	border-bottom:1px solid #DDD;
+}
+
+.td_infor_disc_icon{
+	border-top:1px solid #DDD;
+	padding-left: 3px!important;
+	padding-right: 3px!important;
+}
+
+.td_infor_disc_lbl{
+	padding: 0px!important;
+}
+.td_infor_disc_date{
+    padding-right: 8px!important;
+    padding-top: 3px!important;
+    padding-bottom: 3px!important;
+    text-align: right!important;
+}
+.i_data_exp{
+	font-size:100px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+.img_nfc{
+	width: 229px;
+	height: 149px;
+}
+
+.btn_close{
+	float:left;
+	position:absolute;
+	margin-top: -5px;
+}
+
+.personalInfo img{
+	width:70px!important;
+	height:70px!important;
+}
+
+.p_modal_title{
+	text-align: center;
+	margin: 0;
+}
+
+.infor_disc_person_list_top{
+	border-bottom: 1px solid #e5e5e5;
+}
+.infor_disc_person_list{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.td_rdo_sp{
+	width: 20%;
+}
+
+.tbl_rdo{
+	margin-top: 10px;
+}
+
+.td_rdo_lbl{
+	text-align: right;
+	width: 40%;
+}
+
+.rdobtn_per{
+	padding-left: 10px;
+}
