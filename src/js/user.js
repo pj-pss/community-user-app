@@ -701,3 +701,81 @@ cs.getReceivedMessageAPI = function() {
                 }
   });
 };
+
+var nowViewMenu = "top";
+
+function view(menuId) {
+	$("#" + nowViewMenu).addClass('hidden');
+	$("#" + menuId).removeClass('hidden');
+	nowViewMenu = menuId;
+}
+
+
+var helpAuthorized = false;
+
+function openNfcReader() {
+	helpAuthorized = false
+    $('#modal-nfcReader').modal('show');
+}
+
+function openPersonalInfo() {
+    $('#modal-personalInfo').modal('show');
+}
+
+function openPersonalInfo2() {
+    $('#modal-personalInfo2').modal('show');
+}
+
+function openPersonalInfo3() {
+    $('#modal-personalInfo3').modal('show');
+}
+function openInforDisclosureHistoryPer() {
+    $('#modal-inforDisclosureHistoryPer').modal('show');
+}
+function openInforDisclosureHistoryDB() {
+    $('#modal-inforDisclosureHistory').modal('show');
+}
+
+function authorizedNfcReader() {
+	helpAuthorized = true;
+	$('body').removeClass('modal-open');
+	$('.modal-backdrop').remove();
+	$('#modal-nfcReader').modal('hide');
+}
+
+
+function openHelpConfirm() {
+    $('#modal-helpConfirm').modal('show');
+}
+
+function closeHelpConfirm(f) {
+	if(f) {
+		$("#endHelpOp").addClass('hidden');
+		$("#startHelpOp").removeClass("hidden");
+		$('header').css('background-color', '#008F00');
+		$('h1').css('background-color', '#008F00');
+		$('#welcomMessage').html(welcomeMessage);
+	}
+	$('body').removeClass('modal-open');
+	$('.modal-backdrop').remove();
+	$('#modal-helpConfirm').modal('hide');
+}
+
+var welcomeMessage = "";
+
+$(function () {
+	$('#modal-nfcReader').on('hidden.bs.modal', function () {
+		if(helpAuthorized) {
+			$('#modal-startHelpOp').modal('show');
+
+			$("#startHelpOp").addClass('hidden');
+			$("#endHelpOp").removeClass("hidden");
+
+			$('header').css('background-color', '#FF0000');
+			$('h1').css('background-color', '#FF0000');
+
+			welcomeMessage = $('#welcomMessage').html();
+			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
+		}
+	});
+});

@@ -20,280 +20,16 @@
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
   <link href='./css/user.css' rel='stylesheet' type='text/css'>
-<!--
-  <style type="text/css">
-table {
-    width: 100%;
-}
 
-table tr th,
-table tr td {
-    padding: 0 10px;
-    border: 1px solid #DDD;
-    vertical-align: middle;
-}
-
-table tr th {
-    text-align: center;
-    font-weight: bold;
-}
-  </style>
--->
-<style type="text/css">
-#top img {
-	float: left;
-}
-
-#profile table th,
-.personalInfo table th {
-	text-align: right;
-}
-
-.personalInfo table,
-#helperOpHistory table,
-#consentHistory table,
-#viewHistory table,
-#viewInforDisclosureHistory1 table,
-#viewInforDisclosureHistory2 table {
-	width: 100%;
-}
-.personalInfo table td img {
-	width: 128px;
-	height: 128px;
-	vertical-align: middle;
-}
-
-#opHistory img,
-#helperOpHistory img,
-#viewHistory img{
-	width: 48px;
-	height: 48px;
-	float: left;
-}
-
-#viewInforDisclosureHistory1 img,
-#viewInforDisclosureHistory2 img {
-   	margin-bottom: 5px;
-	width: 48px;
-	height: 48px;
-}
-
-#consentHistory img {
-	width: 48px;
-	height: 48px;
-}
-
-.yourNews,
-#opHistory table tr th,
-#opHistory table tr td,
-#helperOpHistory table tr th,
-#helperOpHistory table tr td,
-#consentHistory table tr th,
-#consentHistory table tr td,
-#viewHistory table tr th,
-#viewHistory table tr td,
-#viewInforDisclosureHistory1 table tr th,
-#viewInforDisclosureHistory1 table tr td,
-#viewInforDisclosureHistory2 table tr th,
-#viewInforDisclosureHistory2 table tr td{
-    padding: 5px 10px;
-    border: 1px solid #DDD;
-    vertical-align: middle;
-}
-
-button.close img {
-	width: 32px;
-	height: 32px;
-}
-
-header h1 {
-	font-size: 16px;
-}
-
-header .helperMsg {
-	font-size: 12px;
-}
-
-
-.rdobtn input {
-	display: none;
-}
-.rdobtn label{
-	display: block;
-	float: left;
-	cursor: pointer;
-	width: 40%;
-	margin: 0;
-	padding: 10px;
-	background: lightgray;
-	color: white;
-	text-align: center;
-	line-height: 1;
-	transition: .2s;
-}
-.rdobtndb label{
-	width: 50%;
-}
-.rdobtn label:first-of-type{
-	border-radius: 3px 0 0 3px;
-}
-.rdobtn label:last-of-type{
-	border-radius: 0 3px 3px 0;
-}
-.rdobtn input[type="radio"]:checked + .onbtn,
-.rdobtn input[type="radio"]:checked + .offbtn {
-	background-color: deepskyblue;
-	color: white;
-}
-
-.img_idh_psn{
-    position: fixed;
-    right: 2.3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
-.img_idh_db{
-    position: fixed;
-    right: .3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
-.data_portability_btn{
-    background: royalblue;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    font-weight: 700;
-    font-size: large;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.img_qrcode{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 180px!important;
-    height: 180px!important;
-}
-
-.main_box_center{
-    text-align: center;
-}
-
-.li_date{
-    text-align:  center;
-    margin-bottom: 5px;
-    line-height: 1;
-}
-
-.kaiji_btn{
-    background: deepskyblue;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    font-weight: 700;
-}
-</style>
-<script type="text/javascript">
-// 現在表示中のメニューID
-var nowViewMenu = "top";
-// 表示するメニューを切り替える
-// Bootstrap機能使用
-function view(menuId) {
-	$("#" + nowViewMenu).addClass('hidden');
-	$("#" + menuId).removeClass('hidden');
-	nowViewMenu = menuId;
-}
-
-// 操作支援を許可したか
-var helpAuthorized = false;
-
-// NFCリーダダイアログを開く
-function openNfcReader() {
-	helpAuthorized = false
-    $('#modal-nfcReader').modal('show');
-}
-// 人物情報ダイアログを開く
-function openPersonalInfo() {
-    $('#modal-personalInfo').modal('show');
-}
-// 人物情報ダイアログ2を開く
-function openPersonalInfo2() {
-    $('#modal-personalInfo2').modal('show');
-}
-// 人物情報ダイアログ3を開く
-function openPersonalInfo3() {
-    $('#modal-personalInfo3').modal('show');
-}
-function openInforDisclosureHistoryPer() {
-    $('#modal-inforDisclosureHistoryPer').modal('show');
-}
-function openInforDisclosureHistoryDB() {
-    $('#modal-inforDisclosureHistory').modal('show');
-}
-// NFCリーダをかざしたとき
-function authorizedNfcReader() {
-	helpAuthorized = true;
-	$('body').removeClass('modal-open');
-	$('.modal-backdrop').remove();
-	$('#modal-nfcReader').modal('hide');
-}
-
-// 操作支援終了問い合わせダイアログを開く
-function openHelpConfirm() {
-    $('#modal-helpConfirm').modal('show');
-}
-// 操作支援終了問い合わせダイアログを閉じる
-function closeHelpConfirm(f) {
-	if(f) {
-		$("#endHelpOp").addClass('hidden');
-		$("#startHelpOp").removeClass("hidden");
-		$('header').css('background-color', '#008F00');
-		$('h1').css('background-color', '#008F00');
-		$('#welcomMessage').html(welcomeMessage);
-	}
-	$('body').removeClass('modal-open');
-	$('.modal-backdrop').remove();
-	$('#modal-helpConfirm').modal('hide');
-}
-
-// ようこそメッセージ
-var welcomeMessage = "";
-
-$(function () {
-	// NFCリーダダイアログが閉じたら操作支援開始ダイアログを開く
-	$('#modal-nfcReader').on('hidden.bs.modal', function () {
-		if(helpAuthorized) {
-			$('#modal-startHelpOp').modal('show');
-
-			$("#startHelpOp").addClass('hidden');
-			$("#endHelpOp").removeClass("hidden");
-
-			$('header').css('background-color', '#FF0000');
-			$('h1').css('background-color', '#FF0000');
-
-			welcomeMessage = $('#welcomMessage').html();
-			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
-		}
-	});
-});
-
-</script>
 </head>
 <body>
   <header>
     <h1 data-i18n="glossary:calorieSmileCollaboration" id="welcomMessage">ようこそ&nbsp;&nbsp;&nbsp;富士通　太郎さん</h1>
     <a id="updateGenki" href="#" onclick="cs.getGenkikunData();return false;">
-	<i class="fa fa-refresh fa-2x fa-fw" style="color:white;font-size:24px"></i>
+	<i class="fa fa-refresh fa-2x fa-fw fnt_icon"></i>
     </a>
     <a href="javascript:void(0)" onclick="cs.openSlide();">
-    	<i class="fa fa-bars fa-2x fa-fw" style="color:white;font-size:24px"></i>
+    	<i class="fa fa-bars fa-2x fa-fw fnt_icon"></i>
     </a>
   </header>
   <div id="dispMsg" style="display:none;">
@@ -303,44 +39,44 @@ $(function () {
 <div id="top">
 	<h2>■あなたへのお知らせ</h2>
 	<div class="main_box">
-		<table style="width: 100%;">
+		<table class="tbl_news">
 			<tr class="yourNews"><td>
 				<table>
 					<tr><td>みんなの掲示板 2017/11/07 13:46</td></tr>
-					<tr><td>&nbsp;&nbsp;<img src="./image/parts_ico_cleaningbucket.png" alt="Cleaning Backet" style="width: 32px;height: 32px;">&nbsp;&nbsp;共有フロアの清掃を次の日程で実施します</td></tr>
+					<tr><td>&nbsp;&nbsp;<img src="./image/parts_ico_cleaningbucket.png" alt="Cleaning Backet">&nbsp;&nbsp;共有フロアの清掃を次の日程で実施します</td></tr>
 					<tr>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">&nbsp;&nbsp;コメント:0</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment">&nbsp;&nbsp;コメント:0</td>
 					</tr>
 				</table>
 			</td></tr>
 			<tr class="yourNews"><td>
 				<table>
 					<tr><td>みんなの掲示板 2017/11/06 10:08</td></tr>
-					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;">まちのみんなでお祝いしよう！UDCK設立11周年記念パーティ</td></tr>
+					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" >まちのみんなでお祝いしよう！UDCK設立11周年記念パーティ</td></tr>
 					<tr>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">参加します:3</td>
-						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">検討中:2</td>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:3</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" >参加します:3</td>
+						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" >検討中:2</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" >コメント:3</td>
 					</tr>
 				</table>
 			</td></tr>
 			<tr class="yourNews"><td>
 				<table>
 					<tr><td>みんなの掲示板 2017/10/28 11:25</td></tr>
-					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;"><a onclick="cs.openExtCellCalSmile();">【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY</a></td></tr>
+					<tr><td colspan="3"><img src="./image/parts_ico_newspaper.png" alt="Newspaper" ><a onclick="cs.openExtCellCalSmile();">【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY</a></td></tr>
 					<tr>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">参加します:11</td>
-						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">検討中:4</td>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:1</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" >参加します:11</td>
+						<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" >検討中:4</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" >コメント:1</td>
 					</tr>
 				</table>
 			</td></tr>
 			<tr class="yourNews"><td>
 				<table>
 					<tr><td>みんなの掲示板 2017/10/25 16:51</td></tr>
-					<tr><td><img src="./image/parts_ico_knivesforks.png" alt="Knives and forks" style="width: 32px;height: 32px;">11月のレストランメニューが決まりました</td></tr>
+					<tr><td><img src="./image/parts_ico_knivesforks.png" alt="Knives and forks" >11月のレストランメニューが決まりました</td></tr>
 					<tr>
-						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">コメント:13</td>
+						<td>&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" >コメント:13</td>
 					</tr>
 				</table>
 			</td></tr>
@@ -352,14 +88,14 @@ $(function () {
 	<h2>■プロフィール</h2>
 	<div class="main_box">
 		<form id="profileForm">
-		<table style="width:100%">
+		<table class="tbl_prof_photo">
 			<tr>
-				<td style="text-align: center;"><img src="./image/parts_ico_gentleman.png" style="width:64px; height:64px;"></td>
-				<td style="width:70%"><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
+				<th class="cls_center"><img src="./image/parts_ico_gentleman.png"></th>
+				<td><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
 			</tr>
 		</table>
-		<table style="width:100%">
-			<tr><th>氏名：</th><td style="width:70%">富士通　太郎 (ふじつう　たろう)</td></tr>
+		<table class="tbl_prof">
+			<tr><th>氏名：</th><td>富士通　太郎 (ふじつう　たろう)</td></tr>
 			<tr><th>ニックネーム：</th><td><input type="text" value="ペコ太郎"></td></tr>
 			<tr><th>PDS URL：</th><td><a href="https://******/fujitsu-taro" target="_blank">https://******/fujitsu-taro</a></td></tr>
 			<tr><th>生年月日：</th><td>1955/11/16 62才</td></tr>
@@ -370,7 +106,7 @@ $(function () {
 			<tr><th>ログインID：</th><td>fujitsu-taro</td></tr>
 			<tr><th>パスワード：</th><td><input type="password" value="12345678"></td></tr>
 			<tr><th></th><td></td></tr>
-			<tr><td colspan="2" style="text-align: center"><button>プロフィールを保存する</button></td></tr>
+			<tr><td colspan="2" class="cls_center"><button>プロフィールを保存する</button></td></tr>
 		</table>
 		</form>
 	</div>
@@ -379,7 +115,7 @@ $(function () {
 <div id="opHistory" class="hidden">
 	<h2>■あなたの操作履歴 最新50件まで</h2>
 	<div class="main_box">
-		<table>
+		<table class="">
 			<tr><td>2017/11/07 13:23:48<br><img src="./image/parts_ico_gentleman.png">が、メニューより［あなたの操作履歴］を選択しました。</td></tr>
 			<tr><td>2017/10/28 14:31:42<br><img src="./image/parts_ico_gentleman.png">が、みんなの掲示板[【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY]にコメントを残しました。</td></tr>
 			<tr><td>2017/10/28 14:27:16<br><img src="./image/parts_ico_gentleman.png">が、みんなの掲示板[【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY]に参加する!と表明しました。</td></tr>
@@ -423,30 +159,29 @@ $(function () {
 	<h2>■あなたの情報開示状況<img src="./image/idh_psn_act.png" class="img_idh_psn">
 	<img src="./image/idh_db.png" class="img_idh_db" onclick="view('viewInforDisclosureHistory2');"></h2>
 	<div class="main_box">
-		<table>
-			<tr><td rowspan="4" style="border-right: none;border-left:none;padding-left: 3px;padding-right: 3px;"><img src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
-			<tr><td style="border-left: none;border-bottom: none;border-right: none;padding: 0px;">患者基本情報</td>
-			<td style="border-left: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+		<table class="tbl_infor_disc">
+			<tr class="tr_infor_disc_top"><td rowspan="4" class="td_infor_disc_icon"><img src="./image/parts_ico_doctor.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
+			<tr class="tr_infor_disc_top"><td class="td_infor_disc_lbl">患者基本情報</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">バイタル情報</td>
-			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr><td class="td_infor_disc_lbl">バイタル情報</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td style="border-left: none;border-top: none;border-right: none;padding: 0px;">健康情報</td>
-			<td style="border-left: none;border-top: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr><td class="td_infor_disc_lbl">健康情報</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td rowspan="5" style="border-right: none;border-left:none;padding-left: 3px;padding-right: 3px;"><img src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
-			<tr><td style="border-left: none;border-bottom: none;border-right: none;padding: 0px;">患者基本情報</td>
-			<td style="border-left: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr class="tr_infor_disc_top tr_infor_disc_bottom"><td rowspan="5" class="td_infor_disc_icon"><img src="./image/parts_ico_doctor2.png" onClick="openInforDisclosureHistoryPer();"></td></tr>
+			<tr class="tr_infor_disc_top"><td class="td_infor_disc_lbl">患者基本情報</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">バイタル情報</td>
-			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr><td class="td_infor_disc_lbl">バイタル情報</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td style="border-left: none;border-top: none;border-bottom: none;border-right: none;padding: 0px;">薬歴</td>
-			<td style="border-left: none;border-top: none;border-bottom: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr><td class="td_infor_disc_lbl">薬歴</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
-			<tr><td style="border-left: none;border-top: none;border-right: none;padding: 0px;">副作用歴/アレルギー歴
-</td>
-			<td style="border-left: none;border-top: none;padding-right: 0px;padding-left: 20px;padding-top: 3px;padding-bottom: 3px;">2018/04/13 09:11:35</td>
+			<tr class="tr_infor_disc_bottom"><td class="td_infor_disc_lbl">副作用歴/アレルギー歴</td>
+			<td class="td_infor_disc_date">2018/04/13 09:11:35</td>
 			</tr>
 		</table>
 	</div>
@@ -455,24 +190,27 @@ $(function () {
 	<h2>■あなたの情報開示状況<img src="./image/idh_psn.png" class="img_idh_psn" onclick="view('viewInforDisclosureHistory1');">
 	<img src="./image/idh_db_act.png" class="img_idh_db"></h2>
 	<div class="main_box">
-		<table>
-			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">患者基本情報</td></tr>
-			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/04/13<br>09:11:35</div></td>
-			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+		<table class="tbl_infor_disc2">
+			<tr class="tr_infor_disc_top"><td colspan="5">患者基本情報</td></tr>
+			<tr class="tr_hum_list">
+			<td ><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/04/13<br>09:11:35</div></td>
+			<td ><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
+			<td ></td>
+			<td ></td>
 			</tr>
-			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">バイタル情報</td></tr>
-			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
-			<td style="border: none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<tr class="tr_infor_disc_top"><td colspan="5">バイタル情報</td></tr>
+			<tr class="tr_hum_list">
+			<td ><div class="li_date"><img src="./image/parts_ico_doctor.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
+			<td ><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/06/13<br>15:31:49</div></td>
+			<td ></td>
+			<td ></td>
 			</tr>
-			<tr><td style="border-bottom:none;border-right:none;border-left:none;" colspan="5">薬歴</td></tr>
-			<td style="border-top:none;border-right:none;border-left:none;padding: 0;width:25%;"><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
-			<td style="border-top:none;border-right:none;border-left:none;width:25%;"></td>
+			<tr class="tr_infor_disc_top"><td colspan="5">薬歴</td></tr>
+			<tr class="tr_hum_list tr_infor_disc_bottom">
+			<td ><div class="li_date"><img src="./image/parts_ico_doctor2.png" onclick="openInforDisclosureHistoryDB();"><br>2018/05/15<br>11:12:51</div></td>
+			<td ></td>
+			<td ></td>
+			<td ></td>
 			</tr>
 		</table>
 	</div>
@@ -490,7 +228,7 @@ $(function () {
 <div id="viewDataExport" class="hidden">
 	<h2>■データエクスポート</h2>
 	<div class="main_box main_box_center">
-		<i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size:100px;    margin-top: 30px;    margin-bottom: 10px;"></i>
+		<i class="fa fa-spinner fa-pulse fa-3x fa-fw i_data_exp"></i>
 		<br>※現在、データエクスポート中です。<br>
 		完了まで暫くお待ち下さい。
 	</div>
@@ -580,7 +318,7 @@ $(function () {
           <!-- <button type="button" class="btn btn-primary" id="bReadAnotherCell" data-i18n="glossary:menu.lookAtOtherPhotos.btn" disabled></button> -->
 
 			<div class="boradttitle">
-				<img src="./image/parts_ico_newspaper.png" alt="Newspaper" style="width: 32px;height: 32px;">&nbsp;&nbsp;【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY
+				<img src="./image/parts_ico_newspaper.png" alt="Newspaper" >&nbsp;&nbsp;【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY
 				<hr>
 				柏の葉アーバンデザインセンター（UDCK）からのお知らせです。<br>
 				<br>
@@ -588,17 +326,17 @@ $(function () {
 				<a href="http://www.udck.jp/event/003504.html" target="_blank">http://www.udck.jp/event/003504.html</a>
 				<hr>
 				<table><tr>
-					<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" style="width: 32px;height: 32px;">&nbsp;&nbsp;参加します:11</td>
-					<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" style="width: 32px;height: 32px;">&nbsp;&nbsp;検討中:4</td>
+					<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" >&nbsp;&nbsp;参加します:11</td>
+					<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" >&nbsp;&nbsp;検討中:4</td>
 				</tr></table>
 				<table>
-					<tr><td colspan="2">&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" style="width: 32px;height: 32px;">&nbsp;&nbsp;コメント:1</td></tr>
+					<tr><td colspan="2">&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" >&nbsp;&nbsp;コメント:1</td></tr>
 					<tr>
 						<td>&nbsp;1&nbsp;</td>
 						<td>
 							<table>
 								<tr><td colspan="2">ヨガ体験ができて、柏の野菜を使ったカレーも食べれるので非常に楽しみです。</td></tr>
-								<tr><td>2017/10/28&nbsp;14:31:42&nbsp;ペコ太郎</td><td><a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp"  style="width: 32px;height: 32px;">通報する</a></td></tr>
+								<tr><td>2017/10/28&nbsp;14:31:42&nbsp;ペコ太郎</td><td><a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp">通報する</a></td></tr>
 							</table>
 						</td>
 					</tr>
@@ -623,8 +361,8 @@ $(function () {
             <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
         	支援する入居者のNFCタグをNFCリーダにかざしてください。
         </div>
-        <div class="modal-body" style="text-align: center">
-            <img src="./image/nfcread.png" onClick="authorizedNfcReader()" style="width: 229px; height: 149px">
+        <div class="modal-body cls_center">
+            <img src="./image/nfcread.png" onClick="authorizedNfcReader()" class="img_nfc">
         </div>
         <div class="modal-footer">
         </div>
@@ -637,12 +375,12 @@ $(function () {
       <div class="modal-content">
         <div class="modal-header">
         </div>
-        <div class="modal-body" style="text-align: center">
+        <div class="modal-body cls_center">
         	入居者：富士通　太郎さんの<br>操作支援を終了しますか？
         </div>
         <div class="modal-footer">
-            <button type="button" class="close" onClick="closeHelpConfirm(true)"  style="text-align: right">&nbsp;はい&nbsp;</button>
-            <button type="button" class="close" onClick="closeHelpConfirm(false)" style="text-align: left">&nbsp;いいえ&nbsp;</button>
+            <button type="button" class="close" onClick="closeHelpConfirm(true)"  class="cls_right">&nbsp;はい&nbsp;</button>
+            <button type="button" class="close" onClick="closeHelpConfirm(false)" class="cls_left">&nbsp;いいえ&nbsp;</button>
         </div>
       </div>
     </div>
@@ -653,11 +391,11 @@ $(function () {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <span style="text-align: center;">人物情報</span>
+          <span class="cls_center">人物情報</span>
         </div>
         <div class="modal-body personalInfo">
         	<table>
-        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_operator.png"></td></tr>
+        		<tr><td colspan="2" class="cls_center"><img src="./image/parts_ico_operator.png"></td></tr>
         		<tr><th>氏名：</th><td>支援者　太郎<br>しえんしゃ　たろう</td></tr>
         		<tr><th>ニックネーム：</th><td>未設定</td></tr>
         		<tr><th>付与権限：</th><td>支援者</td></tr>
@@ -674,11 +412,11 @@ $(function () {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <span style="text-align: center;">人物情報</span>
+          <span class="cls_center">人物情報</span>
         </div>
         <div class="modal-body personalInfo">
         	<table>
-        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_detective.png"></td></tr>
+        		<tr><td colspan="2" class="cls_center"><img src="./image/parts_ico_detective.png"></td></tr>
         		<tr><th>氏名：</th><td>富士通　吾郎<br>ふじつう　ごろう</td></tr>
         		<tr><th>ニックネーム：</th><td>小五郎</td></tr>
         		<tr><th>付与権限：</th><td>入居者/支援者</td></tr>
@@ -695,11 +433,11 @@ $(function () {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <span style="text-align: center;">人物情報</span>
+          <span class="cls_center">人物情報</span>
         </div>
         <div class="modal-body personalInfo">
         	<table>
-        		<tr><td colspan="2" style="text-align: center;"><img src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><td colspan="2" class="cls_center"><img src="./image/parts_ico_doctor.png"></td></tr>
         		<tr><th>氏名：</th><td>医師　太郎<br>いし　たろう</td></tr>
         		<tr><th>ニックネーム：</th><td>Dr.タロウ</td></tr>
         		<tr><th>付与権限：</th><td>外部事業者<br>診療所クリニック</td></tr>
@@ -714,44 +452,44 @@ $(function () {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="float: left;position: absolute;margin-top: -5px;"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <p style="text-align: center;margin: 0;">基本情報：開示情報</span>
+          <button type="button" class="close btn_close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+          <p class="p_modal_title">基本情報：開示情報</p>
         </div>
-        <div class="modal-body personalInfo" style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px; padding-top: 5px;">
+        <div class="modal-body personalInfo infor_disc_person_list_top infor_disc_person_list">
         	<table>
-        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor.png"></td></tr>
-        		<tr><td style="text-align: right;">氏名：</td><td>医師　鞠夫<br>いし　まりお</td></tr>
-        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.マリオ</td></tr>
-        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
+        		<tr><td rowspan="4" colspan="2" class="cls_center"><img src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><td class="cls_right">氏名：</td><td>医師　鞠夫<br>いし　まりお</td></tr>
+        		<tr><td class="cls_right">ニックネーム：</td><td>Dr.マリオ</td></tr>
+        		<tr><td class="cls_right">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
 			<tr><td colspan="4">
-				<table><tr><td style="width: 20%;"></td><td>
+				<table><tr><td class="td_rdo_sp"></td><td>
 				<div class="rdobtn rdobtndb">
 				    <input type="radio" name="21" id="2no1" value="0">
 				    <label for="2no1" class="offbtn">OFF</label>
 				    <input type="radio" name="21" id="2yes1" value="1" checked="">
 				    <label for="2yes1" class="onbtn">ON</label>
-				</div></td><td style="width: 20%;"></td></tr></table>
+				</div></td><td class="td_rdo_sp"></td></tr></table>
 			</td></tr>
         	</table>
         </div>
-        <div class="modal-body personalInfo" style="padding-bottom: 5px; padding-top: 5px;">
+        <div class="modal-body personalInfo infor_disc_person_list">
         	<table>
-        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor2.png"></td></tr>
-        		<tr><td style="text-align: right;">氏名：</td><td>薬屋　花子<br>くすりや　はなこ</td></tr>
-        		<tr><td style="text-align: right;">ニックネーム：</td><td>薬剤師.フラワー</td></tr>
-        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>薬局ファーマシー</td></tr>
+        		<tr><td rowspan="4" colspan="2" class="cls_center"><img src="./image/parts_ico_doctor2.png"></td></tr>
+        		<tr><td class="cls_right">氏名：</td><td>薬屋　花子<br>くすりや　はなこ</td></tr>
+        		<tr><td class="cls_right">ニックネーム：</td><td>薬剤師.フラワー</td></tr>
+        		<tr><td class="cls_right">付与権限：</td><td>外部事業者<br>薬局ファーマシー</td></tr>
 			<tr><td colspan="4">
-				<table><tr><td style="width: 20%;"></td><td>
+				<table><tr><td class="td_rdo_sp"></td><td>
 				<div class="rdobtn rdobtndb">
 				    <input type="radio" name="31" id="3no1" value="0">
 				    <label for="3no1" class="offbtn">OFF</label>
 				    <input type="radio" name="31" id="3yes1" value="1" checked="">
 				    <label for="3yes1" class="onbtn">ON</label>
-				</div></td><td style="width: 20%;"></td></tr></table>
+				</div></td><td class="td_rdo_sp"></td></tr></table>
 			</td></tr>
         	</table>
         </div>
-        <div class="modal-footer" style="text-align: center;">
+        <div class="modal-footer cls_center">
 		<button class="kaiji_btn" data-dismiss="modal">開示情報を保存する</button>
         </div>
       </div>
@@ -761,33 +499,33 @@ $(function () {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="float: left;position: absolute;margin-top: -5px;"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <p style="text-align: center;margin: 0;">開示情報</span>
+          <button type="button" class="close btn_close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+	  <p class="p_modal_title">開示情報</p>
         </div>
         <div class="modal-body personalInfo">
         	<table>
-        		<tr><td rowspan="4" colspan="2" style="text-align: center;"><img style="width:70px;height:70px;" src="./image/parts_ico_doctor.png"></td></tr>
-        		<tr><td style="text-align: right;">氏名：</td><td>医師　太郎<br>いし　たろう</td></tr>
-        		<tr><td style="text-align: right;">ニックネーム：</td><td>Dr.タロウ</td></tr>
-        		<tr><td style="text-align: right;">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
+        		<tr><td rowspan="4" colspan="2" class="cls_center"><img src="./image/parts_ico_doctor.png"></td></tr>
+        		<tr><td class="cls_right">氏名：</td><td>医師　太郎<br>いし　たろう</td></tr>
+        		<tr><td class="cls_right">ニックネーム：</td><td>Dr.タロウ</td></tr>
+        		<tr><td class="cls_right">付与権限：</td><td>外部事業者<br>診療所クリニック</td></tr>
 			<tr><td colspan="4">
-			<table style="margin-top: 10px;">
-				<tr><td style="text-align: right;width: 40%;">患者基本情報</td><td>
-				<div class="rdobtn" style="padding-left: 10px;">
+			<table class="tbl_rdo">
+				<tr><td class="td_rdo_lbl">患者基本情報</td><td>
+				<div class="rdobtn rdobtn_per">
 				    <input type="radio" name="1" id="no1" value="0">
 				    <label for="no1" class="offbtn">OFF</label>
 				    <input type="radio" name="1" id="yes1" value="1" checked="">
 				    <label for="yes1" class="onbtn">ON</label>
 				</div></td></tr>
-				<tr><td style="text-align: right;width: 40%;">バイタル情報</td><td>
-				<div class="rdobtn" style="padding-left: 10px;">
+				<tr><td class="td_rdo_lbl">バイタル情報</td><td>
+				<div class="rdobtn rdobtn_per">
 				    <input type="radio" name="2" id="no2" value="0">
 				    <label for="no2" class="offbtn">OFF</label>
 				    <input type="radio" name="2" id="yes2" value="1" checked="">
 				    <label for="yes2" class="onbtn">ON</label>
 				</div></td></tr>
-				<tr><td style="text-align: right;width: 40%;">健康情報</td><td>
-				<div class="rdobtn" style="padding-left: 10px;">
+				<tr><td class="td_rdo_lbl">健康情報</td><td>
+				<div class="rdobtn rdobtn_per">
 				    <input type="radio" name="3" id="no3" value="0">
 				    <label for="no3" class="offbtn">OFF</label>
 				    <input type="radio" name="3" id="yes3" value="1" checked="">
@@ -796,7 +534,7 @@ $(function () {
 			</td></tr>
         	</table>
         </div>
-        <div class="modal-footer" style="text-align: center;">
+        <div class="modal-footer cls_center">
 		<button class="kaiji_btn" data-dismiss="modal">開示情報を保存する</button>
         </div>
       </div>
@@ -812,61 +550,6 @@ $(function () {
         </div>
         <div class="modal-footer">
             <button type="button" class="close" data-dismiss="modal">&nbsp;O&nbsp;K&nbsp;</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="modal-sendAllowedMessage" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">Ã—</button>
-          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.sendReadPermissionRequest.header"></h4>
-        </div>
-        <div class="modal-body">
-          <select id="requestCells"></select>
-          <button type="button" class="btn btn-primary" id="bSendAllowed" data-i18n="glossary:menu.sendReadPermissionRequest.btn" disabled></button>
-          <span class="popupAlertArea" style="color:red">
-              <aside id="popupSendAllowedErrorMsg"></aside>
-          </span>
-        </div>
-        <div class="modal-footer">
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-listAllowed" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">Ã—</button>
-          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.readPermissionStatus.header"></h4>
-        </div>
-        <div class="modal-body">
-          <table id="allowedCellList">
-          </table>
-        </div>
-        <div class="modal-footer">
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-receiveMessage" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">Ã—</button>
-          <h4 class="modal-title" id="header-public" data-i18n="menu.notification.header"></h4>
-        </div>
-        <div class="modal-body">
-          <div class="panel-group" id="messageList">
-          </div>
-        </div>
-        <div class="modal-footer">
-
         </div>
       </div>
     </div>
