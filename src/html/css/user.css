@@ -256,7 +256,6 @@ header > a {
 }
 
 .overlay {
-    /*position: absolute;*/
     position: fixed;
     background: rgba(0,0,0,0);
     width: 100%;
@@ -276,11 +275,9 @@ header > a {
 }
 
 .slide-menu {
-    /*position: absolute;*/
     position: fixed;
     background: #ffffff;
     width:70%;
-    height: 100%;
     left: 100%;
     top: 0px;
     z-index: 2;
@@ -299,11 +296,10 @@ header > a {
 }
 
 .sidemenu-item {
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-right: 3%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
     width: 95%;
-    height: 48px;
     border-bottom: 1px solid #c7c7c7;
     border-collapse: collapse;
     color: #333333;
