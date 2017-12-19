@@ -70,11 +70,6 @@ additionalCallback = function() {
     $("#modal-sendAllowedMessage").on('show.bs.modal', function() {
         $("#popupSendAllowedErrorMsg").html('');
     });
-
-    $('#dvOverlay').on('click', function() {
-        $(".overlay").removeClass('overlay-on');
-        $(".slide-menu").removeClass('slide-on');
-    });
 }
 
 cs.openExtCellCalSmile = function() {
@@ -778,4 +773,8 @@ $(function () {
 			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
 		}
 	});
+    $('#dvOverlay').on('click', function() {
+        $(".overlay").removeClass('overlay-on');
+        $(".slide-menu").removeClass('slide-on');
+    });
 });
