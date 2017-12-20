@@ -327,10 +327,6 @@ header > a {
     }
 }
 
-#top img {
-	/*float: left;*/
-}
-
 #profile table th,
 .personalInfo table th {
 	text-align: right;
