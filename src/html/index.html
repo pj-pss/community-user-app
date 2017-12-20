@@ -258,66 +258,22 @@
 </div>
 
   </span>
-  <div class="slide-menu">
+  <nav class="slide-menu menu-title">
     <h1 data-i18n="menu.title"></h1>
-    <table class="menu-title">
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();">メニュー</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('top');">トップ</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('profile');">プロフィール</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('opHistory');">あなたの操作履歴</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('helperOpHistory');">支援者の操作履歴</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('consentHistory');">あなたの同意履歴</a>
-        </td>
-      </tr>
-      <tr id="startHelpOp">
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();openNfcReader();">操作支援</a>
-        </td>
-      </tr>
-      <tr id="endHelpOp" class="hidden">
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();openHelpConfirm();">操作支援終了</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('viewHistory');">あなたの情報参照履歴</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('viewInforDisclosureHistory1');">あなたの情報開示履歴</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="sidemenu-item">
-          <a onclick="cs.closeSlide();view('viewDataPortability');">データポータビリティ</a>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <ul>
+      <li><a onclick="cs.closeSlide();">メニュー</a></li>
+      <li><a onclick="cs.closeSlide();view('top');">トップ</a></li>
+      <li><a onclick="cs.closeSlide();view('profile');">プロフィール</a></li>
+      <li><a onclick="cs.closeSlide();view('opHistory');">あなたの操作履歴</a></li>
+      <li><a onclick="cs.closeSlide();view('helperOpHistory');">支援者の操作履歴</a></li>
+      <li><a onclick="cs.closeSlide();view('consentHistory');">あなたの同意履歴</a></li>
+      <li id="startHelpOp"><a onclick="cs.closeSlide();openNfcReader();">操作支援</a></li>
+      <li id="endHelpOp" class="hidden"><a onclick="cs.closeSlide();openHelpConfirm();">操作支援終了</a></li>
+      <li><a onclick="cs.closeSlide();view('viewHistory');">あなたの情報参照履歴</a></li>
+      <li><a onclick="cs.closeSlide();view('viewInforDisclosureHistory1');">あなたの情報開示履歴</a></li>
+      <li><a onclick="cs.closeSlide();view('viewDataPortability');">データポータビリティ</a></li>
+    </ul>
+  </nav>
   <div class="overlay" id="dvOverlay">
   </div>
   <div id="modal-extCellCalSmile" class="modal fade" role="dialog">
