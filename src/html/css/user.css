@@ -388,8 +388,8 @@ header > a {
   border-collapse:collapse;
 }
 .tbl_news tr td{
-  background-color: #e8ffc4;
-  border: 2px #99cc99 solid;
+  background-color: #f3ffe0;
+  border: 2px #a9c9a9 solid;
   vertical-align: top;
   padding: 0px;
 }
