@@ -703,6 +703,7 @@ function view(menuId) {
 	$("#" + nowViewMenu).addClass('hidden');
 	$("#" + menuId).removeClass('hidden');
 	nowViewMenu = menuId;
+	window.scrollTo(0, 0);
 }
 
 
