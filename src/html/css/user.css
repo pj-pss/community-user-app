@@ -422,15 +422,13 @@ header > a {
 }
 
 .stealth_table {
-  width: 100%;
+  float: right;
+  width: 70%;
   height: 100%;
 }
 
-.stealth_table tr td{
-  width: 100%;
-}
-
 .stealth_table tr td {
+  width: 100%;
   border: none;
   vertical-align: middle;
 }
@@ -472,10 +470,12 @@ header > a {
 }
 
 p.overflow {
+  text-align: center;
   width: 65vw;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .boradttitle img,
