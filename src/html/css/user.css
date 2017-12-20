@@ -395,8 +395,8 @@ header > a {
 }
 
 .yourNews .img{
-  height: 300px;
-  width: 300px;
+  height: 30vw;
+  width: 30vw;
   margin-bottom: -5px;
   vertical-align: bottom;
 }
@@ -408,8 +408,8 @@ header > a {
     background-repeat: no-repeat;
     margin: 0px;
     padding: 0px;
-    width: 300px;
-    height: 300px;
+    width: 30vw;
+    height: 30vw;
     border: 0px solid #ccc;
     background-size: cover;
     vertical-align: bottom;
@@ -418,6 +418,7 @@ header > a {
 .yourNews .description{
   padding: 5px;
   height: 0px;
+  width: 70vw;
 }
 
 .stealth_table {
@@ -438,7 +439,7 @@ header > a {
 .stealth_table .date {
   height: 20%;
   color: #777777;
-  font-size: 14px;
+  font-size: 2vw;
 }
 
 .stealth_table .date td{
@@ -448,21 +449,33 @@ header > a {
 .stealth_table .title {
   height: 60%;
   vertical-align: middle;
-  font-size: 20px;
+  font-size: 5vw;
 }
+
 
 .stealth_table .title td{
   text-align: center;
+  width: 65vw;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .stealth_table .article {
   height: 20%;
   color: #777777;
-  font-size: 16px;
+  font-size: 2vw;
 }
 
 .stealth_table .article td {
+}
 
+p.overflow {
+  width: 65vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .boradttitle img,
