@@ -7,8 +7,6 @@ html,body {
     height: 100%;
 }
 
-/* 見出し */
-/* h1 ページタイトルのみ */
 header > h1 {
   flex: 1 1 auto;
   margin: 0;
@@ -26,7 +24,6 @@ h1 {
   background-color: #008F00;
   color: #ffffff;
 }
-/* h2 通常項目見出し */
 h2 {
   margin: 20px 0;
   font-size: 24px;
@@ -39,7 +36,6 @@ h3 {
   color: #8a92a8;
 }
 
-/* セクション */
 section {
   clear: both;
   border-top: 1px solid #d4d4d4;
@@ -52,7 +48,6 @@ section .sizeCaption {
   margin: 0 16px;
 }
 
-/* リスト */
 ul,
 li {
   list-style: none;
@@ -60,7 +55,6 @@ li {
   margin: 0;
 }
 
-/* ヘッダー */
 header {
   display: flex;
   flex-direction: row;
@@ -94,7 +88,6 @@ header > a {
   height: 32px;
 }
 
-/* カロリースマイル用 */
 .meal-section {
   padding: 0 16px;
   border-top: 1px solid #d4d4d4;
@@ -151,7 +144,7 @@ header > a {
 .service-logoback {
     background-color: #f39700;
     height: 25%;
-    line-height:25%; /* heightと同じ値 */
+    line-height:25%;
     text-align:center;
     vertical-align:middle;
 }
@@ -384,23 +377,6 @@ header > a {
     vertical-align: middle;
 }
 
-.tbl_news {
-  border-collapse:collapse;
-}
-.tbl_news tr td{
-  background-color: #f3ffe0;
-  border: 2px #a9c9a9 solid;
-  vertical-align: top;
-  padding: 0px;
-}
-
-.yourNews .img{
-  height: 30vw;
-  width: 30vw;
-  margin-bottom: -5px;
-  vertical-align: bottom;
-}
-
 .cover {
     display: inline-block;
     background-color: #ccc;
@@ -412,24 +388,14 @@ header > a {
     height: 30vw;
     border: 0px solid #ccc;
     background-size: cover;
-    vertical-align: bottom;
-}
-
-.yourNews .description{
-  padding: 5px;
-  height: 0px;
-  width: 70vw;
+    /*vertical-align: bottom;*/
 }
 
 .stealth_table {
-  float: right;
-  margin-right: 5px;
-  width: 70%;
   height: 100%;
 }
 
 .stealth_table tr td {
-  width: 100%;
   border: none;
   vertical-align: middle;
 }
@@ -438,7 +404,7 @@ header > a {
 .stealth_table .date {
   height: 20%;
   color: #777777;
-  font-size: 2vw;
+  font-size: 16px;
 }
 
 .stealth_table .date td{
@@ -448,13 +414,12 @@ header > a {
 .stealth_table .title {
   height: 60%;
   vertical-align: middle;
-  font-size: 5vw;
+  font-size: 40px;
 }
 
 
 .stealth_table .title td{
   text-align: center;
-  width: 65vw;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -464,7 +429,7 @@ header > a {
 .stealth_table .article {
   height: 20%;
   color: #777777;
-  font-size: 2vw;
+  font-size: 16px;
 }
 
 .stealth_table .article td {
@@ -472,11 +437,31 @@ header > a {
 
 p.overflow {
   text-align: center;
-  width: 65vw;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+}
+
+.block_img {
+  height: 30vmin;
+  overflow: hidden;
+
+  background-color: #f3ffe0;
+  border: 2px #a9c9a9 solid;
+  vertical-align: top;
+  padding: 0px;
+  border-width: 2px 0px 2px 2px;
+}
+
+.block_description {
+  height: 30vmin;
+
+  background-color: #f3ffe0;
+  border: 2px #a9c9a9 solid;
+  vertical-align: top;
+  padding: 5px;
+  border-width: 2px 2px 2px 0px;
 }
 
 .boradttitle img,
