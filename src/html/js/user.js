@@ -781,12 +781,12 @@ $(function () {
 
 // Add a link to the table row
 $(function($) {
-    $('tbody tr[data-href]').addClass('clickable').click( function() {
+    $('div[data-href]').addClass('clickable').click( function() {
         window.location = $(this).attr('data-href');
     }).find('a').hover( function() {
-        $(this).parents('tr').unbind('click');
+        $(this).parents('div').unbind('click');
     }, function() {
-        $(this).parents('tr').click( function() {
+        $(this).parents('div').click( function() {
             window.location = $(this).attr('data-href');
         });
     });

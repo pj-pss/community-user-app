@@ -404,7 +404,7 @@ header > a {
 .stealth_table .date {
   height: 20%;
   color: #777777;
-  font-size: 16px;
+  font-size: 2vw;
 }
 
 .stealth_table .date td{
@@ -414,7 +414,7 @@ header > a {
 .stealth_table .title {
   height: 60%;
   vertical-align: middle;
-  font-size: 40px;
+  font-size: 5vw;
 }
 
 
@@ -429,7 +429,7 @@ header > a {
 .stealth_table .article {
   height: 20%;
   color: #777777;
-  font-size: 16px;
+  font-size: 2vw;
 }
 
 .stealth_table .article td {
@@ -447,6 +447,7 @@ p.overflow {
   height: 30vmin;
   overflow: hidden;
 
+  display: inline-block;
   background-color: #f3ffe0;
   border: 2px #a9c9a9 solid;
   vertical-align: top;
@@ -457,6 +458,7 @@ p.overflow {
 .block_description {
   height: 30vmin;
 
+  display: inline-block;
   background-color: #f3ffe0;
   border: 2px #a9c9a9 solid;
   vertical-align: top;
