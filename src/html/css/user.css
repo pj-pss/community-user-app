@@ -423,6 +423,7 @@ header > a {
 
 .stealth_table {
   float: right;
+  margin-right: 5px;
   width: 70%;
   height: 100%;
 }
@@ -691,5 +692,5 @@ table.tbl_prof_photo img{
 }
 
 .btn-group button {
-  font-size: 20px;
+  font-size: 4vw;
 }
