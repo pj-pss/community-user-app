@@ -384,8 +384,8 @@ header > a {
     background-repeat: no-repeat;
     margin: 0px;
     padding: 0px;
-    width: 30vw;
-    height: 30vw;
+    width: 30vmin;
+    height: 30vmin;
     border: 0px solid #ccc;
     background-size: cover;
     /*vertical-align: bottom;*/
@@ -404,7 +404,7 @@ header > a {
 .stealth_table .date {
   height: 20%;
   color: #777777;
-  font-size: 2vw;
+  font-size: 2vmin;
 }
 
 .stealth_table .date td{
@@ -414,7 +414,7 @@ header > a {
 .stealth_table .title {
   height: 60%;
   vertical-align: middle;
-  font-size: 5vw;
+  font-size: 5vmin;
 }
 
 
@@ -429,7 +429,7 @@ header > a {
 .stealth_table .article {
   height: 20%;
   color: #777777;
-  font-size: 2vw;
+  font-size: 2vmin;
 }
 
 .stealth_table .article td {
@@ -447,7 +447,6 @@ p.overflow {
   height: 30vmin;
   overflow: hidden;
 
-  display: inline-block;
   background-color: #f3ffe0;
   border: 2px #a9c9a9 solid;
   vertical-align: top;
@@ -458,12 +457,15 @@ p.overflow {
 .block_description {
   height: 30vmin;
 
-  display: inline-block;
   background-color: #f3ffe0;
   border: 2px #a9c9a9 solid;
   vertical-align: top;
   padding: 5px;
   border-width: 2px 2px 2px 0px;
+}
+
+.hoge {
+  display: block;
 }
 
 .boradttitle img,
