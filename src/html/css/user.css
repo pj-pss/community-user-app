@@ -142,10 +142,9 @@ header > a {
   background-size: 16px;
 }
 
-
 .main_box {
     height: 100%;
-    background-color: whitesmoke;
+    background-color: floralwhite;
 }
 
 .service-logoback {
@@ -498,9 +497,9 @@ table.tbl_prof {
 
 table.tbl_prof tr th,
 table.tbl_prof tr td {
-	font-size: 18px;
+	font-size: 20px;
 	vertical-align: top;
-	padding: 5px;
+	padding: 2px;
 }
 
 table.tbl_prof tr th {
