@@ -680,7 +680,22 @@ table.tbl_prof_photo img{
   border: 1px solid #ccc;
 }
 
+.simple_block_r-open {
+  border: 1px solid #ccc;
+  border-width: 1px 0px 1px 1px;
+}
+
+.simple_block_l-open {
+  border: 1px solid #ccc;
+  border-width: 1px 1px 1px 0px;
+}
+
 .row-eq-height {
   display: flex;
   flex-wrap: wrap;
+}
+
+.horizontal_block {
+  padding: 5px 20px;
+  display: inline-block;
 }
