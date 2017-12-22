@@ -99,29 +99,41 @@
 	</div>
 </div>
 
-<div id="profile" class="hidden">
+<div id="profileView" class="hidden">
 	<h2>■プロフィール</h2>
 	<div class="main_box">
-		<form id="profileForm">
-		<table class="tbl_prof_photo">
-			<tr>
-				<th class="cls_center"><img src="./image/parts_ico_gentleman.png"></th>
-				<td><button>写真を変更する</button>&nbsp;&nbsp;<button>写真を削除する</button><br>※登録された写真は、公開されます。</td>
-			</tr>
-		</table>
 		<table class="tbl_prof">
-			<tr><th>氏名：</th><td>富士通　太郎 (ふじつう　たろう)</td></tr>
-			<tr><th>ニックネーム：</th><td><input type="text" value="ペコ太郎"></td></tr>
-			<tr><th>PDS URL：</th><td><a href="https://******/fujitsu-taro" target="_blank">https://******/fujitsu-taro</a></td></tr>
+			<tr><th colspan="2"><img class="img-thumbnail" src="./image/parts_ico_gentleman.png"></th></tr>
+			<tr><th>ニックネーム：</th><td>ペコ太郎</tr>
+			<tr><th>氏名：</th><td>富士通　太郎<br>(ふじつう　たろう)</td></tr>
 			<tr><th>生年月日：</th><td>1955/11/16 62才</td></tr>
-			<tr><th>性別：</th><td><select><option>男性<option>女性<option></option></select></td></tr>
-			<tr><th>血液型：</th><td><select><option>A<option>B<option>O<option>AB</select></td></tr>
-			<tr><th>住居：</th><td>デュオセーヌ 柏の葉キャンパスA棟 201号室</td></tr>
-			<tr><th>居住形態：</th><td><select><option>単身<option>親族あり<option>その他</select></td></tr>
-			<tr><th>ログインID：</th><td>fujitsu-taro</td></tr>
-			<tr><th>パスワード：</th><td><input type="password" value="12345678"></td></tr>
-			<tr><th></th><td></td></tr>
-			<tr><td colspan="2" class="cls_center"><button>プロフィールを保存する</button></td></tr>
+			<tr><th>性別：</th><td>男性</td></tr>
+			<tr><th>血液型：</th><td>A型</td></tr>
+			<tr><th>住居：</th><td>デュオセーヌ 柏の葉 キャンパス A棟 201号室</td></tr>
+			<tr><th>居住形態：</th><td>単身</td></tr>
+			<tr><td colspan="2" class="cls_center"><buttonbtn class="btn btn-primary" onclick="view('profileEdit');">プロフィールを変更する</button></td></tr>
+		</table>
+	</div>
+</div>
+
+<div id="profileEdit" class="hidden">
+	<h2>■プロフィール変更</h2>
+	<div class="main_box">
+		<form id="profileForm">
+		<table class="tbl_prof">
+			<tr>
+				<th><img class="img-thumbnail" src="./image/parts_ico_gentleman.png"></th>
+				<td class="photoBtnArea"><button class="btn btn-success" onclick="return false;">写真を変更する</button>&nbsp;<button class="btn btn-warning" onclick="return false;">写真を削除する</button><br><span class="text-warning">※登録された写真は公開されます。</span></td>
+			</tr>
+			<tr><th>ニックネーム：</th><td><input type="text" name="nickname" value="ペコ太郎"></td></tr>
+			<tr><td colspan="2" class="cls_center"><button class="btn btn-primary" onclick="view('profileView');return false;">プロフィールを保存する</button>&nbsp;<button class="btn btn-default" onclick="view('profileView');return false;">キャンセル</button></td></tr>
+			<tr><td colspan="2" class="cls_center"><span class="profNotice">以下の情報は変更出来ません</span></td></tr>
+			<tr><th>氏名：</th><td>富士通　太郎 <br>(ふじつう　たろう)</td></tr>
+			<tr><th>生年月日：</th><td>1955/11/16 62才</td></tr>
+			<tr><th>性別：</th><td>男性</td></tr>
+			<tr><th>血液型：</th><td>A型</td></tr>
+			<tr><th>住居：</th><td>デュオセーヌ 柏の葉 キャンパス A棟 201号室</td></tr>
+			<tr><th>居住形態：</th><td>単身</td></tr>
 		</table>
 		</form>
 	</div>
@@ -264,7 +276,7 @@
     <ul>
       <li><a onclick="cs.closeSlide();">メニュー</a></li>
       <li><a onclick="cs.closeSlide();view('top');">トップ</a></li>
-      <li><a onclick="cs.closeSlide();view('profile');">プロフィール</a></li>
+      <li><a onclick="cs.closeSlide();view('profileView');">プロフィール</a></li>
       <li><a onclick="cs.closeSlide();view('opHistory');">あなたの操作履歴</a></li>
       <li><a onclick="cs.closeSlide();view('helperOpHistory');">支援者の操作履歴</a></li>
       <li><a onclick="cs.closeSlide();view('consentHistory');">あなたの同意履歴</a></li>

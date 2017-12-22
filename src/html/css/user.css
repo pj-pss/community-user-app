@@ -135,10 +135,9 @@ header > a {
   background-size: 16px;
 }
 
-
 .main_box {
     height: 100%;
-    background-color: whitesmoke;
+    background-color: floralwhite;
 }
 
 .service-logoback {
@@ -326,8 +325,6 @@ header > a {
 }
 
 .tbl_news,
-.tbl_prof,
-.tbl_prof_photo,
 .personalInfo table,
 #opHistory table,
 #helperOpHistory table,
@@ -565,14 +562,66 @@ header .helperMsg {
 	font-size:24px
 }
 
-table.tbl_prof_photo tr td,
-table.tbl_prof tr td{
-	width:70%;
+table.tbl_prof {
+	width: 100%;
 }
 
-table.tbl_prof_photo img{
-	width:64px;
-	height:64px;
+table.tbl_prof tr th,
+table.tbl_prof tr td {
+	font-size: 20px;
+	vertical-align: top;
+	padding: 2px;
+}
+
+table.tbl_prof tr th {
+	text-align: right;
+	white-space: nowrap;
+}
+
+table.tbl_prof img {
+	width: 128px;
+	height: 128px;
+	padding: 5px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#profileEdit table.tbl_prof img {
+	margin-right: 5px;
+}
+
+table.tbl_prof button {
+	margin: 4px;
+}
+
+table.tbl_prof tr td.photoBtnArea {
+	vertical-align: middle;
+}
+
+table.tbl_prof input[type="text"] {
+	width: 90%;
+}
+
+.profNotice {
+	color: #444;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+}
+.profNotice:before, .profNotice:after {
+	content: "";
+	flex-grow: 1;
+	height: 1px;
+	display: block;
+}
+.profNotice:before {
+	margin-right: .4em;
+	background: linear-gradient(-90deg, #888, transparent);
+}
+.profNotice:after {
+	margin-left: .4em;
+	background: linear-gradient(90deg, #888, transparent);
 }
 
 .cls_center{
