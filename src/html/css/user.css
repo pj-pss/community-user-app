@@ -675,3 +675,12 @@ table.tbl_prof_photo img{
 .btn-group button {
   font-size: 4vmin;
 }
+
+.simple_block {
+  border: 1px solid #ccc;
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
