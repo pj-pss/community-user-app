@@ -792,3 +792,7 @@ $(function($) {
         });
     });
 });
+
+function openPostCommentModal() {
+    $('#modal-comment').modal('show');
+}

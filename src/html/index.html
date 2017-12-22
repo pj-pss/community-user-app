@@ -47,7 +47,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div data-href="javascript:void(0)">
-                    <div class="col-xs-4 col-md-2 block_img" data-href="javascript:cs.openExtCellCalSmile();">
+                    <div class="col-xs-4 col-md-2 block_img">
                         <span class="cover" style="background-image: url('./image/clean.JPG')"></span>
                     </div>
                     <div class="col-xs-8 col-md-4 block_description">
@@ -62,7 +62,7 @@
                     <div class="col-xs-4 col-md-2 block_img">
                         <span class="cover" style="background-image: url('./image/11thAniv.png')"></span>
                     </div>
-                    <div class="col-xs-8 col-md-4 block_description" data-href="javascript:cvoid(0);">
+                    <div class="col-xs-8 col-md-4 block_description">
                         <table class="stealth_table">
                             <tr class="date"><td>みんなの掲示板 2017/11/06 (月) 10:08</td></tr>
                             <tr class="title"><td>まちのみんなでお祝いしよう！UDCK設立11周年記念パーティ</td></tr>
@@ -70,7 +70,7 @@
                         </table>
                     </div>
                 </div>
-                <div data-href="javascript:cs.openExtCellCalSmile()">
+                <div data-href="javascript:view('articleDetail')">
                     <div class="col-xs-4 col-md-2 block_img">
                         <span class="cover" style="background-image: url('./image/InternationalCurryParty.png')"></span>
                     </div>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div data-href="javascript:void(0)">
-                    <div class="col-xs-4 col-md-2 block_img" data-href="javascript:cs.openExtCellCalSmile();">
+                    <div class="col-xs-4 col-md-2 block_img">
                         <span class="cover" style="background-image: url('./image/novemberMenu.JPG')"></span>
                     </div>
                     <div class="col-xs-8 col-md-4 block_description">
@@ -323,53 +323,70 @@
   </nav>
   <div class="overlay" id="dvOverlay">
   </div>
-  <div id="modal-extCellCalSmile" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
-          <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.lookAtOtherPhotos.header">みんなの掲示板</h4>
-        </div>
-        <div class="modal-body">
-          <!-- <select id="otherAllowedCells"></select> -->
-          <!-- <button type="button" class="btn btn-primary" id="bReadAnotherCell" data-i18n="glossary:menu.lookAtOtherPhotos.btn" disabled></button> -->
 
-			<div class="boradttitle">
-				<img src="./image/parts_ico_newspaper.png" alt="Newspaper" >&nbsp;&nbsp;【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY
-				<hr>
-				柏の葉アーバンデザインセンター（UDCK）からのお知らせです。<br>
-				<br>
-				詳しい情報は以下となります。<br>
-				<a href="http://www.udck.jp/event/003504.html" target="_blank">http://www.udck.jp/event/003504.html</a>
-				<hr>
-				<table><tr>
-					<td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" >&nbsp;&nbsp;参加します:11</td>
-					<td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" >&nbsp;&nbsp;検討中:4</td>
-				</tr></table>
-				<table>
-					<tr><td colspan="2">&nbsp;&nbsp;<img src="./image/parts_ico_comment.png" alt="Comment" >&nbsp;&nbsp;コメント:1</td></tr>
-					<tr>
-						<td>&nbsp;1&nbsp;</td>
-						<td>
-							<table>
-								<tr><td colspan="2">ヨガ体験ができて、柏の野菜を使ったカレーも食べれるので非常に楽しみです。</td></tr>
-								<tr><td>2017/10/28&nbsp;14:31:42&nbsp;ペコ太郎</td><td><a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp">通報する</a></td></tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-				<table>
-					<tr><td colspan="2"><input type="radio" id="wrtier_nickname" name="writer_name" value="nickname" checked="checked"><label for=="wrtier_nickname">ニックネームで投稿</label>&nbsp;<input type="radio" id="writer_realname" name="writer_name" value="realname"><label for="writer_realname">実名で投稿</label>&nbsp;<input type="radio" id="writer_anonymous" name="writer_name" value="anonymous"><label for="writer_anonymous">匿名で投稿</labp>&nbsp;</td></tr>
-					<tr><td>コメント&nbsp;&nbsp</td><td><input type="textarea" name="comment" rows="2"></td></tr>
-					<tr><td colspan="2"><button onclick="alert('コメントが投稿されました');">コメントを投稿する</button></td></tr>
-				</table>
-			</div>
-        </div>
-        <div class="modal-footer">
-        </div>
+<div id="articleDetail" class="hidden">
+  <h4 class="modal-title" id="header-public" data-i18n="glossary:menu.lookAtOtherPhotos.header">みんなの掲示板</h4>
+    <div class="main_box">
+
+      <div class="boradttitle">
+        <h2><img src="./image/parts_ico_newspaper.png" alt="Newspaper" >&nbsp;&nbsp;【配信協力】留学⽣×市⺠ みんなで楽しもう！INTERNATIONAL CURRY PARTY</h2>
+
+        <hr>
+        柏の葉アーバンデザインセンター（UDCK）からのお知らせです。<br>
+        <br>
+        詳しい情報は以下となります。<br>
+        <a href="http://www.udck.jp/event/003504.html" target="_blank">http://www.udck.jp/event/003504.html</a>
+        <hr>
+        <table><tr>
+          <td>&nbsp;&nbsp;<img src="./image/parts_ico_thumbsup.png" alt="Thumb Up" >&nbsp;&nbsp;参加します:11</td>
+          <td>&nbsp;&nbsp;<img src="./image/part_ico_underreview.png" alt="Under Review" >&nbsp;&nbsp;検討中:4</td>
+        </tr></table>
+        <hr>
+          <div class="comment_button"><button class="btn btn-default" onclick="javascript:openPostCommentModal()">コメントを投稿する</button></div>
+          <img src="./image/parts_ico_comment.png" alt="Comment" > コメント:1
+          <div class="media">
+            <p class="media-left">1</p>
+            <div class="media-body">
+              <p class="media-heading">2017/10/28 14:31:42 ペコ太郎 <a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp">通報する</a></p>
+              ヨガ体験ができて、柏の野菜を使ったカレーも食べれるので非常に楽しみです。
+            </div>
+          </div>
+          <div class="media">
+            <p class="media-left">2</p>
+            <div class="media-body">
+              <p class="media-heading">2017/10/28 14:31:42 ペコ太郎 <a><img src="./image/parts_ico_patrollamp.png" alt="Patrol Lamp">通報する</a></p>
+              らりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろらりるれろ
+
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+<div id="modal-comment" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><img src="./image/parts_ico_close.png" alt="Close"></button>
+        コメントを投稿する
+      </div>
+      <div class="modal-body cls_center">
+        <input type="radio" id="wrtier_nickname" name="writer_name" value="nickname" checked="checked">
+        <label for=="wrtier_nickname">ニックネームで投稿</label>
+        <input type="radio" id="writer_realname" name="writer_name" value="realname">
+        <label for="writer_realname">実名で投稿</label>
+        <input type="radio" id="writer_anonymous" name="writer_name" value="anonymous">
+        <label for="writer_anonymous">匿名で投稿</label><br>
+
+        <textarea class="comment" name="comment" rows="4"></textarea>
+
+        <button class="btn btn-default" onclick="alert('コメントが投稿されました');">コメントを投稿する</button>
       </div>
     </div>
   </div>
+</div>
+
+
 
   <div id="modal-nfcReader" class="modal fade" role="dialog">
     <div class="modal-dialog">

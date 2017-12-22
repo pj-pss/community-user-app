@@ -751,3 +751,12 @@ table.tbl_prof input[type="text"] {
   padding: 5px 20px;
   display: inline-block;
 }
+
+.comment {
+  width: 90%;
+  overflow: auto;
+}
+
+.comment_button {
+  margin-bottom: 10px;
+}
