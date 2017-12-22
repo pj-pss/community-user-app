@@ -677,17 +677,20 @@ table.tbl_prof_photo img{
 }
 
 .simple_block {
-  border: 1px solid #ccc;
+  border: 1px solid #d7ddd2;
+  background: #f5ffed;
 }
 
 .simple_block_r-open {
-  border: 1px solid #ccc;
+  border: 1px solid #d7ddd2;
   border-width: 1px 0px 1px 1px;
+  background: #f5ffed;
 }
 
 .simple_block_l-open {
-  border: 1px solid #ccc;
+  border: 1px solid #d7ddd2;
   border-width: 1px 1px 1px 0px;
+  background: #f5ffed;
 }
 
 .row-eq-height {
