@@ -778,6 +778,24 @@ $(function () {
         $(".overlay").removeClass('overlay-on');
         $(".slide-menu").removeClass('slide-on');
     });
+
+    $("#profileBasic").collapse('hide');
+
+    var topBtn = $('#profileViewTop');
+    topBtn.hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            topBtn.fadeIn();
+        } else {
+            topBtn.fadeOut();
+        }
+    });
+    topBtn.click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+        return false;
+    });
 });
 
 // Add a link to the table row

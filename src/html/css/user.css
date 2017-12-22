@@ -578,13 +578,63 @@ table.tbl_prof tr th {
 	white-space: nowrap;
 }
 
-table.tbl_prof img {
+#profileView img {
 	width: 128px;
 	height: 128px;
 	padding: 5px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#profileView dl {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+#editPrflBtn {
+	text-align: center;
+	padding: 2px;
+}
+
+.panel-heading a:after {
+    font-family: "Glyphicons Halflings";
+    content: "\e114";
+    float: right;
+    margin-left: 15px;
+}
+
+.panel-heading a.collapsed:after {
+    content: "\e080";
+}
+
+#profileView dl dt {
+	padding: 0 1em 0 1em;
+}
+
+#profileView dl dd {
+	padding: 0 1em 0 4em;
+}
+
+#profileViewTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 77%;
+}
+#profileViewTop a {
+    background: #666;
+    text-decoration: none;
+    color: #fff;
+    width: 100px;
+    padding: 30px 0;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+}
+#profileViewTop a:hover {
+    text-decoration: none;
+    background: #999;
 }
 
 #profileEdit table.tbl_prof img {
