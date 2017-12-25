@@ -792,11 +792,3 @@ $(function($) {
         });
     });
 });
-
-function openPostCommentModal() {
-    $('#modal-comment').modal('show');
-}
-
-function openReportCommentModal() {
-    $('#modal-report').modal('show');
-}
