@@ -752,7 +752,7 @@ table.tbl_prof input[type="text"] {
   display: inline-block;
 }
 
-.comment {
+.commentBox {
   width: 90%;
   overflow: auto;
 }
@@ -768,4 +768,9 @@ table.tbl_prof input[type="text"] {
 
 .closeIcon {
   font-size: 32px;
+}
+
+.commentIcon {
+  font-size: 24px;
+  color: black;
 }
