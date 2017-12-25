@@ -758,5 +758,14 @@ table.tbl_prof input[type="text"] {
 }
 
 .comment_button {
-  margin-bottom: 10px;
+  margin: 10px;
+}
+
+.reportIcon {
+  margin: 0px 5px;
+  color: red;
+}
+
+.closeIcon {
+  font-size: 32px;
 }
