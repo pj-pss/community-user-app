@@ -752,7 +752,7 @@ table.tbl_prof input[type="text"] {
   display: inline-block;
 }
 
-.commentBox {
+.comment_box {
   width: 90%;
   overflow: auto;
 }
@@ -761,16 +761,16 @@ table.tbl_prof input[type="text"] {
   margin: 10px;
 }
 
-.reportIcon {
+.report_icon {
   margin: 0px 5px;
   color: red;
 }
 
-.closeIcon {
+.close_icon {
   font-size: 32px;
 }
 
-.commentIcon {
+.comment_icon {
   font-size: 24px;
   color: black;
 }
