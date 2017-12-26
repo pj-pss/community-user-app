@@ -797,7 +797,6 @@ $(function() {
                 });
             });
         });
-
     });
     $("#profileView").load("profileView.html");
     $("#profileEdit").load("profileEdit.html");
@@ -805,21 +804,24 @@ $(function() {
     $("#helperOpHistory").load("helperOpHistory.html");
     $("#consentHistory").load("consentHistory.html");
     $("#viewHistory").load("viewHistory.html");
-    $("#viewInforDisclosureHistory1").load("viewInforDisclosureHistory1.html");
-    $("#viewInforDisclosureHistory2").load("viewInforDisclosureHistory2.html");
+    $("#viewInforDisclosureHistory1").load("viewInforDisclosureHistory1.html", function(){
+        $("#modal-inforDisclosureHistoryPer").load("modal-inforDisclosureHistoryPer.html");
+    });
+    $("#viewInforDisclosureHistory2").load("viewInforDisclosureHistory2.html", function(){
+        $("#modal-inforDisclosureHistory").load("modal-inforDisclosureHistory.html");
+    });
     $("#viewDataPortability").load("viewDataPortability.html");
     $("#viewDataExport").load("viewDataExport.html");
     $("#viewQRCode").load("viewQRCode.html");
     $("#articleDetail").load("articleDetail.html");
-    $("#articleComment").load("articleComment.html");
+    $("#articleComment").load("articleComment.html", function(){
+        $("#modal-comment").load("modal-comment.html");
+    });
 
-    $("#modal-comment").load("modal-comment.html");
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
     $("#modal-personalInfo").load("modal-personalInfo.html");
     $("#modal-personalInfo2").load("modal-personalInfo2.html");
     $("#modal-personalInfo3").load("modal-personalInfo3.html");
-    $("#modal-inforDisclosureHistory").load("modal-inforDisclosureHistory.html");
-    $("#modal-inforDisclosureHistoryPer").load("modal-inforDisclosureHistoryPer.html");
     $("#modal-startHelpOp").load("modal-startHelpOp.html");
 });
