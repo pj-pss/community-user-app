@@ -780,44 +780,46 @@ $(function () {
     });
 });
 
-// Add a link to the table row
-$(function($) {
-    $('div[data-href]').addClass('clickable').click( function() {
-        window.location = $(this).attr('data-href');
-    }).find('a').hover( function() {
-        $(this).parents('div').unbind('click');
-    }, function() {
-        $(this).parents('div').click( function() {
-            window.location = $(this).attr('data-href');
-        });
-    });
-});
 
 
 // load html
 $(function() {
-  $("#top").load("top.html");
-  $("#profileView").load("profileView.html");
-  $("#profileEdit").load("profileEdit.html");
-  $("#opHistory").load("opHistory.html");
-  $("#helperOpHistory").load("helperOpHistory.html");
-  $("#consentHistory").load("consentHistory.html");
-  $("#viewHistory").load("viewHistory.html");
-  $("#viewInforDisclosureHistory1").load("viewInforDisclosureHistory1.html");
-  $("#viewInforDisclosureHistory2").load("viewInforDisclosureHistory2.html");
-  $("#viewDataPortability").load("viewDataPortability.html");
-  $("#viewDataExport").load("viewDataExport.html");
-  $("#viewQRCode").load("viewQRCode.html");
-  $("#articleDetail").load("articleDetail.html");
-  $("#articleComment").load("articleComment.html");
+    $("#top").load("top.html" , function(){
+        // Add a link to the table row
+        $(function($) {
+            $('div[data-href]').addClass('clickable').click( function() {
+                window.location = $(this).attr('data-href');
+            }).find('a').hover( function() {
+                $(this).parents('div').unbind('click');
+            }, function() {
+                $(this).parents('div').click( function() {
+                    window.location = $(this).attr('data-href');
+                });
+            });
+        });
 
-  $("#modal-comment").load("modal-comment.html");
-  $("#modal-nfcReader").load("modal-nfcReader.html");
-  $("#modal-helpConfirm").load("modal-helpConfirm.html");
-  $("#modal-personalInfo").load("modal-personalInfo.html");
-  $("#modal-personalInfo2").load("modal-personalInfo2.html");
-  $("#modal-personalInfo3").load("modal-personalInfo3.html");
-  $("#modal-inforDisclosureHistory").load("modal-inforDisclosureHistory.html");
-  $("#modal-inforDisclosureHistoryPer").load("modal-inforDisclosureHistoryPer.html");
-  $("#modal-startHelpOp").load("modal-startHelpOp.html");
+    });
+    $("#profileView").load("profileView.html");
+    $("#profileEdit").load("profileEdit.html");
+    $("#opHistory").load("opHistory.html");
+    $("#helperOpHistory").load("helperOpHistory.html");
+    $("#consentHistory").load("consentHistory.html");
+    $("#viewHistory").load("viewHistory.html");
+    $("#viewInforDisclosureHistory1").load("viewInforDisclosureHistory1.html");
+    $("#viewInforDisclosureHistory2").load("viewInforDisclosureHistory2.html");
+    $("#viewDataPortability").load("viewDataPortability.html");
+    $("#viewDataExport").load("viewDataExport.html");
+    $("#viewQRCode").load("viewQRCode.html");
+    $("#articleDetail").load("articleDetail.html");
+    $("#articleComment").load("articleComment.html");
+
+    $("#modal-comment").load("modal-comment.html");
+    $("#modal-nfcReader").load("modal-nfcReader.html");
+    $("#modal-helpConfirm").load("modal-helpConfirm.html");
+    $("#modal-personalInfo").load("modal-personalInfo.html");
+    $("#modal-personalInfo2").load("modal-personalInfo2.html");
+    $("#modal-personalInfo3").load("modal-personalInfo3.html");
+    $("#modal-inforDisclosureHistory").load("modal-inforDisclosureHistory.html");
+    $("#modal-inforDisclosureHistoryPer").load("modal-inforDisclosureHistoryPer.html");
+    $("#modal-startHelpOp").load("modal-startHelpOp.html");
 });
