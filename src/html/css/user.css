@@ -75,6 +75,10 @@ header > a {
   align-items: center;
 }
 
+a {
+  word-break: break-all;
+}
+
 #reloadIcon,
 #menuIcon {
   width: 32px;
@@ -805,4 +809,11 @@ table.tbl_prof input[type="text"] {
 
 .rule {
   margin: 10px;
+}
+
+
+.back_icon {
+  font-size: 24px;
+  color: black;
+  margin: 10px 5px 20px 20px;
 }
