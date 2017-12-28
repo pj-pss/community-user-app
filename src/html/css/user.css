@@ -504,22 +504,6 @@ header .helperMsg {
 	color: white;
 }
 
-.img_idh_psn{
-    position: fixed;
-    right: 2.3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
-.img_idh_db{
-    position: fixed;
-    right: .3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
 .data_portability_btn{
     background: royalblue;
     padding: 10px;
@@ -735,6 +719,7 @@ table.tbl_prof input[type="text"] {
   border: 1px solid #d7ddd2;
   border-width: 1px 0px 1px 1px;
   background: #f5ffed;
+  margin: 0px -1px 0px 0px;
 }
 
 .simple_block_l-open {
@@ -774,10 +759,7 @@ table.tbl_prof input[type="text"] {
 .comment_icon {
   font-size: 24px;
   color: black;
-}
-
-.report_button {
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .article_box {
@@ -816,4 +798,40 @@ table.tbl_prof input[type="text"] {
   font-size: 24px;
   color: black;
   margin: 10px 5px 20px 20px;
+}
+
+.action_menu_box {
+  background-color: #bddbbc;
+  border-radius: 10px;
+  margin: 0px 20px;
+  padding: 5px;
+}
+
+.action_menu_body {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.action_list {
+  margin: 0px;
+}
+
+.persons_icon {
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+.db_icon {
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+.icon_enable {
+  color: #efa243;
+}
+
+.icon_disable {
+  color: gray;
 }
