@@ -504,22 +504,6 @@ header .helperMsg {
 	color: white;
 }
 
-.img_idh_psn{
-    position: fixed;
-    right: 2.3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
-.img_idh_db{
-    position: fixed;
-    right: .3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
 .data_portability_btn{
     background: royalblue;
     padding: 10px;
@@ -735,6 +719,7 @@ table.tbl_prof input[type="text"] {
   border: 1px solid #d7ddd2;
   border-width: 1px 0px 1px 1px;
   background: #f5ffed;
+  margin: 0px -1px 0px 0px;
 }
 
 .simple_block_l-open {
@@ -831,4 +816,24 @@ table.tbl_prof input[type="text"] {
 
 .action_list {
   margin: 0px;
+}
+
+.persons_icon {
+  margin-top: -10px;
+  /*position: fixed;*/
+  font-size: 30px;
+}
+
+.db_icon {
+  margin-top: -10px;
+  /*position: fixed;*/
+  font-size: 30px;
+}
+
+.icon_enable {
+  color: #efa243;
+}
+
+.icon_disable {
+  color: gray;
 }
