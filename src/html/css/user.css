@@ -774,6 +774,7 @@ table.tbl_prof input[type="text"] {
 .comment_icon {
   font-size: 24px;
   color: black;
+  margin: 10px 0px;
 }
 
 .report_button {
