@@ -817,6 +817,7 @@ $(function() {
     $("#articleComment").load("articleComment.html", function(){
         $("#modal-comment").load("modal-comment.html");
     });
+    $("#actionList").load("actionList.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
