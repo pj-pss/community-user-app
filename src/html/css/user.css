@@ -48,13 +48,6 @@ section .sizeCaption {
   margin: 0 16px;
 }
 
-ul,
-li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 header {
   display: flex;
   flex-direction: row;
@@ -80,6 +73,10 @@ header > a {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+a {
+  word-break: break-all;
 }
 
 #reloadIcon,
@@ -137,7 +134,7 @@ header > a {
 
 .main_box {
     height: 100%;
-    background-color: floralwhite;
+    background-color: white;
 }
 
 .service-logoback {
@@ -290,6 +287,11 @@ header > a {
     overflow: auto;
 }
 
+.menu-title ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .menu-title li {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -457,7 +459,6 @@ p.overflow {
   border-width: 2px 2px 2px 0px;
 }
 
-.boradttitle img,
 button.close img {
 	width: 32px;
 	height: 32px;
@@ -501,22 +502,6 @@ header .helperMsg {
 .rdobtn input[type="radio"]:checked + .offbtn {
 	background-color: deepskyblue;
 	color: white;
-}
-
-.img_idh_psn{
-    position: fixed;
-    right: 2.3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
-}
-
-.img_idh_db{
-    position: fixed;
-    right: .3em;
-    width: 30px!important;
-    height: 30px!important;
-    margin-top: -10px;
 }
 
 .data_portability_btn{
@@ -773,4 +758,130 @@ table.tbl_prof input[type="text"] {
 
 .btn-group button {
   font-size: 4vmin;
+}
+
+.simple_block {
+  border: 1px solid #d7ddd2;
+  background: #f5ffed;
+}
+
+.simple_block_r-open {
+  border: 1px solid #d7ddd2;
+  border-width: 1px 0px 1px 1px;
+  background: #f5ffed;
+  margin: 0px -1px 0px 0px;
+}
+
+.simple_block_l-open {
+  border: 1px solid #d7ddd2;
+  border-width: 1px 1px 1px 0px;
+  background: #f5ffed;
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.horizontal_block {
+  padding: 5px 20px;
+  display: inline-block;
+}
+
+.comment_box {
+  width: 90%;
+  overflow: auto;
+}
+
+.comment_button {
+  margin: 10px;
+}
+
+.report_icon {
+  margin: 0px 5px;
+  color: red;
+}
+
+.close_icon {
+  font-size: 32px;
+}
+
+.comment_icon {
+  font-size: 24px;
+  color: black;
+  margin: 10px 0px;
+}
+
+.article_box {
+  background-color: #bddbbc;
+  border-radius: 10px;
+  margin: 0px 20px;
+  padding: 5px;
+}
+
+.article_body {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.article_body ul{
+  list-style-type: disc;
+}
+
+.article_title {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 24px;
+  color: #8a92a8;
+}
+
+.rule {
+  margin: 10px;
+}
+
+
+.back_icon {
+  font-size: 24px;
+  color: black;
+  margin: 10px 5px 20px 20px;
+}
+
+.action_menu_box {
+  background-color: #bddbbc;
+  border-radius: 10px;
+  margin: 0px 20px;
+  padding: 5px;
+}
+
+.action_menu_body {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.action_list {
+  margin: 0px;
+}
+
+.persons_icon {
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+.db_icon {
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+.icon_enable {
+  color: #efa243;
+}
+
+.icon_disable {
+  color: gray;
 }
