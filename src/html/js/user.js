@@ -700,6 +700,10 @@ cs.getReceivedMessageAPI = function() {
 var nowViewMenu = "top";
 
 function view(menuId) {
+    if(menuId == "profileView"){
+        $("a.header-text").addClass('collapsed');
+        $("div.panel-collapse").removeClass('in');
+    }
 	$("#" + nowViewMenu).addClass('hidden');
 	$("#" + menuId).removeClass('hidden');
 	nowViewMenu = menuId;
@@ -759,29 +763,6 @@ function closeHelpConfirm(f) {
 
 var welcomeMessage = "";
 
-$(function () {
-	$('#modal-nfcReader').on('hidden.bs.modal', function () {
-		if(helpAuthorized) {
-			$('#modal-startHelpOp').modal('show');
-
-			$("#startHelpOp").addClass('hidden');
-			$("#endHelpOp").removeClass("hidden");
-
-			$('header').css('background-color', '#FF0000');
-			$('h1').css('background-color', '#FF0000');
-
-			welcomeMessage = $('#welcomMessage').html();
-			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
-		}
-	});
-    $('#dvOverlay').on('click', function() {
-        $(".overlay").removeClass('overlay-on');
-        $(".slide-menu").removeClass('slide-on');
-    });
-});
-
-
-
 // load html
 $(function() {
     $("#top").load("top.html" , function(){
@@ -798,7 +779,23 @@ $(function() {
             });
         });
     });
-    $("#profileView").load("profileView.html");
+    $("#profileView").load("profileView.html", function () {
+        var topBtn = $('#profileViewTop');
+        topBtn.hide();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                topBtn.fadeIn();
+            } else {
+                topBtn.fadeOut();
+            }
+        });
+        topBtn.click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+            return false;
+        });
+    });
     $("#profileEdit").load("profileEdit.html");
     $("#opHistory").load("opHistory.html");
     $("#helperOpHistory").load("helperOpHistory.html");
@@ -825,4 +822,26 @@ $(function() {
     $("#modal-personalInfo2").load("modal-personalInfo2.html");
     $("#modal-personalInfo3").load("modal-personalInfo3.html");
     $("#modal-startHelpOp").load("modal-startHelpOp.html");
+
+	$('#modal-nfcReader').on('hidden.bs.modal', function () {
+		if(helpAuthorized) {
+			$('#modal-startHelpOp').modal('show');
+
+			$("#startHelpOp").addClass('hidden');
+			$("#endHelpOp").removeClass("hidden");
+
+			$('header').css('background-color', '#FF0000');
+			$('h1').css('background-color', '#FF0000');
+
+			welcomeMessage = $('#welcomMessage').html();
+			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
+		}
+	});
+    $('#dvOverlay').on('click', function() {
+        $(".overlay").removeClass('overlay-on');
+        $(".slide-menu").removeClass('slide-on');
+    });
+
+    $("#profileBasic").collapse('hide');
+
 });
