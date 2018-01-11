@@ -5,6 +5,7 @@ td {
 
 html,body {
     height: 100%;
+    word-wrap: break-word;
 }
 
 header > h1 {
@@ -75,9 +76,6 @@ header > a {
   align-items: center;
 }
 
-a {
-  word-break: break-all;
-}
 
 #reloadIcon,
 #menuIcon {
