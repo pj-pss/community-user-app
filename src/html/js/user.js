@@ -775,7 +775,23 @@ $(function() {
             });
         });
     });
-    $("#profileView").load("profileView.html");
+    $("#profileView").load("profileView.html", function () {
+        var topBtn = $('#profileViewTop');
+        topBtn.hide();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                topBtn.fadeIn();
+            } else {
+                topBtn.fadeOut();
+            }
+        });
+        topBtn.click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+            return false;
+        });
+    });
     $("#profileEdit").load("profileEdit.html");
     $("#opHistory").load("opHistory.html");
     $("#helperOpHistory").load("helperOpHistory.html");
@@ -824,19 +840,4 @@ $(function() {
 
     $("#profileBasic").collapse('hide');
 
-    var topBtn = $('#profileViewTop');
-    topBtn.hide();
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            topBtn.fadeIn();
-        } else {
-            topBtn.fadeOut();
-        }
-    });
-    topBtn.click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
 });
