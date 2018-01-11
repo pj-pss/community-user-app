@@ -700,6 +700,11 @@ cs.getReceivedMessageAPI = function() {
 var nowViewMenu = "top";
 
 function view(menuId) {
+    if(menuId == "profileView"){
+        $("a.header-text").addClass('collapsed');
+        $("div.panel-collapse").addClass('collapse');
+        $("div.panel-collapse").removeClass('in');
+    }
 	$("#" + nowViewMenu).addClass('hidden');
 	$("#" + menuId).removeClass('hidden');
 	nowViewMenu = menuId;
