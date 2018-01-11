@@ -580,6 +580,7 @@ table.tbl_prof tr th {
 #editPrflBtn {
 	text-align: center;
 	padding: 2px;
+  margin: 10px;
 }
 
 .panel-heading a:after {
