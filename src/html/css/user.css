@@ -604,10 +604,12 @@ table.tbl_prof tr th {
 
 #profileView dl dt {
 	padding: 0 1em 0 1em;
+  font-size: 18px;
 }
 
 #profileView dl dd {
 	padding: 0 1em 0 4em;
+  font-size: 20px;
 }
 
 #profileViewTop {
