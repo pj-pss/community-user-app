@@ -620,6 +620,7 @@ table.tbl_prof tr th {
 }
 #profileViewTop a {
     background: #666;
+    opacity: 0.7;
     text-decoration: none;
     color: #fff;
     width: 100px;
