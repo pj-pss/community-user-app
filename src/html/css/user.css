@@ -583,6 +583,10 @@ table.tbl_prof tr th {
   margin: 10px;
 }
 
+.header-text {
+  font-size: 20px;
+}
+
 .panel-heading a:after {
     font-family: "Glyphicons Halflings";
     content: "\e114";
