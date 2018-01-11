@@ -750,8 +750,8 @@ function openHelpConfirm() {
 
 function closeHelpConfirm(f) {
 	if(f) {
-		$("#endHelpOp").addClass('hidden');
-		$("#startHelpOp").removeClass("hidden");
+		$(".endHelpOp").addClass('hidden');
+		$(".startHelpOp").removeClass("hidden");
 		$('header').css('background-color', '#008F00');
 		$('h1').css('background-color', '#008F00');
 		$('#welcomMessage').html(welcomeMessage);
@@ -827,8 +827,8 @@ $(function() {
 		if(helpAuthorized) {
 			$('#modal-startHelpOp').modal('show');
 
-			$("#startHelpOp").addClass('hidden');
-			$("#endHelpOp").removeClass("hidden");
+			$(".startHelpOp").addClass('hidden');
+			$(".endHelpOp").removeClass("hidden");
 
 			$('header').css('background-color', '#FF0000');
 			$('h1').css('background-color', '#FF0000');
