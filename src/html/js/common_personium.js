@@ -16,20 +16,24 @@
  */
 var Common = Common || {};
 
-Common.approvalRel = function(extCell, uuid, msgId) {
+Common.approvalRel = function(extCell, uuid, msgId, callback) {
     Common.changeStatusMessageAPI(uuid, "approved").done(function() {
         $("#" + msgId).remove();
-        Common.getAllowedCellList();
+        if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+            callback();
+        }
         var title = i18next.t("readResponseTitle");
         var body = i18next.t("readResponseApprovedBody");
         Common.sendMessageAPI(uuid, extCell, "message", title, body);
     });
 };
 
-Common.rejectionRel = function(extCell, uuid, msgId) {
+Common.rejectionRel = function(extCell, uuid, msgId, callback) {
     Common.changeStatusMessageAPI(uuid, "rejected").done(function() {
         $("#" + msgId).remove();
-        Common.getAllowedCellList();
+        if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+            callback();
+        }
         var title = i18next.t("readResponseTitle");
         var body = i18next.t("readResponseDeclinedBody");
         Common.sendMessageAPI(uuid, extCell, "message", title, body);
@@ -40,25 +44,25 @@ Common.changeStatusMessageAPI = function(uuid, command) {
     var data = {};
     data.Command = command;
     return $.ajax({
-            type: "POST",
-            url: Common.getCellUrl() + '__message/received/' + uuid,
-            data: JSON.stringify(data),
-            headers: {
-                    'Authorization':'Bearer ' + Common.getToken()
-            }
+        type: "POST",
+        url: Common.getCellUrl() + '__message/received/' + uuid,
+        data: JSON.stringify(data),
+        headers: {
+            'Authorization':'Bearer ' + Common.getToken()
+        }
     })
 };
 
-Common.getAllowedCellList = function() {
+Common.getAllowedCellList = function(role) {
     let extCellUrl = [
         Common.getCellUrl(),
-        '__ctl/Relation(Name=\'',
-        getAppReadRelation(),
+        '__ctl/Role(Name=\'',
+        role,
         '\',_Box\.Name=\'',
         Common.getBoxName(),
         '\')/$links/_ExtCell'
     ].join("");
-    
+
     $.ajax({
         type: "GET",
         url: extCellUrl,
@@ -80,9 +84,9 @@ Common.dispAllowedCellList = function(json) {
         })
 
         for (var i in results) {
-          var uri = results[i].uri;
-          var matchUrl = uri.match(/\(\'(.+)\'\)/);
-          var extUrl = matchUrl[1];
+            var uri = results[i].uri;
+            var matchUrl = uri.match(/\(\'(.+)\'\)/);
+            var extUrl = matchUrl[1];
 
             Common.dispAllowedCellListAfter(extUrl, i);
         }
@@ -104,9 +108,9 @@ Common.dispAllowedCellListAfter = function(extUrl, no) {
 
 Common.getProfile = function(url) {
     return $.ajax({
-    type: "GET",
-    url: url + '__/profile.json',
-    dataType: 'json',
+        type: "GET",
+        url: url + '__/profile.json',
+        dataType: 'json',
         headers: {'Accept':'application/json'}
     })
 };
@@ -119,7 +123,7 @@ Common.appendAllowedCellList = function(extUrl, dispName, no) {
 
 Common.notAllowedCell = function(aDom) {
     let extUrl = $(aDom).data("extUrl");
-    Common.deleteExtCellLinkRelation(extUrl, getAppReadRelation()).done(function() {
+    Common.deleteExtCellLinkRelation(extUrl, getAppRole()).done(function() {
         $(aDom).closest("tr").remove();
     });
 };
@@ -130,11 +134,11 @@ Common.deleteExtCellLinkRelation = function(extCell, relName) {
     var fqdn = urlArray[2];
     var cellName = urlArray[3];
     return $.ajax({
-            type: "DELETE",
-            url: Common.getCellUrl() + '__ctl/ExtCell(\'' + hProt + '%3A%2F%2F' + fqdn + '%2F' + cellName + '%2F\')/$links/_Relation(Name=\'' + relName + '\',_Box.Name=\'' + Common.getBoxName() + '\')',
-            headers: {
-              'Authorization':'Bearer ' + Common.getToken()
-            }
+        type: "DELETE",
+        url: Common.getCellUrl() + '__ctl/ExtCell(\'' + hProt + '%3A%2F%2F' + fqdn + '%2F' + cellName + '%2F\')/$links/_Role(Name=\'' + relName + '\',_Box.Name=\'' + Common.getBoxName() + '\')',
+        headers: {
+            'Authorization':'Bearer ' + Common.getToken()
+        }
     });
 };
 
@@ -142,21 +146,21 @@ Common.getOtherAllowedCells = function() {
     Common.getExtCell().done(function(json) {
         var objSel = document.getElementById("otherAllowedCells");
         if (objSel.hasChildNodes()) {
-          while (objSel.childNodes.length > 0) {
-            objSel.removeChild(objSel.firstChild);
-          }
+            while (objSel.childNodes.length > 0) {
+                objSel.removeChild(objSel.firstChild);
+            }
         }
         objSel = document.getElementById("requestCells");
         if (objSel.hasChildNodes()) {
-          while (objSel.childNodes.length > 0) {
-            objSel.removeChild(objSel.firstChild);
-          }
+            while (objSel.childNodes.length > 0) {
+                objSel.removeChild(objSel.firstChild);
+            }
         }
-
+        
         var results = json.d.results;
         if (results.length > 0) {
             results.sort(function(val1, val2) {
-              return (val1.Url < val2.Url ? 1 : -1);
+                return (val1.Url < val2.Url ? 1 : -1);
             })
 
             for (var i in results) {
@@ -168,18 +172,18 @@ Common.getOtherAllowedCells = function() {
 };
 
 Common.getExtCell = function() {
-  return $.ajax({
-                type: "GET",
-                url: Common.getCellUrl() + '__ctl/ExtCell',
-                headers: {
-                    'Authorization':'Bearer ' + Common.getToken(),
-                    'Accept':'application/json'
-                }
-  });
+    return $.ajax({
+        type: "GET",
+        url: Common.getCellUrl() + '__ctl/ExtCell',
+        headers: {
+            'Authorization':'Bearer ' + Common.getToken(),
+            'Accept':'application/json'
+        }
+    });
 };
 
 Common.dispOtherAllowedCells = function(extUrl) {
-    Common.getProfileName(extUrl, Common.checkOtherAllowedCells);
+    Common.getProfileName(extUrl, Common.prepareExtCellForApp);
 };
 
 Common.getProfileName = function(extUrl, callback) {
@@ -197,9 +201,52 @@ Common.getProfileName = function(extUrl, callback) {
     });
 };
 
-Common.checkOtherAllowedCells = function(extUrl, dispName) {
-    Common.getTargetToken(extUrl).done(function(extData) {
-        Common.getAppDataAPI(extUrl + Common.getBoxName(), extData.access_token).done(function(data) {
+/*
+ * Get Transcell Token of the external Cell and prepare its data.
+ * When done, execute callback (add external Cell to proper list).
+ */
+Common.prepareExtCellForApp = function(extUrl, dispName) {
+    $.when(Common.getTranscellToken(extUrl), Common.getAppAuthToken(extUrl))
+        .done(function(result1, result2) {
+            let tempTCAT = result1[0].access_token; // Transcell Access Token
+            let tempAAAT = result2[0].access_token; // App Authentication Access Token
+            Common.perpareExtCellInfo(extUrl, tempTCAT, tempAAAT, Common.appendExtCellToList, dispName);
+        })
+};
+
+/*
+ * Get Schema Authenitication Token of the external Cell and get its Box URL.
+ * When done, execute callback (add external Cell to proper list).
+ */
+Common.perpareExtCellInfo = function(cellUrl, tcat, aaat, callback, dispName) {
+    Common.getToCellSchemaAuthToken(cellUrl, tcat, aaat).done(function(appCellToken) {
+        Common.getBoxUrlAPI(cellUrl, appCellToken.access_token)
+            .done(function(data, textStatus, request) {
+                let boxUrl = request.getResponseHeader("Location") + "/";
+                console.log(boxUrl);
+
+                if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+                    callback(boxUrl, tcat, cellUrl, dispName);
+                }
+            })
+            .fail(function(error) {
+                console.log(error.responseJSON.code);
+                console.log(error.responseJSON.message.value);
+            });
+    }).fail(function(error) {
+        console.log(error.responseJSON.code);
+        console.log(error.responseJSON.message.value);
+    });
+};
+
+/* 
+ * Check and append the external Cell to either fo the following lists.
+ * - List contains Cell which has read permission
+ * - List contains Cell which does not has read permission
+ */
+Common.appendExtCellToList = function(extBoxUrl, extTcat, extUrl, dispName) {
+    Common.getAppDataAPI(extBoxUrl, extTcat)
+        .done(function(data) {
             Common.appendOtherAllowedCells(extUrl, dispName);
         }).fail(function(data) {
             // Insufficient access privileges
@@ -207,31 +254,30 @@ Common.checkOtherAllowedCells = function(extUrl, dispName) {
                 Common.appendRequestCells(extUrl, dispName);
             }
         });
-    });
 };
 
-Common.getTargetToken = function(extCellUrl) {
+Common.getTranscellToken = function(extCellUrl) {
     return $.ajax({
-                type: "POST",
-                url: Common.getCellUrl() + '__token',
-                processData: true,
+        type: "POST",
+        url: Common.getCellUrl() + '__token',
+        processData: true,
         dataType: 'json',
-                data: {
-                        grant_type: "refresh_token",
-                        refresh_token: Common.getRefressToken(),
-                        p_target: extCellUrl
-                },
+        data: {
+            grant_type: "refresh_token",
+            refresh_token: Common.getRefressToken(),
+            p_target: extCellUrl
+        },
         headers: {'Accept':'application/json'}
     });
 };
 
-Common.getAppDataAPI = function(targetCell, token) {
+Common.getAppDataAPI = function(targetBoxUrl, token) {
     let requestInfo = $.extend(true,
         {
             type: 'GET',
-            url: targetCell + getAppDataPath(),
+            url: targetBoxUrl + getAppDataPath(),
             headers: {
-                'Authorization':'Bearer ' + token,
+                    'Authorization':'Bearer ' + token,
             }
         },
         getAppRequestInfo()
@@ -268,11 +314,11 @@ Common.sendMessageAPI = function(uuid, extCell, type, title, body, reqRel, reqRe
     }
 
     return $.ajax({
-            type: "POST",
-            url: Common.getCellUrl() + '__message/send',
-            data: JSON.stringify(data),
-            headers: {
-                    'Authorization':'Bearer ' + Common.getToken()
-            }
+        type: "POST",
+        url: Common.getCellUrl() + '__message/send',
+        data: JSON.stringify(data),
+        headers: {
+            'Authorization':'Bearer ' + Common.getToken()
+        }
     })
 };
