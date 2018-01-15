@@ -700,6 +700,10 @@ cs.getReceivedMessageAPI = function() {
 var nowViewMenu = "top";
 
 function view(menuId) {
+    if(menuId == "profileView"){
+        $("a.header-text").addClass('collapsed');
+        $("div.panel-collapse").removeClass('in');
+    }
 	$("#" + nowViewMenu).addClass('hidden');
 	$("#" + menuId).removeClass('hidden');
 	nowViewMenu = menuId;
@@ -746,8 +750,8 @@ function openHelpConfirm() {
 
 function closeHelpConfirm(f) {
 	if(f) {
-		$("#endHelpOp").addClass('hidden');
-		$("#startHelpOp").removeClass("hidden");
+		$(".endHelpOp").addClass('hidden');
+		$(".startHelpOp").removeClass("hidden");
 		$('header').css('background-color', '#008F00');
 		$('h1').css('background-color', '#008F00');
 		$('#welcomMessage').html(welcomeMessage);
@@ -775,7 +779,23 @@ $(function() {
             });
         });
     });
-    $("#profileView").load("profileView.html");
+    $("#profileView").load("profileView.html", function () {
+        var topBtn = $('#profileViewTop');
+        topBtn.hide();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                topBtn.fadeIn();
+            } else {
+                topBtn.fadeOut();
+            }
+        });
+        topBtn.click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+            return false;
+        });
+    });
     $("#profileEdit").load("profileEdit.html");
     $("#opHistory").load("opHistory.html");
     $("#helperOpHistory").load("helperOpHistory.html");
@@ -807,8 +827,8 @@ $(function() {
 		if(helpAuthorized) {
 			$('#modal-startHelpOp').modal('show');
 
-			$("#startHelpOp").addClass('hidden');
-			$("#endHelpOp").removeClass("hidden");
+			$(".startHelpOp").addClass('hidden');
+			$(".endHelpOp").removeClass("hidden");
 
 			$('header').css('background-color', '#FF0000');
 			$('h1').css('background-color', '#FF0000');
@@ -824,19 +844,4 @@ $(function() {
 
     $("#profileBasic").collapse('hide');
 
-    var topBtn = $('#profileViewTop');
-    topBtn.hide();
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            topBtn.fadeIn();
-        } else {
-            topBtn.fadeOut();
-        }
-    });
-    topBtn.click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
 });

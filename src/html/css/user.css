@@ -5,6 +5,7 @@ td {
 
 html,body {
     height: 100%;
+    word-wrap: break-word;
 }
 
 header > h1 {
@@ -75,9 +76,6 @@ header > a {
   align-items: center;
 }
 
-a {
-  word-break: break-all;
-}
 
 #reloadIcon,
 #menuIcon {
@@ -580,6 +578,15 @@ table.tbl_prof tr th {
 #editPrflBtn {
 	text-align: center;
 	padding: 2px;
+  margin: 10px;
+}
+
+.panel-group {
+  margin: 20px 0px 0px 0px;
+}
+
+.header-text {
+  font-size: 20px;
 }
 
 .panel-heading a:after {
@@ -595,10 +602,12 @@ table.tbl_prof tr th {
 
 #profileView dl dt {
 	padding: 0 1em 0 1em;
+  font-size: 18px;
 }
 
 #profileView dl dd {
 	padding: 0 1em 0 4em;
+  font-size: 20px;
 }
 
 #profileViewTop {
@@ -609,6 +618,7 @@ table.tbl_prof tr th {
 }
 #profileViewTop a {
     background: #666;
+    opacity: 0.7;
     text-decoration: none;
     color: #fff;
     width: 100px;
@@ -848,6 +858,10 @@ table.tbl_prof input[type="text"] {
   font-size: 24px;
   color: black;
   margin: 10px 5px 20px 20px;
+}
+
+.back_link {
+  font-size: 20px;
 }
 
 .action_menu_box {
