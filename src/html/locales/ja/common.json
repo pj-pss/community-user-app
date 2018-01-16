@@ -28,5 +28,12 @@
         "info" : "お知らせ",
         "profile" : "私の情報",
         "action" : "アクション"
+    },
+    "top" : {
+        "participation" : "参加表明",
+        "event" : "イベント",
+        "info" : "お知らせ",
+        "eventHistory" : "イベント参加履歴",
+        "clubHistory" : "サークル活動履歴"
     }
 }
