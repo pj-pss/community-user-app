@@ -1046,3 +1046,9 @@ table.tbl_prof input[type="text"] {
 .modal_title .close_button{
   width: 32px;
 }
+
+.read_more {
+  font-size: 15px;
+  margin: 10px;
+  text-align: right;
+}
