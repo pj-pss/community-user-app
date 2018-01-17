@@ -899,3 +899,11 @@ table.tbl_prof input[type="text"] {
 .icon_disable {
   color: gray;
 }
+
+.panel-default > div.profile-parent {
+  background-color: #337ab7;
+}
+
+div.profile-parent > a {
+  color: #f5f5f5
+}
