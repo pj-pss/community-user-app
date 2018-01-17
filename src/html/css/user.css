@@ -1033,3 +1033,16 @@ table.tbl_prof input[type="text"] {
 .icon_disable {
   color: gray;
 }
+
+.modal_title {
+  display: flex;
+}
+
+.modal_title .title {
+  flex: 1;
+  text-align: center;
+}
+
+.modal_title .close_button{
+  width: 32px;
+}

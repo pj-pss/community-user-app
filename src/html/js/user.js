@@ -735,6 +735,9 @@ function openInforDisclosureHistoryPer() {
 function openInforDisclosureHistoryDB() {
     $('#modal-inforDisclosureHistory').modal('show');
 }
+function openClubHistory() {
+    $('#modal-clubHistory').modal('show');
+}
 
 function authorizedNfcReader() {
 	helpAuthorized = true;
@@ -778,6 +781,9 @@ $(function() {
                 });
             });
         });
+
+        // load modal window
+        $("#modal-clubHistory").load("modal-clubHistory.html");
     });
     $("#profileView").load("profileView.html", function () {
         var topBtn = $('#profileViewTop');
