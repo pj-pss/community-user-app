@@ -484,76 +484,73 @@ p.overflow {
   -webkit-line-clamp: 1;
 }
 
-.cover {
-  height: 30vmin;
-}
-.block_img {
-  height: 30vmin;
-}
+.cover,
+.block_img,
 .block_description {
   height: 30vmin;
 }
 .block_clubHistory {
   height: 15vmin;
 }
-.stealth_table .date {
+.event .cover,
+.event .block_img,
+.event .block_description {
+  height: 18vmin;
+}
+.stealth_table .date,
+.stealth_table .article {
   font-size: 3vmin;
 }
 .stealth_table .title {
   font-size: 5vmin;
-}
-.stealth_table .article {
-  font-size: 3vmin;
 }
 .top_menu button {
   font-size: 4vmin;
 }
 
 @media screen and (max-width: 360px){
-  .cover {
-    height: 128px;
-  }
-  .block_img {
-    height: 128px;
-  }
+  .cover,
+  .block_img,
   .block_description {
     height: 128px;
   }
   .block_clubHistory {
     height: 64px;
   }
-  .stealth_table .date {
+  .event .cover,
+  .event .block_img,
+  .event .block_description {
+    height: 140px;
+  }
+  .stealth_table .date,
+  .stealth_table .article {
     font-size: 11px;
   }
   .stealth_table .title {
     font-size: 18px;
-  }
-  .stealth_table .article {
-    font-size: 11px;
   }
   .top_menu button {
     font-size: 14px;
   }
 }
 @media screen and (min-width: 481px){
-  .cover {
-    height: 144px;
-  }
-  .block_img {
-    height: 144px;
-  }
+  .cover,
+  .block_img,
   .block_description {
     height: 144px;
   }
   .block_clubHistory {
     height: 72px;
   }
+  .event .cover,
+  .event .block_img,
+  .event .block_description {
+    height: 160px;
+  }
   .stealth_table .title {
     font-size: 24px;
   }
-  .stealth_table .date {
-    font-size: 15px;
-  }
+  .stealth_table .date,
   .stealth_table .article {
     font-size: 15px;
   }
