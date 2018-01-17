@@ -481,6 +481,10 @@ p.overflow {
   border-width: 2px;
 }
 
+.block_clubHistory .stealth_table .title td{
+  -webkit-line-clamp: 1;
+}
+
 button.close img {
 	width: 32px;
 	height: 32px;
