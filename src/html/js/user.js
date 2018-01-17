@@ -821,7 +821,6 @@ $(function() {
     $("#eventList").load("eventList.html");
     $("#infoList").load("infoList.html");
     $("#eventHistoryList").load("eventHistoryList.html");
-    $("#clubHistoryList").load("clubHistoryList.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
