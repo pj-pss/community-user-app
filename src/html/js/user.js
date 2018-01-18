@@ -735,6 +735,9 @@ function openInforDisclosureHistoryPer() {
 function openInforDisclosureHistoryDB() {
     $('#modal-inforDisclosureHistory').modal('show');
 }
+function openClubHistory() {
+    $('#modal-clubHistory').modal('show');
+}
 
 function authorizedNfcReader() {
 	helpAuthorized = true;
@@ -815,6 +818,9 @@ $(function() {
         $("#modal-comment").load("modal-comment.html");
     });
     $("#actionList").load("actionList.html");
+    $("#eventList").load("eventList.html");
+    $("#infoList").load("infoList.html");
+    $("#eventHistoryList").load("eventHistoryList.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
@@ -822,6 +828,7 @@ $(function() {
     $("#modal-personalInfo2").load("modal-personalInfo2.html");
     $("#modal-personalInfo3").load("modal-personalInfo3.html");
     $("#modal-startHelpOp").load("modal-startHelpOp.html");
+    $("#modal-clubHistory").load("modal-clubHistory.html");
 
 	$('#modal-nfcReader').on('hidden.bs.modal', function () {
 		if(helpAuthorized) {

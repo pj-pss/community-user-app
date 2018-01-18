@@ -1,0 +1,39 @@
+{
+    "msg": {
+        "welcome" : "ようこそ 富士通 太郎 さん",
+        "backToTop" : "$t(topMenu.top)に戻る"
+    },
+    "btn": {
+        "cancel": "キャンセル",
+        "edit": "編集",
+        "save": "保存",
+        "release": "解除",
+        "approve": "承諾",
+        "decline": "拒否"
+    },
+    "pageTitle" : {
+        "menu" : "メニュー",
+        "top" : "お知らせ",
+        "profileView" : "私の情報",
+        "opHistory" : "私の操作履歴",
+        "helperOpHistory" : "支援者の操作履歴",
+        "consentHistory" : "私の同意履歴",
+        "startHelpOp" : "操作支援",
+        "endHelpOp" : "操作支援終了",
+        "viewHistory" : "私の情報参照履歴",
+        "viewInforDisclosureHistory" : "私の情報開示状況",
+        "viewDataPortability" : "データポータビリティ",
+        "profileEdit" : "プロフィール変更"
+    },
+    "topMenu" : {
+        "top" : "カレンダー",
+        "myHealth" : "私の健康",
+        "monitoring" : "見守り"
+    },
+    "top" : {
+        "participation" : "参加表明",
+        "event" : "イベント",
+        "info" : "お知らせ",
+        "eventHistory" : "活動履歴"
+    }
+}
