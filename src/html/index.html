@@ -24,7 +24,7 @@
 </head>
 <body>
   <header>
-    <h1 data-i18n="glossary:calorieSmileCollaboration" id="welcomMessage">ようこそ&nbsp;&nbsp;&nbsp;富士通　太郎さん</h1>
+    <h1 data-i18n="msg.welcome" id="welcomMessage"></h1>
     <a id="updateGenki" href="#" onclick="cs.getGenkikunData();return false;">
       <i class="fa fa-refresh fa-2x fa-fw fnt_icon"></i>
     </a>
@@ -50,23 +50,26 @@
     <div id="articleDetail" class="hidden"></div>
     <div id="articleComment" class="hidden"></div>
     <div id="actionList" class="hidden"></div>
+    <div id="eventList" class="hidden"></div>
+    <div id="infoList" class="hidden"></div>
+    <div id="eventHistoryList" class="hidden"></div>
     <div id="myhealth" class="hidden"></div>
   </span>
 
   <nav class="slide-menu menu-title">
-    <h1 data-i18n="menu.title"></h1>
+    <h1></h1>
     <ul>
-      <li><a onclick="cs.closeSlide();">メニュー</a></li>
-      <li><a onclick="cs.closeSlide();view('top');">お知らせ</a></li>
-      <li><a onclick="cs.closeSlide();view('profileView');">私の情報</a></li>
-      <li><a onclick="cs.closeSlide();view('opHistory');">私の操作履歴</a></li>
-      <li><a onclick="cs.closeSlide();view('helperOpHistory');">支援者の操作履歴</a></li>
-      <li><a onclick="cs.closeSlide();view('consentHistory');">私の同意履歴</a></li>
-      <li class="startHelpOp"><a onclick="cs.closeSlide();openNfcReader();">操作支援</a></li>
-      <li class="endHelpOp hidden"><a onclick="cs.closeSlide();openHelpConfirm();">操作支援終了</a></li>
-      <li><a onclick="cs.closeSlide();view('viewHistory');">私の情報参照履歴</a></li>
-      <li><a onclick="cs.closeSlide();view('viewInforDisclosureHistory1');">私の情報開示状況</a></li>
-      <li><a onclick="cs.closeSlide();view('viewDataPortability');">データポータビリティ</a></li>
+      <li><a onclick="cs.closeSlide();" data-i18n="pageTitle.menu"></a></li>
+      <li><a onclick="cs.closeSlide();view('top');" data-i18n="pageTitle.top"></a></li>
+      <li><a onclick="cs.closeSlide();view('profileView');" data-i18n="pageTitle.profileView"></a></li>
+      <li><a onclick="cs.closeSlide();view('opHistory');" data-i18n="pageTitle.opHistory"></a></li>
+      <li><a onclick="cs.closeSlide();view('helperOpHistory');" data-i18n="pageTitle.helperOpHistory"></a></li>
+      <li><a onclick="cs.closeSlide();view('consentHistory');" data-i18n="pageTitle.consentHistory"></a></li>
+      <li class="startHelpOp"><a onclick="cs.closeSlide();openNfcReader();" data-i18n="pageTitle.startHelpOp"></a></li>
+      <li class="endHelpOp hidden"><a onclick="cs.closeSlide();openHelpConfirm();" data-i18n="pageTitle.endHelpOp"></a></li>
+      <li><a onclick="cs.closeSlide();view('viewHistory');" data-i18n="pageTitle.viewHistory"></a></li>
+      <li><a onclick="cs.closeSlide();view('viewInforDisclosureHistory1');" data-i18n="pageTitle.viewInforDisclosureHistory"></a></li>
+      <li><a onclick="cs.closeSlide();view('viewDataPortability');" data-i18n="pageTitle.viewDataPortability"></a></li>
     </ul>
   </nav>
   <div class="overlay" id="dvOverlay">
@@ -78,6 +81,7 @@
   <div id="modal-personalInfo2" class="modal fade" role="dialog"></div>
   <div id="modal-personalInfo3" class="modal fade" role="dialog"></div>
   <div id="modal-startHelpOp" class="modal fade" role="dialog"></div>
+  <div id="modal-clubHistory" class="modal fade" role="dialog"></div>
 
 </body>
 </html>
