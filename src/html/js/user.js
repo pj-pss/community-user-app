@@ -764,6 +764,11 @@ function closeHelpConfirm(f) {
 	$('#modal-helpConfirm').modal('hide');
 }
 
+function viewInfoDisclosureDetail(type){
+    // dummy function
+    console.log(type);
+}
+
 var welcomeMessage = "";
 
 // load html
