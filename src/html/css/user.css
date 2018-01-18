@@ -505,7 +505,7 @@ p.overflow {
   font-size: 5vmin;
 }
 .top_menu button {
-  font-size: 4vmin;
+  font-size: 4.5vmin;
 }
 
 @media screen and (max-width: 360px){
@@ -530,7 +530,7 @@ p.overflow {
     font-size: 18px;
   }
   .top_menu button {
-    font-size: 14px;
+    font-size: 17px;
   }
 }
 @media screen and (min-width: 481px){
@@ -555,7 +555,7 @@ p.overflow {
     font-size: 15px;
   }
   .top_menu button {
-    font-size: 22px;
+    font-size: 23px;
   }
 }
 
