@@ -681,7 +681,7 @@ table.tbl_prof tr th {
 	white-space: nowrap;
 }
 
-#profileView img {
+#monitoring img {
 	width: 128px;
 	height: 128px;
 	padding: 5px;
@@ -690,7 +690,7 @@ table.tbl_prof tr th {
 	margin-right: auto;
 }
 
-#profileView dl {
+#monitoring dl {
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
@@ -720,23 +720,23 @@ table.tbl_prof tr th {
     content: "\e080";
 }
 
-#profileView dl dt {
+#monitoring dl dt {
 	padding: 0 1em 0 1em;
   font-size: 18px;
 }
 
-#profileView dl dd {
+#monitoring dl dd {
 	padding: 0 1em 0 4em;
   font-size: 20px;
 }
 
-#profileViewTop {
+#monitoringTop {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 77%;
 }
-#profileViewTop a {
+#monitoringTop a {
     background: #666;
     opacity: 0.7;
     text-decoration: none;
@@ -747,7 +747,7 @@ table.tbl_prof tr th {
     display: block;
     border-radius: 5px;
 }
-#profileViewTop a:hover {
+#monitoringTop a:hover {
     text-decoration: none;
     background: #999;
 }

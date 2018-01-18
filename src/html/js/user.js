@@ -700,7 +700,7 @@ cs.getReceivedMessageAPI = function() {
 var nowViewMenu = "top";
 
 function view(menuId) {
-    if(menuId == "profileView"){
+    if(menuId == "monitoring"){
         $("a.header-text").addClass('collapsed');
         $("div.panel-collapse").removeClass('in');
     }
@@ -782,8 +782,8 @@ $(function() {
             });
         });
     });
-    $("#profileView").load("profileView.html", function () {
-        var topBtn = $('#profileViewTop');
+    $("#monitoring").load("monitoring.html", function () {
+        var topBtn = $('#monitoringTop');
         topBtn.hide();
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
