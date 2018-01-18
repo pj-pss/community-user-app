@@ -695,6 +695,14 @@ table.tbl_prof tr th {
 	margin-bottom: 2px;
 }
 
+#monitoring .notes {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #606060;
+  font-size: 18px;
+}
+
 #editPrflBtn {
 	text-align: center;
 	padding: 2px;
