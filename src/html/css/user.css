@@ -25,7 +25,8 @@ h1 {
   background-color: #008F00;
   color: #ffffff;
 }
-h2 {
+
+.main_box h2 {
 position: relative;
 padding: 0.1em 0em 0.1em 1.5em;
 margin: 20px 0;
@@ -36,7 +37,7 @@ background: #fffff4;
   font-size: 24px;
 }
 
-h2 .icon{
+.main_box h2 .icon{
 position: absolute;
 left: 0.25em;
 top: 0.1em;
@@ -505,7 +506,7 @@ p.overflow {
   font-size: 5vmin;
 }
 .top_menu button {
-  font-size: 4vmin;
+  font-size: 4.5vmin;
 }
 
 @media screen and (max-width: 360px){
@@ -530,7 +531,7 @@ p.overflow {
     font-size: 18px;
   }
   .top_menu button {
-    font-size: 14px;
+    font-size: 17px;
   }
 }
 @media screen and (min-width: 481px){
@@ -555,7 +556,7 @@ p.overflow {
     font-size: 15px;
   }
   .top_menu button {
-    font-size: 22px;
+    font-size: 23px;
   }
 }
 
@@ -565,11 +566,28 @@ button.close img {
 }
 
 header h1 {
-	font-size: 16px;
+	font-size: 5vmin;
+}
+
+header h2 {
+  font-size: 4vmin;
 }
 
 header .helperMsg {
-	font-size: 12px;
+	font-size: 15px;
+}
+
+header #welcomeMessage {
+  font-size: 4vmin;
+}
+
+@media screen and (min-width: 481px){
+  header #welcomeMessage {
+    font-size: 20px;
+  }
+  header h1 {
+    font-size: 23px;
+  }
 }
 
 
