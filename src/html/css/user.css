@@ -720,6 +720,40 @@ table.tbl_prof tr th {
     content: "\e080";
 }
 
+.panel-heading .watching:after,
+.panel-heading .many_watching:after,
+.panel-heading .no_watching:after {
+  content: none;
+}
+
+.watching,
+.many_watching,
+.no_watching {
+  float: right;
+  font-size: 22px;
+}
+
+.watching:after,
+.panel-heading .watching:after {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f007";
+}
+.many_watching:after,
+.panel-heading .many_watching:after {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f0c0";
+}
+
+.no_watching:after,
+.panel-heading .no_watching:after {
+  font-family: FontAwesome;
+  color: #80808070;
+  content: "\f2c0";
+}
+
+
 #monitoring dl dt {
 	padding: 0 1em 0 1em;
   font-size: 18px;
