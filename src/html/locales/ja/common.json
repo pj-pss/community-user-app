@@ -1,8 +1,13 @@
 {
     "msg": {
-        "welcome" : "ようこそ 富士通 太郎 さん",
+        "welcome" : "ようこそ",
+        "userName" : "$t(user.001) さん",
         "backToTop" : "$t(pageTitle.top)に戻る"
     },
+    "user": {
+        "001" : "富士通 太郎"
+    }
+    ,
     "btn": {
         "cancel": "キャンセル",
         "edit": "編集",
