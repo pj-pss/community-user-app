@@ -766,7 +766,7 @@ function closeHelpConfirm(f) {
 
 function viewInfoDisclosureDetail(type){
     // dummy function
-    console.log(type);
+    view("viewInfoDisclosureDetail");
 }
 
 var welcomeMessage = "";
@@ -828,6 +828,7 @@ $(function() {
     $("#eventList").load("eventList.html");
     $("#infoList").load("infoList.html");
     $("#eventHistoryList").load("eventHistoryList.html");
+    $("#viewInfoDisclosureDetail").load("viewInfoDisclosureDetail.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
