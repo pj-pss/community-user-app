@@ -1053,13 +1053,10 @@ table.tbl_prof input[type="text"] {
   margin: 0px;
 }
 
-.persons_icon {
-  margin-top: -10px;
-  font-size: 30px;
-}
-
+.persons_icon,
 .db_icon {
-  margin-top: -10px;
+  margin : 5px 10px 5px 0px;
+  float : right;
   font-size: 30px;
 }
 
@@ -1069,6 +1066,10 @@ table.tbl_prof input[type="text"] {
 
 .icon_disable {
   color: gray;
+}
+
+.icon_box {
+  overflow: hidden;
 }
 
 .modal_title {
