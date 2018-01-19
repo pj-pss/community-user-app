@@ -795,14 +795,14 @@ table.tbl_prof tr th {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    font-size: 77%;
+    font-size: 18px;
 }
 .scrollToTop a {
     background: #666;
     opacity: 0.7;
     text-decoration: none;
     color: #fff;
-    width: 100px;
+    width: 120px;
     padding: 30px 0;
     text-align: center;
     display: block;
