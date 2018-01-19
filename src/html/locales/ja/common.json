@@ -29,7 +29,9 @@
         "viewHistory" : "私の情報参照履歴",
         "viewInforDisclosureHistory" : "私の情報開示状況",
         "viewDataPortability" : "データポータビリティ",
-        "profileEdit" : "プロフィール変更"
+        "profileEdit" : "プロフィール変更",
+        "vital" : "バイタル情報",
+        "location" : "在宅状況"
     },
     "profile" : {
         "prefix" : "情報開示詳細: ",
