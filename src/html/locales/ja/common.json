@@ -29,9 +29,12 @@
         "viewHistory" : "私の情報参照履歴",
         "viewInforDisclosureHistory" : "私の情報開示状況",
         "viewDataPortability" : "データポータビリティ",
+        "dataExport" : "データエクスポート",
         "profileEdit" : "プロフィール変更",
         "vital" : "バイタル情報",
-        "location" : "在宅状況"
+        "location" : "在宅状況",
+        "bbs" : "みんなの掲示板",
+        "bbsComment" : "みんなの掲示板: コメント"
     },
     "profile" : {
         "prefix" : "情報開示詳細: ",
