@@ -89,14 +89,14 @@ cs.receiveMessage = function() {
 };
 
 cs.transGenki = function(json) {
-    // 閲覧許可状況(外部セル)
+    // permission to browse(external cell)
     Common.getOtherAllowedCells();
-    // 閲覧許可状況
+    // permission to browse
     Common.getAllowedCellList();
-    // 通知
+    // notification
     cs.getReceiveMessage();
 
-    // 更新開始
+    // start updating
     cs.getGenkikunData();
 };
 
