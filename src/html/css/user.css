@@ -1097,3 +1097,87 @@ table.tbl_prof input[type="text"] {
 div.profile-parent > a {
   color: #f5f5f5
 }
+
+#myhealth dl dt {
+  padding: 0 1em 0 1em;
+  font-size: 18px;
+}
+
+#myhealth dl dd {
+  padding: 0 1em 0 4em;
+  font-size: 20px;
+}
+
+#vitalPanel {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#bloodPressurePanel1, #bloodPressurePanel2 {
+  color: #000;
+  background-color: #0f0;
+  border-style: solid;
+  border-color: #0d0;
+  box-sizing: border-box;
+  width: 49%;
+}
+
+#bloodPressurePanel1 {
+  border-width: 3px 0px 3px 3px;
+}
+
+#bloodPressurePanel2 {
+  border-width: 3px 3px 3px 0px;
+}
+
+#pulsePanel {
+  color: #000;
+  background-color: #0ff;
+  border: 3px solid #0dd;
+  box-sizing: border-box;
+  width: 49%;
+}
+
+#temperaturPanele {
+  color: #000;
+  background-color: #ff0;
+  border: 3px solid #dd0;
+  box-sizing: border-box;
+  width: 49%;
+}
+
+.vitalTitle {
+  font-size: 1.5em;
+  padding-left: 0.5em;
+  padding-top: 0.1em;
+  padding-bottom: 0.5em;
+}
+
+.vitalValue, .vitalPrevValue {
+  font-weight: bold;
+}
+
+.vitalValue {
+  font-size: 4em;
+  text-align: center;
+}
+
+.vitalUnitBefore {
+  text-align: left;
+  padding-left: 2em;
+}
+
+.vitalUnitAfter {
+  text-align: right;
+  padding-right: 2em;
+}
+
+.vitalPrev {
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
+.vitalPrevValue {
+  font-size: 2em;
+}

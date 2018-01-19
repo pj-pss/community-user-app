@@ -804,6 +804,7 @@ $(function() {
             return false;
         });
     });
+    $("#myhealth").load("myhealth.html");
     $("#profileEdit").load("profileEdit.html");
     $("#opHistory").load("opHistory.html");
     $("#helperOpHistory").load("helperOpHistory.html");
