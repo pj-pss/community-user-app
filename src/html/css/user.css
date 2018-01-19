@@ -1187,29 +1187,35 @@ div.profile-parent > a {
   margin: 5px;
 }
 
-.nowState .ordinary{
-
+.nowState .emergency{
+  font-weight: bold;
+  color: #ff4141;
 }
 
-.emergency {
+.nowState .ordinary{
+  font-weight: bold;
+  color:#47cff7;
+}
+
+.emergency_box {
   border: 3px solid #f27575;
   padding: 5px 15px;
   margin: 5px;
 }
 
-.emergency .title {
+.emergency_box .title {
   font-size: 22px;
-  color: #f27575;
+  color: #ff4141;
   margin: 0 10px;
 }
 
-.ordinary {
+.ordinary_box {
   border: 3px solid #47cff7;
   padding: 5px;
   margin: 5px -10px;
 }
 
-.ordinary .title {
+.ordinary_box .title {
   color: #47cff7;
 }
 
