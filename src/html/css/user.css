@@ -681,8 +681,7 @@ table.tbl_prof tr th {
 	white-space: nowrap;
 }
 
-#monitoring img,
-#viewInfoDisclosureDetail img {
+#monitoring img {
 	width: 128px;
 	height: 128px;
 	padding: 5px;
@@ -702,11 +701,6 @@ table.tbl_prof tr th {
   margin-bottom: 5px;
   color: #606060;
   font-size: 18px;
-}
-
-#viewInfoDisclosureDetail img {
-  display: inline-block;
-  margin: 10px;
 }
 
 #editPrflBtn {
@@ -1188,12 +1182,43 @@ div.profile-parent > a {
   font-size: 2em;
 }
 
+.nowState {
+  font-size: 24px;
+  margin: 5px;
+}
+
+.nowState .ordinary{
+
+}
+
 .emergency {
   border: 3px solid #f27575;
-  padding: 5px;
+  padding: 5px 15px;
+  margin: 5px;
+}
+
+.emergency .title {
+  font-size: 22px;
+  color: #f27575;
+  margin: 0 10px;
 }
 
 .ordinary {
   border: 3px solid #47cff7;
   padding: 5px;
+  margin: 5px -10px;
+}
+
+.ordinary .title {
+  color: #47cff7;
+}
+
+#viewInfoDisclosureDetail img {
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 5px 10px;
 }
