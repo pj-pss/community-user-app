@@ -1228,3 +1228,8 @@ div.profile-parent > a {
   margin-right: auto;
   margin: 5px 10px;
 }
+
+#viewInfoDisclosureDetail img.grayout {
+  background-color: #b8b8b8;
+  opacity: 0.5;
+}
