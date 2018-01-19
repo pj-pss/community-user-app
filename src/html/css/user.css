@@ -1187,12 +1187,12 @@ div.profile-parent > a {
   margin: 5px;
 }
 
-.nowState .emergency{
+.nowState .emergency {
   font-weight: bold;
   color: #ff4141;
 }
 
-.nowState .ordinary{
+.nowState .ordinary {
   font-weight: bold;
   color:#47cff7;
 }

@@ -28,7 +28,25 @@
         "viewHistory" : "私の情報参照履歴",
         "viewInforDisclosureHistory" : "私の情報開示状況",
         "viewDataPortability" : "データポータビリティ",
-        "profileEdit" : "プロフィール変更"
+        "profileEdit" : "プロフィール変更",
+        "infoDisclosureDetail" : {
+            "prefix" : "情報開示詳細: ",
+            "location" : "現在地",
+            "profileBasicContact" : "連絡先",
+            "profileBasicRoom" : "部屋情報",
+            "profileOption" : "オプション・カスタマイズ",
+            "profileFamily" : "家族構成",
+            "profilePet" : "ペット情報",
+            "profileCrtfctRsdnc" : "住民票",
+            "profileEmrgncyCntct" : "緊急連絡先",
+            "profileLifestyle" : "生活習慣等",
+            "profileAffltnCrcl" : "所属サークル",
+            "profileEvacuation" : "避難(区分)",
+            "profileEnterLeave" : "入退去状況",
+            "profileOperator" : "賃貸契約時の管理会社",
+            "profileSgmntOwnr" : "区分所有者",
+            "profileRcptsCnfrmtn" : "受領書類・確認"
+        }
     },
     "topMenu" : {
         "top" : "カレンダー",
