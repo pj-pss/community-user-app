@@ -785,13 +785,13 @@ table.tbl_prof tr th {
   font-size: 20px;
 }
 
-#monitoringTop {
+.scrollToTop {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 77%;
 }
-#monitoringTop a {
+.scrollToTop a {
     background: #666;
     opacity: 0.7;
     text-decoration: none;
@@ -802,7 +802,7 @@ table.tbl_prof tr th {
     display: block;
     border-radius: 5px;
 }
-#monitoringTop a:hover {
+.scrollToTop a:hover {
     text-decoration: none;
     background: #999;
 }

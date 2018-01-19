@@ -788,23 +788,24 @@ $(function() {
         });
     });
     $("#monitoring").load("monitoring.html", function () {
-        var topBtn = $('#monitoringTop');
-        topBtn.hide();
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
-                topBtn.fadeIn();
-            } else {
-                topBtn.fadeOut();
-            }
-        });
-        topBtn.click(function () {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 500);
-            return false;
+        $("#myhealth").load("myhealth.html", function() {
+            var topBtn = $('.scrollToTop');
+            topBtn.hide();
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    topBtn.fadeIn();
+                } else {
+                    topBtn.fadeOut();
+                }
+            });
+            topBtn.click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 500);
+                return false;
+            });
         });
     });
-    $("#myhealth").load("myhealth.html");
     $("#profileEdit").load("profileEdit.html");
     $("#opHistory").load("opHistory.html");
     $("#helperOpHistory").load("helperOpHistory.html");
