@@ -681,7 +681,7 @@ table.tbl_prof tr th {
 	white-space: nowrap;
 }
 
-#profileView img {
+#monitoring img {
 	width: 128px;
 	height: 128px;
 	padding: 5px;
@@ -690,9 +690,17 @@ table.tbl_prof tr th {
 	margin-right: auto;
 }
 
-#profileView dl {
+#monitoring dl {
 	margin-top: 2px;
 	margin-bottom: 2px;
+}
+
+#monitoring .notes {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #606060;
+  font-size: 18px;
 }
 
 #editPrflBtn {
@@ -720,23 +728,70 @@ table.tbl_prof tr th {
     content: "\e080";
 }
 
-#profileView dl dt {
+.panel-heading .watching:after,
+.panel-heading .many_watching:after,
+.panel-heading .no_watching:after {
+  content: none;
+}
+
+.watching,
+.many_watching,
+.no_watching {
+  float: right;
+  font-size: 22px;
+}
+
+.nowLocation .watching,
+.nowLocation .many_watching,
+.nowLocation .no_watching {
+  margin: 0px -10px 10px 20px;
+  font-size: 24px;
+}
+
+.watching:after,
+.panel-heading .watching:after {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f007";
+}
+.many_watching:after,
+.panel-heading .many_watching:after {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f0c0";
+}
+
+.no_watching:after,
+.panel-heading .no_watching:after {
+  font-family: FontAwesome;
+  color: #80808070;
+  content: "\f2c0";
+}
+
+.nowLocation {
+  color: blue;
+  font-size: 24px;
+  display: inline-block;
+}
+
+
+#monitoring dl dt {
 	padding: 0 1em 0 1em;
   font-size: 18px;
 }
 
-#profileView dl dd {
+#monitoring dl dd {
 	padding: 0 1em 0 4em;
   font-size: 20px;
 }
 
-#profileViewTop {
+#monitoringTop {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 77%;
 }
-#profileViewTop a {
+#monitoringTop a {
     background: #666;
     opacity: 0.7;
     text-decoration: none;
@@ -747,7 +802,7 @@ table.tbl_prof tr th {
     display: block;
     border-radius: 5px;
 }
-#profileViewTop a:hover {
+#monitoringTop a:hover {
     text-decoration: none;
     background: #999;
 }

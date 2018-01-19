@@ -19,7 +19,7 @@
     "pageTitle" : {
         "menu" : "メニュー",
         "top" : "カレンダー",
-        "profileView" : "私の情報",
+        "monitoring" : "見守り",
         "opHistory" : "私の操作履歴",
         "helperOpHistory" : "支援者の操作履歴",
         "consentHistory" : "私の同意履歴",
