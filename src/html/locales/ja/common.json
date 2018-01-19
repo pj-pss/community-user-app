@@ -2,7 +2,8 @@
     "msg": {
         "welcome" : "ようこそ",
         "userName" : "$t(user.001) さん",
-        "backToTop" : "$t(pageTitle.top)に戻る"
+        "backToTop" : "$t(pageTitle.top)に戻る",
+        "scrollToTop" : "先頭へ戻る"
     },
     "user": {
         "001" : "富士通 太郎"
@@ -28,25 +29,36 @@
         "viewHistory" : "私の情報参照履歴",
         "viewInforDisclosureHistory" : "私の情報開示状況",
         "viewDataPortability" : "データポータビリティ",
-        "profileEdit" : "プロフィール変更",
-        "infoDisclosureDetail" : {
-            "prefix" : "情報開示詳細: ",
-            "location" : "現在地",
-            "profileBasicContact" : "連絡先",
-            "profileBasicRoom" : "部屋情報",
-            "profileOption" : "オプション・カスタマイズ",
-            "profileFamily" : "家族構成",
-            "profilePet" : "ペット情報",
-            "profileCrtfctRsdnc" : "住民票",
-            "profileEmrgncyCntct" : "緊急連絡先",
-            "profileLifestyle" : "生活習慣等",
-            "profileAffltnCrcl" : "所属サークル",
-            "profileEvacuation" : "避難(区分)",
-            "profileEnterLeave" : "入退去状況",
-            "profileOperator" : "賃貸契約時の管理会社",
-            "profileSgmntOwnr" : "区分所有者",
-            "profileRcptsCnfrmtn" : "受領書類・確認"
-        }
+        "profileEdit" : "プロフィール変更"
+    },
+    "profile" : {
+        "prefix" : "情報開示詳細: ",
+        "location" : "現在地",
+        "profileBasicContact" : "連絡先",
+        "profileBasicRoom" : "部屋情報",
+        "profileOption" : "オプション・カスタマイズ",
+        "profileFamily" : "家族構成",
+        "profilePet" : "ペット情報",
+        "profileCrtfctRsdnc" : "住民票",
+        "profileEmrgncyCntct" : "緊急連絡先",
+        "profileLifestyle" : "生活習慣等",
+        "profileAffltnCrcl" : "所属サークル",
+        "profileEvacuation" : "避難(区分)",
+        "profileEnterLeave" : "入退去状況",
+        "profileOperator" : "賃貸契約時の管理会社",
+        "profileSgmntOwnr" : "区分所有者",
+        "profileRcptsCnfrmtn" : "受領書類・確認",
+        "profileVital" : "バイタル",
+        "profileHealthInsurance" : "健康保険",
+        "profilePrmryNursingCare" : "要介護認定",
+        "profileDisability" : "身体障害",
+        "profilePrmryCrDctr" : "掛かりつけ医",
+        "profileAnamnesis" : "既往症・通院治療中の病気",
+        "profilePrsntSmptm" : "現症状",
+        "profileMedicine" : "内服薬・外用薬",
+        "profileVaccination" : "予防接種",
+        "profileExamination" : "検診受診状況",
+        "profileCareService" : "介護サービス"
     },
     "topMenu" : {
         "top" : "カレンダー",
