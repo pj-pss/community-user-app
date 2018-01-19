@@ -681,7 +681,8 @@ table.tbl_prof tr th {
 	white-space: nowrap;
 }
 
-#monitoring img {
+#monitoring img,
+#viewInfoDisclosureDetail img {
 	width: 128px;
 	height: 128px;
 	padding: 5px;
@@ -701,6 +702,11 @@ table.tbl_prof tr th {
   margin-bottom: 5px;
   color: #606060;
   font-size: 18px;
+}
+
+#viewInfoDisclosureDetail img {
+  display: inline-block;
+  margin: 10px;
 }
 
 #editPrflBtn {
@@ -1180,4 +1186,14 @@ div.profile-parent > a {
 
 .vitalPrevValue {
   font-size: 2em;
+}
+
+.emergency {
+  border: 3px solid #f27575;
+  padding: 5px;
+}
+
+.ordinary {
+  border: 3px solid #47cff7;
+  padding: 5px;
 }
