@@ -89,14 +89,14 @@ cs.receiveMessage = function() {
 };
 
 cs.transGenki = function(json) {
-    // permission to browse(external cell)
+    // 閲覧許可状況(外部セル)
     Common.getOtherAllowedCells();
-    // permission to browse
+    // 閲覧許可状況
     Common.getAllowedCellList();
-    // notification
+    // 通知
     cs.getReceiveMessage();
 
-    // start updating
+    // 更新開始
     cs.getGenkikunData();
 };
 
@@ -765,8 +765,8 @@ function closeHelpConfirm(f) {
 }
 
 function viewInfoDisclosureDetail(type){
-    $("#pageTitle").attr("data-i18n", "profile." + type).localize();
-    view("viewInfoDisclosureDetail");
+    // dummy function
+    console.log(type);
 }
 
 var welcomeMessage = "";
@@ -828,7 +828,6 @@ $(function() {
     $("#eventList").load("eventList.html");
     $("#infoList").load("infoList.html");
     $("#eventHistoryList").load("eventHistoryList.html");
-    $("#viewInfoDisclosureDetail").load("viewInfoDisclosureDetail.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
