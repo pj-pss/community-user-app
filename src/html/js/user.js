@@ -765,7 +765,7 @@ function closeHelpConfirm(f) {
 }
 
 function viewInfoDisclosureDetail(type){
-    $("#viewInfoDisclosureDetail #pageTitle").html(i18next.t("profile." + type));
+    $("#pageTitle").attr("data-i18n", "profile." + type).localize();
     view("viewInfoDisclosureDetail");
 }
 
