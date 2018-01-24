@@ -1053,13 +1053,10 @@ table.tbl_prof input[type="text"] {
   margin: 0px;
 }
 
-.persons_icon {
-  margin-top: -10px;
-  font-size: 30px;
-}
-
+.persons_icon,
 .db_icon {
-  margin-top: -10px;
+  margin : 5px 10px 5px 0px;
+  float : right;
   font-size: 30px;
 }
 
@@ -1069,6 +1066,10 @@ table.tbl_prof input[type="text"] {
 
 .icon_disable {
   color: gray;
+}
+
+.icon_box {
+  overflow: hidden;
 }
 
 .modal_title {
@@ -1180,4 +1181,56 @@ div.profile-parent > a {
 
 .vitalPrevValue {
   font-size: 2em;
+}
+
+.nowState {
+  font-size: 24px;
+  margin: 5px;
+}
+
+.nowState .emergency {
+  font-weight: bold;
+  color: #ff4141;
+}
+
+.nowState .ordinary {
+  font-weight: bold;
+  color:#47cff7;
+}
+
+.emergency_box {
+  border: 3px solid #f27575;
+  padding: 5px 15px;
+  margin: 5px;
+}
+
+.emergency_box .title {
+  font-size: 22px;
+  color: #ff4141;
+  margin: 0 10px;
+}
+
+.ordinary_box {
+  border: 3px solid #47cff7;
+  padding: 5px;
+  margin: 5px -10px;
+}
+
+.ordinary_box .title {
+  color: #47cff7;
+}
+
+#viewInfoDisclosureDetail img {
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 5px 10px;
+}
+
+#viewInfoDisclosureDetail img.grayout {
+  background-color: #b8b8b8;
+  opacity: 0.5;
 }
