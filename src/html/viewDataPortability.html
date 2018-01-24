@@ -1,6 +1,7 @@
 <h2><i class="fa fa-file-text icon"></i><span data-i18n="pageTitle.viewDataPortability"></span></h2>
 <div class="main_box main_box_center">
-    <button class="data_portability_btn" onclick="view('viewDataExport');setTimeout(function(){view('viewQRCode');},3000);">データエクスポートを<br>実施する</button>
-    <br>※情報量によって、データエクスポートの<br>
-    完了までの時間が変動します。
+    <div class="dataExport">
+        <button class="data_portability_btn" data-i18n="msg.dataExport.start" onclick="view('viewDataExport');setTimeout(function(){view('viewQRCode');},3000);"></button>
+        <p data-i18n="msg.dataExport.notice"></p>
+    </div>
 </div>
