@@ -695,14 +695,6 @@ table.tbl_prof tr th {
 	margin-bottom: 2px;
 }
 
-#monitoring .notes {
-  display: inline-block;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  color: #606060;
-  font-size: 18px;
-}
-
 #editPrflBtn {
 	text-align: center;
 	padding: 2px;
@@ -728,44 +720,24 @@ table.tbl_prof tr th {
     content: "\e080";
 }
 
-.panel-heading .watching:after,
-.panel-heading .many_watching:after,
-.panel-heading .no_watching:after {
+.panel-heading .watching:after {
   content: none;
 }
 
-.watching,
-.many_watching,
-.no_watching {
+.watching {
   float: right;
-  font-size: 22px;
 }
 
-.nowLocation .watching,
-.nowLocation .many_watching,
-.nowLocation .no_watching {
-  margin: 0px -10px 10px 20px;
-  font-size: 24px;
+.watching .badge {
+  font-size: 15px;
 }
 
-.watching:after,
-.panel-heading .watching:after {
-  font-family: FontAwesome;
-  color: black;
-  content: "\f007";
-}
-.many_watching:after,
-.panel-heading .many_watching:after {
-  font-family: FontAwesome;
-  color: black;
-  content: "\f0c0";
+.panel-heading .watching .badge {
+  margin: 0px -10px -8px 0px;
 }
 
-.no_watching:after,
-.panel-heading .no_watching:after {
-  font-family: FontAwesome;
-  color: #80808070;
-  content: "\f2c0";
+.nowLocation .watching .badge {
+  margin: 0px -10px 0px 20px;
 }
 
 .nowLocation {
