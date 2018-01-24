@@ -1,8 +1,19 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close btn_close" data-dismiss="modal"><i class="fa fa-times-circle-o close_icon" aria-hidden="true"></i></button>
-            <p class="p_modal_title">開示情報</p>
+            <div class="modal_title">
+                <div class="close_button">
+                </div>
+                <div class="title">
+                    <div class="text-center">
+                        <span data-i18n="profile.prefix"></span>
+                        <span class="title_text"></span>
+                    </div>
+                </div>
+                <div class="close_button">
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle-o close_icon" aria-hidden="true"></i></button>
+                </div>
+            </div>
         </div>
         <div class="modal-body personalInfo">
             <table>
@@ -13,7 +24,7 @@
                 <tr><td colspan="4">
                 <table class="tbl_rdo">
                     <tr>
-                        <td class="td_rdo_lbl">患者基本情報</td>
+                        <td class="td_rdo_lbl" data-i18n="profile.basicInfo"></td>
                         <td><div class="rdobtn rdobtn_per">
                             <input type="radio" name="1" id="no1" value="0">
                             <label for="no1" class="offbtn">OFF</label>
@@ -22,7 +33,7 @@
                         </div></td>
                     </tr>
                     <tr>
-                        <td class="td_rdo_lbl">バイタル情報</td>
+                        <td class="td_rdo_lbl" data-i18n="profile.vital"></td>
                         <td><div class="rdobtn rdobtn_per">
                             <input type="radio" name="2" id="no2" value="0">
                             <label for="no2" class="offbtn">OFF</label>
@@ -31,7 +42,7 @@
                         </div></td>
                     </tr>
                     <tr>
-                        <td class="td_rdo_lbl">健康情報</td>
+                        <td class="td_rdo_lbl" data-i18n="profile.healthInfo"></td>
                         <td><div class="rdobtn rdobtn_per">
                             <input type="radio" name="3" id="no3" value="0">
                             <label for="no3" class="offbtn">OFF</label>
