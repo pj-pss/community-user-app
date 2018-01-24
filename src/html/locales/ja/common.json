@@ -3,7 +3,17 @@
         "welcome" : "ようこそ",
         "userName" : "$t(user.001) さん",
         "backToTop" : "$t(pageTitle.top)に戻る",
-        "scrollToTop" : "先頭へ戻る"
+        "scrollToTop" : "先頭へ戻る",
+        "latest" : "最新50件まで",
+        "dataExport" : {
+            "title" : "データエクスポート",
+            "start" : "$t(msg.dataExport.title)を実施する",
+            "notice" : "※情報量によって、$t(msg.dataExport.title)の完了までの時間が変動します",
+            "doing" : "※現在、$t(msg.dataExport.title)中です",
+            "wait" : "完了まで暫くお待ち下さい",
+            "complete" : "$t(msg.dataExport.title)が完了しました",
+            "QRcode" : "QRコードからダウンロードを行って下さい"
+        }
     },
     "user": {
         "001" : "富士通 太郎"
@@ -29,9 +39,12 @@
         "viewHistory" : "私の情報参照履歴",
         "viewInforDisclosureHistory" : "私の情報開示状況",
         "viewDataPortability" : "データポータビリティ",
+        "dataExport" : "データエクスポート",
         "profileEdit" : "プロフィール変更",
         "vital" : "バイタル情報",
-        "location" : "在宅状況"
+        "location" : "在宅状況",
+        "bbs" : "みんなの掲示板",
+        "bbsComment" : "みんなの掲示板: コメント"
     },
     "profile" : {
         "prefix" : "情報開示詳細: ",
