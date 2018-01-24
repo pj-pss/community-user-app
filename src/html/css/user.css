@@ -728,8 +728,10 @@ table.tbl_prof tr th {
   float: right;
 }
 
-.watching .badge {
+#monitoring .badge,
+#myhealth .badge {
   font-size: 15px;
+  background-color: #575757 !important;
 }
 
 .panel-heading .watching .badge {
