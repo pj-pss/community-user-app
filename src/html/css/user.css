@@ -759,7 +759,7 @@ table.tbl_prof tr th {
 
 .scrollToTop {
     position: fixed;
-    bottom: 20px;
+    bottom: 60px;
     right: 20px;
     font-size: 18px;
 }
