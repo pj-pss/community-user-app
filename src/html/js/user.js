@@ -732,9 +732,6 @@ function openPersonalInfo3() {
 function openInforDisclosureHistoryPer() {
     $('#modal-inforDisclosureHistoryPer').modal('show');
 }
-function openInforDisclosureHistoryDB() {
-    $('#modal-inforDisclosureHistory').modal('show');
-}
 function openClubHistory() {
     $('#modal-clubHistory').modal('show');
 }
@@ -765,8 +762,8 @@ function closeHelpConfirm(f) {
 }
 
 function viewInfoDisclosureDetail(type){
-    $("#pageTitle").attr("data-i18n", "profile." + type).localize();
-    view("viewInfoDisclosureDetail");
+    $("#modal-inforDisclosureHistory .title_text").attr("data-i18n", "profile." + type).localize();
+    $('#modal-inforDisclosureHistory').modal('show');
 }
 
 var welcomeMessage = "";
