@@ -4,7 +4,7 @@
         "userName" : "$t(user.001) さん",
         "backToTop" : "$t(pageTitle.top)に戻る",
         "scrollToTop" : "先頭へ戻る",
-        "latest" : "最新50件",
+        "latest" : "最新50件まで",
         "dataExport" : {
             "title" : "データエクスポート",
             "start" : "$t(msg.dataExport.title)を実施する",
