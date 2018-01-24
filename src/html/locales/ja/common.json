@@ -15,7 +15,8 @@
         "save": "保存",
         "release": "解除",
         "approve": "承諾",
-        "decline": "拒否"
+        "decline": "拒否",
+        "saveDiscInfo" : "開示情報を保存する"
     },
     "pageTitle" : {
         "action" : "アクション",
