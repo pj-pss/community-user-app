@@ -1024,15 +1024,17 @@ table.tbl_prof input[type="text"] {
   margin: 10px;
 }
 
+.back_link {
+  font-size: 20px;
+}
 
-.back_icon {
+.back_link:before {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f060";
   font-size: 24px;
   color: black;
   margin: 10px 5px 20px 20px;
-}
-
-.back_link {
-  font-size: 20px;
 }
 
 .action_menu_box {

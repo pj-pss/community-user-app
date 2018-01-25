@@ -3,7 +3,7 @@
         "welcome" : "ようこそ",
         "userName" : "$t(user.001) さん",
         "backToTop" : "$t(pageTitle.top)に戻る",
-        "backToArticle" : "$t(pageTitle.bbs)に戻る",
+        "backToArticle" : "記事本文に戻る",
         "readMore" : "もっと見る",
         "join" : "参加します",
         "consider" : "検討中",
