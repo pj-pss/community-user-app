@@ -493,17 +493,16 @@ p.overflow {
 .block_clubHistory {
   height: 15vmin;
 }
-.event .cover,
-.event .block_img,
-.event .block_description {
-  height: 33vmin;
-}
 .stealth_table .date,
 .stealth_table .article {
   font-size: 3vmin;
 }
 .stealth_table .title {
   font-size: 5vmin;
+}
+.event .stealth_table .date {
+  font-size: 4vmin;
+  color: #ec9e29;
 }
 .top_menu button {
   font-size: 4.5vmin;
@@ -518,17 +517,15 @@ p.overflow {
   .block_clubHistory {
     height: 64px;
   }
-  .event .cover,
-  .event .block_img,
-  .event .block_description {
-    height: 140px;
-  }
   .stealth_table .date,
   .stealth_table .article {
     font-size: 11px;
   }
   .stealth_table .title {
     font-size: 18px;
+  }
+  .event .stealth_table .date {
+    font-size: 14px;
   }
   .top_menu button {
     font-size: 17px;
@@ -543,17 +540,15 @@ p.overflow {
   .block_clubHistory {
     height: 72px;
   }
-  .event .cover,
-  .event .block_img,
-  .event .block_description {
-    height: 160px;
-  }
   .stealth_table .title {
     font-size: 24px;
   }
   .stealth_table .date,
   .stealth_table .article {
     font-size: 15px;
+  }
+  .event .stealth_table .date {
+    font-size: 20px;
   }
   .top_menu button {
     font-size: 23px;
