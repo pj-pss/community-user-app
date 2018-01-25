@@ -751,7 +751,7 @@ function closeHelpConfirm(f) {
 		$(".startHelpOp").removeClass("hidden");
 		$('header').css('background-color', '#008F00');
 		$('h1').css('background-color', '#008F00');
-		$('#welcomMessage').html(welcomeMessage);
+		$('#welcomeMessage').html(welcomeMessage);
 	}
 	$('body').removeClass('modal-open');
 	$('.modal-backdrop').remove();
@@ -851,8 +851,8 @@ $(function() {
 			$('header').css('background-color', '#FF0000');
 			$('h1').css('background-color', '#FF0000');
 
-			welcomeMessage = $('#welcomMessage').html();
-			$('#welcomMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
+			welcomeMessage = $('#welcomeMessage').html();
+			$('#welcomeMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
 		}
 	});
     $('#dvOverlay').on('click', function() {
