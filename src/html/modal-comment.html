@@ -13,12 +13,18 @@
             </div>
         </div>
         <div class="modal-body cls_center">
-            <input type="radio" id="wrtier_nickname" name="writer_name" value="nickname" checked="checked">
-            <label for=="wrtier_nickname">ニックネームで投稿</label>
-            <input type="radio" id="writer_realname" name="writer_name" value="realname">
-            <label for="writer_realname">実名で投稿</label>
-            <input type="radio" id="writer_anonymous" name="writer_name" value="anonymous">
-            <label for="writer_anonymous">匿名で投稿</label><br>
+            <label class="checkbox-inline">
+                <input type="radio" id="wrtier_nickname" name="writer_name" value="nickname" checked="checked">
+                <span data-i18n="comment.nickname"></span>
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" id="writer_realname" name="writer_name" value="realname">
+                <span data-i18n="comment.realname"></span>
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" id="writer_anonymous" name="writer_name" value="anonymous">
+                <span data-i18n="comment.anonymous"></span>
+            </label>
 
             <textarea class="comment_box" name="comment" rows="4"></textarea>
 

@@ -113,9 +113,14 @@
         "info" : "お知らせ",
         "eventHistory" : "活動履歴"
     },
-    "dateType" :{
+    "dateType" : {
         "event" : "開催日時",
         "bbs" : "みんなの掲示板",
         "club" : "サークル活動記録"
+    },
+    "comment" : {
+        "nickname" : "ニックネームで投稿",
+        "realname" : "実名で投稿",
+        "anonymous" : "匿名で投稿"
     }
 }
