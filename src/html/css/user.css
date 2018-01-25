@@ -707,6 +707,7 @@ table.tbl_prof tr th {
 
 .header-text {
   font-size: 20px;
+  color: #337ab7;
 }
 
 .panel-heading a:after {
@@ -720,10 +721,6 @@ table.tbl_prof tr th {
     content: "\e080";
 }
 
-.panel-heading .watching:after {
-  content: none;
-}
-
 .watching {
   float: right;
 }
@@ -734,12 +731,12 @@ table.tbl_prof tr th {
   background-color: #575757 !important;
 }
 
-.panel-heading .watching .badge {
-  margin: 0px -10px -8px 0px;
+.list-group-item .watching {
+  margin: 5px 0px 0px 0px;
 }
 
 .nowLocation .watching .badge {
-  margin: 0px -10px 0px 20px;
+  margin: 0px -10px 5px 20px;
 }
 
 .nowLocation {

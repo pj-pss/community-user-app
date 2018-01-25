@@ -802,6 +802,11 @@ $(function() {
                 }, 500);
                 return false;
             });
+
+            // prevent the propagation of events to the parent element (prevent to open the accordion)
+            $(".list-group-item .watching").on("click", function(e) {
+                e.stopPropagation();
+            });
         });
     });
     $("#profileEdit").load("profileEdit.html");
