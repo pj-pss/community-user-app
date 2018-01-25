@@ -62,6 +62,10 @@
         "bbs" : "みんなの掲示板",
         "bbsComment" : "みんなの掲示板: コメント"
     },
+    "modalTitle" : {
+        "postComment" : "コメントを投稿する",
+        "personalInfo" : "人物情報"
+    },
     "profile" : {
         "prefix" : "情報開示詳細: ",
         "location" : "現在地",
