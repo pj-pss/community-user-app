@@ -424,7 +424,7 @@ header > a {
 }
 
 .stealth_table .date td{
-  text-align: right;
+  text-align: left;
 }
 
 .stealth_table .title {
@@ -438,22 +438,6 @@ header > a {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.stealth_table .article {
-  height: 20%;
-  color: #777777;
-}
-
-.stealth_table .article td {
-}
-
-p.overflow {
-  text-align: center;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
   overflow: hidden;
 }
 
@@ -473,18 +457,6 @@ p.overflow {
   border-width: 2px 2px 2px 0px;
 }
 
-.block_clubHistory {
-  background-color: #f3ffe0;
-  border: 2px #a9c9a9 solid;
-  vertical-align: top;
-  padding: 5px;
-  border-width: 2px;
-}
-
-.block_clubHistory .stealth_table .title td{
-  -webkit-line-clamp: 1;
-}
-
 .cover,
 .block_img,
 .block_description {
@@ -493,17 +465,12 @@ p.overflow {
 .block_clubHistory {
   height: 15vmin;
 }
-.event .cover,
-.event .block_img,
-.event .block_description {
-  height: 33vmin;
-}
-.stealth_table .date,
-.stealth_table .article {
-  font-size: 3vmin;
-}
 .stealth_table .title {
   font-size: 5vmin;
+}
+.stealth_table .date {
+  font-size: 4.5vmin;
+  color: black;
 }
 .top_menu button {
   font-size: 4.5vmin;
@@ -518,19 +485,11 @@ p.overflow {
   .block_clubHistory {
     height: 64px;
   }
-  .event .cover,
-  .event .block_img,
-  .event .block_description {
-    height: 140px;
-  }
-  .stealth_table .date,
-  .stealth_table .article {
-    font-size: 11px;
-  }
   .stealth_table .title {
     font-size: 18px;
   }
-  .top_menu button {
+  .top_menu button,
+  .stealth_table .date {
     font-size: 17px;
   }
 }
@@ -543,26 +502,13 @@ p.overflow {
   .block_clubHistory {
     height: 72px;
   }
-  .event .cover,
-  .event .block_img,
-  .event .block_description {
-    height: 160px;
-  }
   .stealth_table .title {
     font-size: 24px;
   }
-  .stealth_table .date,
-  .stealth_table .article {
-    font-size: 15px;
-  }
-  .top_menu button {
+  .top_menu button,
+  .stealth_table .date {
     font-size: 23px;
   }
-}
-
-button.close img {
-	width: 32px;
-	height: 32px;
 }
 
 header h1 {
