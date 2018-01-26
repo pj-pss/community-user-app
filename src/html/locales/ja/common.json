@@ -15,6 +15,28 @@
         "canNotEditInfo" : "以下の情報は変更できません",
         "scrollToTop" : "先頭へ戻る",
         "latest" : "最新50件まで",
+
+        "op" : {
+            "select" : "$t(userImg.001) が、メニューより［$t(pageTitle.opHistory)］を選択しました",
+            "comment" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］にコメントしました",
+            "join" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］に参加する!と表明しました",
+            "access" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］より外部サイトにアクセスしました"
+        },
+        "helperOp" : {
+            "endOp" : "$t(userImg.002) がメニューより操作支援終了を選択しました",
+            "join" : "$t(userImg.002)が、$t(pageTitle.bbs)[$t(article.002)]に参加する!と表明しました",
+            "access" : "$t(userImg.002)が、$t(pageTitle.bbs)[$t(article.002)]より、外部サイトにアクセスしました。",
+            "openArticle" : "$t(userImg.002)が、お知らせ画面より$t(pageTitle.bbs)[$t(article.002)]を開きました。"
+        },
+        "concern" : {
+            "001" : "$t(userImg.001)が$t(userImg.002)に、操作支援を同意しました。",
+            "002" : "$t(userImg.001)が$t(userImg.003)に、操作支援を同意しました。"
+        },
+        "history" : {
+            "vital" : "$t(userImg.004)が、$t(profile.vital)を参照しました。",
+            "medicine" : "$t(userImg.005)が、$t(profile.medicine)を参照しました。"
+        },
+
         "dataExport" : {
             "title" : "データエクスポート",
             "start" : "$t(msg.dataExport.title)を実施する",
@@ -27,6 +49,17 @@
     },
     "user": {
         "001" : "富士通 太郎"
+    },
+    "userImg" : {
+        "001" : "<img src=\"./image/parts_ico_gentleman.png\">",
+        "002" : "<img src=\"./image/parts_ico_operator.png\" onClick=\"openPersonalInfo();\">",
+        "003" : "<img src=\"./image/parts_ico_detective.png\" onClick=\"openPersonalInfo2();\">",
+        "004" : "<img src=\"./image/parts_ico_doctor.png\" onClick=\"openPersonalInfo3();\">",
+        "005" : "<img src=\"./image/parts_ico_doctor2.png\" onClick=\"openPersonalInfo3();\">"
+    },
+    "article" : {
+        "001" : "【配信協力】留学生×市民 みんなで楽しもう！INTERNATIONAL CURRY PARTY",
+        "002" : "柏の葉 街まるごとオープンキャンパス2017のお知らせ"
     },
     "btn": {
         "ok" : "OK",
