@@ -424,7 +424,7 @@ header > a {
 }
 
 .stealth_table .date td{
-  text-align: right;
+  text-align: left;
 }
 
 .stealth_table .title {
@@ -465,15 +465,11 @@ header > a {
 .block_clubHistory {
   height: 15vmin;
 }
-.stealth_table .date,
-.stealth_table .article {
-  font-size: 3vmin;
-}
 .stealth_table .title {
   font-size: 5vmin;
 }
-.event .stealth_table .date {
-  font-size: 4vmin;
+.stealth_table .date {
+  font-size: 4.5vmin;
   color: black;
 }
 .top_menu button {
@@ -489,17 +485,11 @@ header > a {
   .block_clubHistory {
     height: 64px;
   }
-  .stealth_table .date,
-  .stealth_table .article {
-    font-size: 11px;
-  }
   .stealth_table .title {
     font-size: 18px;
   }
-  .event .stealth_table .date {
-    font-size: 14px;
-  }
-  .top_menu button {
+  .top_menu button,
+  .stealth_table .date {
     font-size: 17px;
   }
 }
@@ -515,14 +505,8 @@ header > a {
   .stealth_table .title {
     font-size: 24px;
   }
-  .stealth_table .date,
-  .stealth_table .article {
-    font-size: 15px;
-  }
-  .event .stealth_table .date {
-    font-size: 20px;
-  }
-  .top_menu button {
+  .top_menu button,
+  .stealth_table .date {
     font-size: 23px;
   }
 }
