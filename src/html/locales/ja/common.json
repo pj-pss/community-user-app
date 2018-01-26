@@ -25,7 +25,8 @@
         "save": "保存",
         "release": "解除",
         "approve": "承諾",
-        "decline": "拒否"
+        "decline": "拒否",
+        "saveDiscInfo" : "開示情報を保存する"
     },
     "pageTitle" : {
         "action" : "アクション",
@@ -49,6 +50,7 @@
     "profile" : {
         "prefix" : "情報開示詳細: ",
         "location" : "現在地",
+        "basicInfo" : "基本情報",
         "basicContact" : "連絡先",
         "basicRoom" : "部屋情報",
         "option" : "オプション・カスタマイズ",
@@ -59,10 +61,12 @@
         "lifestyle" : "生活習慣等",
         "affltnCrcl" : "所属サークル",
         "evacuation" : "避難(区分)",
+        "contractInfo" : "契約情報",
         "enterLeave" : "入退去状況",
         "operator" : "賃貸契約時の管理会社",
         "sgmntOwnr" : "区分所有者",
         "rcptsCnfrmtn" : "受領書類・確認",
+        "healthInfo" : "健康情報",
         "vital" : "バイタル",
         "healthInsurance" : "健康保険",
         "prmryNursingCare" : "要介護認定",
