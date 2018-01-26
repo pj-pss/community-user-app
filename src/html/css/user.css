@@ -441,22 +441,6 @@ header > a {
   overflow: hidden;
 }
 
-.stealth_table .article {
-  height: 20%;
-  color: #777777;
-}
-
-.stealth_table .article td {
-}
-
-p.overflow {
-  text-align: center;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-}
-
 .block_img {
   overflow: hidden;
   border: 2px #a9c9a9 solid;
@@ -471,18 +455,6 @@ p.overflow {
   vertical-align: top;
   padding: 5px;
   border-width: 2px 2px 2px 0px;
-}
-
-.block_clubHistory {
-  background-color: #f3ffe0;
-  border: 2px #a9c9a9 solid;
-  vertical-align: top;
-  padding: 5px;
-  border-width: 2px;
-}
-
-.block_clubHistory .stealth_table .title td{
-  -webkit-line-clamp: 1;
 }
 
 .cover,
@@ -553,11 +525,6 @@ p.overflow {
   .top_menu button {
     font-size: 23px;
   }
-}
-
-button.close img {
-	width: 32px;
-	height: 32px;
 }
 
 header h1 {
