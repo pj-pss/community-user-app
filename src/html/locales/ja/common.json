@@ -3,8 +3,41 @@
         "welcome" : "ようこそ",
         "userName" : "$t(user.001) さん",
         "backToTop" : "$t(pageTitle.top)に戻る",
+        "backToArticle" : "記事本文に戻る",
+        "readMore" : "もっと見る",
+        "join" : "参加します",
+        "consider" : "検討中",
+        "comment" : "コメント",
+        "touchNFC" : "支援する入居者のNFCタグをNFCリーダにかざしてください",
+        "startOpHelp" : "入居者：$t(user.001)さん の操作支援を開始します",
+        "duringOpHelp" : "支援者：$t(user.002)が操作しています",
+        "endOpHelp" : "入居者:$t(user.001)さん の操作支援を終了しますか?",
+        "registerImg" : "※登録された写真は公開されます",
+        "canNotEditInfo" : "以下の情報は変更できません",
         "scrollToTop" : "先頭へ戻る",
         "latest" : "最新50件まで",
+
+        "op" : {
+            "select" : "$t(userImg.001) が、メニューより［$t(pageTitle.opHistory)］を選択しました",
+            "comment" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］にコメントしました",
+            "join" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］に参加する!と表明しました",
+            "access" : "$t(userImg.001) が、$t(pageTitle.bbs)［$t(pageTitle.opHistory)］より外部サイトにアクセスしました"
+        },
+        "helperOp" : {
+            "endOp" : "$t(userImg.002) がメニューより操作支援終了を選択しました",
+            "join" : "$t(userImg.002)が、$t(pageTitle.bbs)[$t(article.002)]に参加する!と表明しました",
+            "access" : "$t(userImg.002)が、$t(pageTitle.bbs)[$t(article.002)]より、外部サイトにアクセスしました。",
+            "openArticle" : "$t(userImg.002)が、お知らせ画面より$t(pageTitle.bbs)[$t(article.002)]を開きました。"
+        },
+        "concern" : {
+            "001" : "$t(userImg.001)が$t(userImg.002)に、操作支援を同意しました。",
+            "002" : "$t(userImg.001)が$t(userImg.003)に、操作支援を同意しました。"
+        },
+        "history" : {
+            "vital" : "$t(userImg.004)が、$t(profile.vital)を参照しました。",
+            "medicine" : "$t(userImg.005)が、$t(profile.medicine)を参照しました。"
+        },
+
         "dataExport" : {
             "title" : "データエクスポート",
             "start" : "$t(msg.dataExport.title)を実施する",
@@ -16,17 +49,36 @@
         }
     },
     "user": {
-        "001" : "富士通 太郎"
-    }
-    ,
+        "001" : "富士通 太郎",
+        "002" : "富士通 桜子"
+    },
+    "userImg" : {
+        "001" : "<img src=\"./image/parts_ico_gentleman.png\">",
+        "002" : "<img src=\"./image/parts_ico_operator.png\" onClick=\"openPersonalInfo();\">",
+        "003" : "<img src=\"./image/parts_ico_detective.png\" onClick=\"openPersonalInfo2();\">",
+        "004" : "<img src=\"./image/parts_ico_doctor.png\" onClick=\"openPersonalInfo3();\">",
+        "005" : "<img src=\"./image/parts_ico_doctor2.png\" onClick=\"openPersonalInfo3();\">"
+    },
+    "article" : {
+        "001" : "【配信協力】留学生×市民 みんなで楽しもう！INTERNATIONAL CURRY PARTY",
+        "002" : "柏の葉 街まるごとオープンキャンパス2017のお知らせ"
+    },
     "btn": {
+        "ok" : "OK",
         "cancel": "キャンセル",
+        "yes" : "はい",
+        "no" : "いいえ",
         "edit": "編集",
         "save": "保存",
         "release": "解除",
         "approve": "承諾",
         "decline": "拒否",
-        "saveDiscInfo" : "開示情報を保存する"
+        "changeImg" : "写真を変更する",
+        "deleteImg" : "写真を削除する",
+        "saveProfile" : "プロフィールを保存する",
+        "postComment" : "コメントを投稿する",
+        "saveDiscInfo" : "開示情報を保存する",
+        "editProfile" : "わたしの情報を変更する"
     },
     "pageTitle" : {
         "action" : "アクション",
@@ -46,6 +98,10 @@
         "location" : "在宅状況",
         "bbs" : "みんなの掲示板",
         "bbsComment" : "みんなの掲示板: コメント"
+    },
+    "modalTitle" : {
+        "postComment" : "コメントを投稿する",
+        "personalInfo" : "人物情報"
     },
     "profile" : {
         "prefix" : "情報開示詳細: ",
@@ -79,6 +135,14 @@
         "examination" : "検診受診状況",
         "careService" : "介護サービス"
     },
+    "vital" : {
+        "bloodPressure" : "血圧",
+        "maxPressure" : "最高血圧",
+        "minPressure" : "最低血圧",
+        "pulse" : "脈拍",
+        "bodyTemp" : "体温",
+        "prevRatio" : "前回比"
+    },
     "topMenu" : {
         "top" : "カレンダー",
         "myHealth" : "私の健康",
@@ -89,5 +153,14 @@
         "event" : "イベント",
         "info" : "お知らせ",
         "eventHistory" : "活動履歴"
+    },
+    "comment" : {
+        "nickname" : "ニックネームで投稿",
+        "realname" : "実名で投稿",
+        "anonymous" : "匿名で投稿"
+    },
+    "locationState" : {
+        "indoor" : "在宅",
+        "outdoor" : "外出中"
     }
 }

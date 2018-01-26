@@ -519,8 +519,8 @@ header h2 {
   font-size: 4vmin;
 }
 
-header .helperMsg {
-	font-size: 15px;
+#during_help {
+	font-size: 14px;
 }
 
 header #welcomeMessage {
@@ -941,15 +941,17 @@ table.tbl_prof input[type="text"] {
   margin: 10px;
 }
 
+.back_link {
+  font-size: 20px;
+}
 
-.back_icon {
+.back_link:before {
+  font-family: FontAwesome;
+  color: black;
+  content: "\f060";
   font-size: 24px;
   color: black;
   margin: 10px 5px 20px 20px;
-}
-
-.back_link {
-  font-size: 20px;
 }
 
 .action_menu_box {
@@ -1156,4 +1158,8 @@ div.profile-parent > a {
   width: 75%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.modal-footer .btn {
+  margin: 0 5px;
 }
