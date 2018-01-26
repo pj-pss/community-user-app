@@ -44,7 +44,7 @@ Common.accessData = {
 /*
  * The followings should be shared among applications and/or within the same application.
  */
-$(document).ready(function() {
+$(window).on("load", function() {
     i18next
         .use(i18nextXHRBackend)
         .use(i18nextBrowserLanguageDetector)
