@@ -42,7 +42,8 @@
         "deleteImg" : "写真を削除する",
         "saveProfile" : "プロフィールを保存する",
         "postComment" : "コメントを投稿する",
-        "saveDiscInfo" : "開示情報を保存する"
+        "saveDiscInfo" : "開示情報を保存する",
+        "editProfile" : "わたしの情報を変更する"
     },
     "pageTitle" : {
         "action" : "アクション",
@@ -100,6 +101,7 @@
         "careService" : "介護サービス"
     },
     "vital" : {
+        "bloodPressure" : "血圧",
         "maxPressure" : "最高血圧",
         "minPressure" : "最低血圧",
         "pulse" : "脈拍",
@@ -121,5 +123,9 @@
         "nickname" : "ニックネームで投稿",
         "realname" : "実名で投稿",
         "anonymous" : "匿名で投稿"
+    },
+    "locationState" : {
+        "indoor" : "在宅",
+        "outdoor" : "外出中"
     }
 }
