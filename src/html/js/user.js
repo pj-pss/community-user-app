@@ -73,18 +73,22 @@ additionalCallback = function() {
 }
 
 cs.openExtCellCalSmile = function() {
+    $('#modal-extCellCalSmile').localize();
     $('#modal-extCellCalSmile').modal('show');
 };
 
 cs.openSendAllowedMessage = function() {
+    $('#modal-sendAllowedMessage').localize();
     $('#modal-sendAllowedMessage').modal('show');
 };
 
 cs.listAllowed = function() {
+    $('#modal-listAllowed').localize();
     $('#modal-listAllowed').modal('show');
 };
 
 cs.receiveMessage = function() {
+    $('#modal-receiveMessage').localize();
     $('#modal-receiveMessage').modal('show');
 };
 
@@ -706,6 +710,7 @@ function view(menuId) {
     }
 	$("#" + nowViewMenu).addClass('hidden');
 	$("#" + menuId).removeClass('hidden');
+    $("#" + menuId).localize();
 	nowViewMenu = menuId;
 	window.scrollTo(0, 0);
 }
@@ -715,21 +720,26 @@ var helpAuthorized = false;
 
 function openNfcReader() {
 	helpAuthorized = false
+    $('#modal-nfcReader').localize();
     $('#modal-nfcReader').modal('show');
 }
 
 function openPersonalInfo() {
+    $('#modal-personalInfo').localize();
     $('#modal-personalInfo').modal('show');
 }
 
 function openPersonalInfo2() {
+    $('#modal-personalInfo2').localize();
     $('#modal-personalInfo2').modal('show');
 }
 
 function openPersonalInfo3() {
+    $('#modal-personalInfo3').localize();
     $('#modal-personalInfo3').modal('show');
 }
 function openClubHistory() {
+    $('#modal-clubHistory').localize();
     $('#modal-clubHistory').modal('show');
 }
 
@@ -742,6 +752,7 @@ function authorizedNfcReader() {
 
 
 function openHelpConfirm() {
+    $('#modal-helpConfirm').localize();
     $('#modal-helpConfirm').modal('show');
 }
 
@@ -759,11 +770,13 @@ function closeHelpConfirm(f) {
 }
 
 function viewInfoDisclosureDetail(type){
-    $("#modal-inforDisclosureHistory .title_text").attr("data-i18n", "profile." + type).localize();
+    $("#modal-inforDisclosureHistory .title_text").attr("data-i18n", "profile." + type);
+    $('#modal-inforDisclosureHistory').localize();
     $('#modal-inforDisclosureHistory').modal('show');
 }
 function openInforDisclosureHistoryPer(type) {
     $("#modal-inforDisclosureHistoryPer .title_text").html(type);
+    $('#modal-inforDisclosureHistoryPer').localize();
     $('#modal-inforDisclosureHistoryPer').modal('show');
 }
 
@@ -843,6 +856,7 @@ $(function() {
 
 	$('#modal-nfcReader').on('hidden.bs.modal', function () {
 		if(helpAuthorized) {
+            $('#modal-startHelpOp').localize();
 			$('#modal-startHelpOp').modal('show');
 
 			$(".startHelpOp").addClass('hidden');
