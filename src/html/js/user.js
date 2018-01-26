@@ -729,12 +729,6 @@ function openPersonalInfo2() {
 function openPersonalInfo3() {
     $('#modal-personalInfo3').modal('show');
 }
-function openInforDisclosureHistoryPer() {
-    $('#modal-inforDisclosureHistoryPer').modal('show');
-}
-function openInforDisclosureHistoryDB() {
-    $('#modal-inforDisclosureHistory').modal('show');
-}
 function openClubHistory() {
     $('#modal-clubHistory').modal('show');
 }
@@ -765,8 +759,12 @@ function closeHelpConfirm(f) {
 }
 
 function viewInfoDisclosureDetail(type){
-    $("#pageTitle").attr("data-i18n", "profile." + type).localize();
-    view("viewInfoDisclosureDetail");
+    $("#modal-inforDisclosureHistory .title_text").attr("data-i18n", "profile." + type).localize();
+    $('#modal-inforDisclosureHistory').modal('show');
+}
+function openInforDisclosureHistoryPer(type) {
+    $("#modal-inforDisclosureHistoryPer .title_text").html(type);
+    $('#modal-inforDisclosureHistoryPer').modal('show');
 }
 
 var welcomeMessage = "";
@@ -803,6 +801,11 @@ $(function() {
                     scrollTop: 0
                 }, 500);
                 return false;
+            });
+
+            // prevent the propagation of events to the parent element (prevent to open the accordion)
+            $(".list-group-item .watching").on("click", function(e) {
+                e.stopPropagation();
             });
         });
     });

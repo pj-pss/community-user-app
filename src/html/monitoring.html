@@ -1,7 +1,7 @@
 <div class="main_box">
     <h2><i class="fa fa-fw fa-eye icon" aria-hidden="true"></i><span data-i18n="pageTitle.location"></span></h2>
     <div class="cls_center">
-        <div class="nowLocation">外出中<a href="javascript:viewInfoDisclosureDetail('location')" class="watching"></a></div>
+        <div class="nowLocation">外出中<a href="javascript:viewInfoDisclosureDetail('location')" class="watching"><span class="badge">3</span></a></div>
     </div>
     <div><img class="img-thumbnail" src="./image/parts_ico_gentleman.png"></div>
     <dl>
@@ -14,7 +14,7 @@
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading profile-parent" data-toggle="collapse" data-target="#profileBasic">
-                <a href="#profileBasic" class="collapsed header-text" data-toggle="collapse">基本情報</a>
+                <a href="#profileBasic" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.basicInfo"></a>
             </div>
             <div id="profileBasic" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -38,11 +38,12 @@
                         <dt>コメント：</dt>
                         <dd>皇居</dd>
                     </dl>
-                    <div class="panel-group">
+
+                    <div class="list-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileBasicContact">
-                                <a href="#profileBasicContact" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.basicContact"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('basicContact')" class="many_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" href="#profileBasicContact">
+                                <span class="header-text" data-i18n="profile.basicContact"></span>
+                                <span onclick="viewInfoDisclosureDetail('basicContact')" class="watching badge">10</span>
                             </div>
                             <div id="profileBasicContact" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -64,9 +65,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileBasicRoom">
-                                <a href="#profileBasicRoom" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.basicRoom"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('basicRoom')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileBasicRoom">
+                                <span class="header-text" data-i18n="profile.basicRoom"></span>
+                                <span onclick="viewInfoDisclosureDetail('basicRoom')" class="watching badge">4</span>
                             </div>
                             <div id="profileBasicRoom" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -86,9 +87,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileOption">
-                                <a href="#profileOption" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.option"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('option')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileOption">
+                                <span class="header-text" data-i18n="profile.option"></span>
+                                <span onclick="viewInfoDisclosureDetail('option')" class="watching badge">1</span>
                             </div>
                             <div id="profileOption" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -112,9 +113,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileFamily">
-                                <a href="#profileFamily" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.family"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('family')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileFamily">
+                                <span class="header-text" data-i18n="profile.family"></span>
+                                <span onclick="viewInfoDisclosureDetail('family')" class="watching badge">3</span>
                             </div>
                             <div id="profileFamily" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -139,9 +140,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profilePet">
-                                <a href="#profilePet" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.pet"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('pet')" class="no_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profilePet">
+                                <span class="header-text" data-i18n="profile.pet"></span>
+                                <span onclick="viewInfoDisclosureDetail('pet')" class="watching badge">0</span>
                             </div>
                             <div id="profilePet" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -160,9 +161,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileCrtfctRsdnc">
-                                <a href="#profileCrtfctRsdnc" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.crtfctRsdnc"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('crtfctRsdnc')" class="no_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileCrtfctRsdnc">
+                                <span class="header-text" data-i18n="profile.crtfctRsdnc"></span>
+                                <span onclick="viewInfoDisclosureDetail('crtfctRsdnc')" class="watching badge">2</span>
                             </div>
                             <div id="profileCrtfctRsdnc" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -180,9 +181,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileEmrgncyCntct">
-                                <a href="#profileEmrgncyCntct" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.emrgncyCntct"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('emrgncyCntct')" class="many_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileEmrgncyCntct">
+                                <span class="header-text" data-i18n="profile.emrgncyCntct"></span>
+                                <span onclick="viewInfoDisclosureDetail('emrgncyCntct')" class="watching badge">2</span>
                             </div>
                             <div id="profileEmrgncyCntct" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -210,9 +211,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileLifestyle">
-                                <a href="#profileLifestyle" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.lifestyle"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('lifestyle')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileLifestyle">
+                                <span class="header-text" data-i18n="profile.lifestyle"></span>
+                                <span onclick="viewInfoDisclosureDetail('lifestyle')" class="watching badge">3</span>
                             </div>
                             <div id="profileLifestyle" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -236,9 +237,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileAffltnCrcl">
-                                <a href="#profileAffltnCrcl" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.affltnCrcl"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('affltnCrcl')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileAffltnCrcl">
+                                <span class="header-text" data-i18n="profile.affltnCrcl"></span>
+                                <span onclick="viewInfoDisclosureDetail('affltnCrcl')" class="watching badge">5</span>
                             </div>
                             <div id="profileAffltnCrcl" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -254,9 +255,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileEvacuation">
-                                <a href="#profileEvacuation" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.evacuation"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('evacuation')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileEvacuation">
+                                <span class="header-text" data-i18n="profile.evacuation"></span>
+                                <span onclick="viewInfoDisclosureDetail('evacuation')" class="watching badge">2</span>
                             </div>
                             <div id="profileEvacuation" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -283,15 +284,15 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading profile-parent" data-toggle="collapse" data-target="#profileAgreement">
-                <a href="#profileAgreement" class="collapsed header-text" data-toggle="collapse">契約情報</a>
+                <a href="#profileAgreement" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.contractInfo"></a>
             </div>
             <div id="profileAgreement" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileEnterLeave">
-                                <a href="#profileEnterLeave" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.enterLeave"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('enterLeave')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileEnterLeave">
+                                <span class="header-text" data-i18n="profile.enterLeave"></span>
+                                <span onclick="viewInfoDisclosureDetail('enterLeave')" class="watching badge">0</span>
                             </div>
                             <div id="profileEnterLeave" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -315,9 +316,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileOperator">
-                                <a href="#profileOperator" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.operator"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('operator')" class="watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileOperator">
+                                <span class="header-text" data-i18n="profile.operator"></span>
+                                <span onclick="viewInfoDisclosureDetail('operator')" class="watching badge">0</span>
                             </div>
                             <div id="profileOperator" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -339,9 +340,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileSgmntOwnr">
-                                <a href="#profileSgmntOwnr" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.sgmntOwnr"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('sgmntOwnr')" class="no_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileSgmntOwnr">
+                                <span class="header-text" data-i18n="profile.sgmntOwnr"></span>
+                                <span onclick="viewInfoDisclosureDetail('sgmntOwnr')" class="watching badge">2</span>
                             </div>
                             <div id="profileSgmntOwnr" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -369,9 +370,9 @@
                     </div>
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div class="panel-heading" data-toggle="collapse" data-target="#profileRcptsCnfrmtn">
-                                <a href="#profileRcptsCnfrmtn" class="collapsed header-text" data-toggle="collapse" data-i18n="profile.rcptsCnfrmtn"></a>
-                                <a href="javascript:viewInfoDisclosureDetail('rcptsCnfrmtn')" class="no_watching"></a>
+                            <div class="list-group-item" data-toggle="collapse" data-target="#profileRcptsCnfrmtn">
+                                <span class="header-text" data-i18n="profile.rcptsCnfrmtn"></span>
+                                <span onclick="viewInfoDisclosureDetail('rcptsCnfrmtn')" class="watching badge">1</span>
                             </div>
                             <div id="profileRcptsCnfrmtn" class="panel-collapse collapse">
                                 <div class="panel-body">
@@ -392,12 +393,4 @@
         </div>
     </div>
     <p class="scrollToTop"><a href="#top" data-i18n="msg.scrollToTop"></a></p>
-    <div class="cls_center">
-        <div class="notes">
-            情報開示人数<br>
-            <i class="fa fa-fw fa-user-o" aria-hidden="true"></i>: 0人<br>
-            <i class="fa fa-fw fa-user" aria-hidden="true"></i>: 1~4人<br>
-            <i class="fa fa-fw fa-users" aria-hidden="true"></i>: 5人以上
-        </div>
-    </div>
 </div>
