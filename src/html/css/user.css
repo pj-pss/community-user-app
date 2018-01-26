@@ -519,8 +519,8 @@ header h2 {
   font-size: 4vmin;
 }
 
-header .helperMsg {
-	font-size: 15px;
+header #during_help {
+	font-size: 14px;
 }
 
 header #welcomeMessage {

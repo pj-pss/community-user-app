@@ -762,7 +762,7 @@ function closeHelpConfirm(f) {
 		$(".startHelpOp").removeClass("hidden");
 		$('header').css('background-color', '#008F00');
 		$('h1').css('background-color', '#008F00');
-		$('#welcomeMessage').html(welcomeMessage);
+		$('#during_help').addClass('hidden');
 	}
 	$('body').removeClass('modal-open');
 	$('.modal-backdrop').remove();
@@ -779,8 +779,6 @@ function openInforDisclosureHistoryPer(type) {
     $('#modal-inforDisclosureHistoryPer').localize();
     $('#modal-inforDisclosureHistoryPer').modal('show');
 }
-
-var welcomeMessage = "";
 
 // load html
 $(function() {
@@ -865,8 +863,7 @@ $(function() {
 			$('header').css('background-color', '#FF0000');
 			$('h1').css('background-color', '#FF0000');
 
-			welcomeMessage = $('#welcomeMessage').html();
-			$('#welcomeMessage').append('<br><span class="helperMsg">支援者：富士通　桜子が操作しています。</span>');
+			$("#during_help").removeClass("hidden");
 		}
 	});
     $('#dvOverlay').on('click', function() {

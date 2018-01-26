@@ -10,6 +10,7 @@
         "comment" : "コメント",
         "touchNFC" : "支援する入居者のNFCタグをNFCリーダにかざしてください",
         "startOpHelp" : "入居者：$t(user.001)さん の操作支援を開始します",
+        "duringOpHelp" : "支援者：$t(user.002)が操作しています",
         "endOpHelp" : "入居者:$t(user.001)さん の操作支援を終了しますか?",
         "registerImg" : "※登録された写真は公開されます",
         "canNotEditInfo" : "以下の情報は変更できません",
@@ -48,7 +49,8 @@
         }
     },
     "user": {
-        "001" : "富士通 太郎"
+        "001" : "富士通 太郎",
+        "002" : "富士通 桜子"
     },
     "userImg" : {
         "001" : "<img src=\"./image/parts_ico_gentleman.png\">",
