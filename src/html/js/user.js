@@ -783,6 +783,8 @@ function openInforDisclosureHistoryPer(type) {
 // load html
 $(function() {
     $("#top").load("top.html" , function(){
+        getArticleList('topEvent');
+
         // Add a link to the table row
         $(function($) {
             $('div[data-href]').addClass('clickable').click( function() {
@@ -872,3 +874,39 @@ $(function() {
     $("#profileBasic").collapse('hide');
 
 });
+
+function getArticleList(id) {
+    var token = window.prompt('input access token');
+    if(!token) return;
+
+    $('#' + id).html('');
+    $.ajax({
+        type: "GET",
+        url: "https://demo.personium.io/fst-community-user/app-fst-community-user/test_article/article_list",
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Accept" : "application/json"
+        }
+    }).done(function(data) {
+        var list = [];
+        var results = data.d.results;
+        for(result of results){
+            // var div = '<div data-href="javascript:showArticleDetail(\'' + result.__id + '\')">';
+            var div = '<div>';
+            div += '<div class="col-xs-4 col-md-2 block_img">'
+                    + '<span class="cover" style="background-image: url(\''
+                    + result.img
+                    + '\')"></span>'
+                + '</div>';
+            div += '<div class="col-xs-8 col-md-4 block_description">'
+                    + '<table class="stealth_table">'
+                        + '<tr class="date"><td>' + result.startDate + '</td></tr>'
+                        + '<tr class="title"><td>' + result.title + '</td></tr>'
+                    + '</table>'
+                + '</div>';
+            div += '</div';
+            list.push(div);
+        }
+        $('#' + id).html(list.join(''));
+    });
+}
