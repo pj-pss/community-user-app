@@ -838,11 +838,9 @@ $(function() {
     $("#articleComment").load("articleComment.html", function(){
         $("#modal-comment").load("modal-comment.html");
     });
-    $("#actionList").load("actionList.html");
     $("#eventList").load("eventList.html");
     $("#infoList").load("infoList.html");
     $("#eventHistoryList").load("eventHistoryList.html");
-    $("#viewInfoDisclosureDetail").load("viewInfoDisclosureDetail.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
