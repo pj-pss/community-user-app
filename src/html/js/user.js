@@ -14,6 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const TYPE = {
+    INFO: 0,
+    EVENT: 1
+}
+
+const SEX = {
+    ALL: 0,
+    MALE: 1,
+    FEMALE: 2
+}
+
+const AGE = {
+    ALL: 0,
+    OVER_EIGHTY: 1,
+    SEVENTY: 2,
+    SIXTY: 3,
+    UNDER_FIFTY: 4
+}
+
+Object.freeze(TYPE);
+Object.freeze(SEX);
+Object.freeze(AGE);
+
 const APP_URL = "https://demo.personium.io/app-fst-community-user/";
 const APP_BOX_NAME = 'io_personium_demo_app-fst-community-user';
 const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organization/'
@@ -114,17 +137,17 @@ function openInforDisclosureHistoryPer(type) {
 $(function() {
     $("#top").load("top.html" , function(){
         // Add a link to the table row
-        $(function($) {
-            $('div[data-href]').addClass('clickable').click( function() {
-                window.location = $(this).attr('data-href');
-            }).find('a').hover( function() {
-                $(this).parents('div').unbind('click');
-            }, function() {
-                $(this).parents('div').click( function() {
-                    window.location = $(this).attr('data-href');
-                });
-            });
-        });
+        // $(function($) {
+        //     $('div[data-href]').addClass('clickable').click( function() {
+        //         window.location = $(this).attr('data-href');
+        //     }).find('a').hover( function() {
+        //         $(this).parents('div').unbind('click');
+        //     }, function() {
+        //         $(this).parents('div').click( function() {
+        //             window.location = $(this).attr('data-href');
+        //         });
+        //     });
+        // });
     });
     $("#monitoring").load("monitoring.html", function () {
         $("#myhealth").load("myhealth.html", function() {
@@ -223,12 +246,12 @@ function getArticleList(divId) {
             var list = [];
             var results = data.d.results;
             for(result of results){
-                // var div = '<div data-href="javascript:showArticleDetail(\'' + result.__id + '\')">';
                 var dateTime = new Date(parseInt(result.__updated.substr(6)));
                 var date = dateTime.getFullYear() + '/' +
-                    ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
-                    ('0' + (dateTime.getDate())).slice(-2);
-                var div = '<div>';
+                ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
+                ('0' + (dateTime.getDate())).slice(-2);
+                var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
+                // var div = '<div>';
                 div += '<div class="col-xs-4 col-md-2 block_img">'
                     + '<span id="' + result.__id +'" class="cover"></span>'
                     + '</div>';
@@ -238,11 +261,24 @@ function getArticleList(divId) {
                             + '<tr class="title"><td>' + result.title + '</td></tr>'
                         + '</table>'
                     + '</div>';
-                div += '</div';
+                div += '</div>';
                 list.push(div);
                 getArticleListImage(result.__id, token);
             }
             $('#' + divId).html(list.join(''));
+            
+            // Add a link to the table row
+            $(function ($) {
+                $('div[data-href]').addClass('clickable').click(function () {
+                    window.location = $(this).attr('data-href');
+                }).find('a').hover(function () {
+                    $(this).parents('div').unbind('click');
+                }, function () {
+                    $(this).parents('div').click(function () {
+                        window.location = $(this).attr('data-href');
+                    });
+                });
+            });
         })
         .fail(function() {
             alert('failed to get article list');
@@ -284,6 +320,101 @@ function getArticleListImage(id, token) {
     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
         alert(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
     });
+}
+
+function getArticleDetail(id) {
+
+    callArticleFunction(function (token) {
+        var base = 'https://demo.personium.io';
+        var box = 'fst-community-organization';
+        var cell = 'app-fst-community-user';
+        var oData = 'test_article';
+        var entityType = 'provide_information';
+        var DAV = 'test_article_image';
+
+        var err = [];
+
+        $.when(
+            // get text
+            $.ajax({
+                type: 'GET',
+                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType + "('" + id + "')",
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                },
+                success: function (res) {
+                    return res;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
+            }),
+
+            // get image
+            $.ajax({
+                type: 'GET',
+                url: base + '/' + box + '/' + cell + '/' + DAV + '/' + id,
+                dataType: 'binary',
+                processData: false,
+                responseType: 'blob',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function (res) {
+                    return res;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
+            })
+        )
+        .done(function (text, image) {
+            var article = text[0].d.results;
+            
+            if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
+                var term = article.start_date + ' ' + article.start_time + ' ~ ' + (article.end_date == article.start_date ? '' : article.end_date) + ' ' + article.end_time;
+            }
+            
+            link = $('<a></a>').attr('href', article.url);
+            link.text(article.url);
+            
+            var venue = article.venue ? '開催場所: ' + article.venue : '';
+            if (!venue) {
+                $('#modal-preview .term')[0].style.display = 'none';
+            }
+            
+            var img = $('<img>').attr('src', article.previewImg).addClass('thumbnail');
+            
+
+            $('#articleDetail .title').html(article.title);
+            $('#articleDetail .url').html(link);
+            $('#articleDetail .venue').html(venue);
+            $('#articleDetail .date').html(term);
+            $('#articleDetail .text').html(article.detail);
+            
+            var reader = new FileReader();
+            reader.onloadend = $.proxy(function (event) {
+                var binary = '';
+                var bytes = new Uint8Array(event.currentTarget.result);
+                var len = bytes.byteLength;
+                for (var i = 0; i < len; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+                window.btoa(binary);
+                getImage = "data:image/jpg;base64," + btoa(binary);
+                var img_src = $('<img>').attr('src', getImage).addClass('thumbnail');
+                $('#articleDetail .img').html(img_src);
+            }, this);
+            reader.readAsArrayBuffer(image[0]);
+
+            view('articleDetail');
+
+        })
+        .fail(function () {
+            alert('failed to get article detail\n\n' + err.join('\n'));
+        });
+    }, id);
 }
 
 function callArticleFunction(callback, id) {
