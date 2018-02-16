@@ -368,7 +368,9 @@ function getArticleDetail(id) {
             
             var venue = article.venue ? '開催場所: ' + article.venue : '';
             if (!venue) {
-                $('#modal-preview .term')[0].style.display = 'none';
+                $('#articleDetail .term')[0].style.display = 'none';
+            } else {
+                $('#articleDetail .term')[0].style.display = '';
             }
             
             var img = $('<img>').attr('src', article.previewImg).addClass('thumbnail');
