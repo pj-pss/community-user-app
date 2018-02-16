@@ -135,20 +135,7 @@ function openInforDisclosureHistoryPer(type) {
 
 // load html
 $(function() {
-    $("#top").load("top.html" , function(){
-        // Add a link to the table row
-        // $(function($) {
-        //     $('div[data-href]').addClass('clickable').click( function() {
-        //         window.location = $(this).attr('data-href');
-        //     }).find('a').hover( function() {
-        //         $(this).parents('div').unbind('click');
-        //     }, function() {
-        //         $(this).parents('div').click( function() {
-        //             window.location = $(this).attr('data-href');
-        //         });
-        //     });
-        // });
-    });
+    $("#top").load("top.html");
     $("#monitoring").load("monitoring.html", function () {
         $("#myhealth").load("myhealth.html", function() {
             var topBtn = $('.scrollToTop');
