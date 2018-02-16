@@ -240,7 +240,7 @@ function getArticleList(divId) {
                     + '</div>';
                 div += '</div';
                 list.push(div);
-                getArticleImage(result.__id, token);
+                getArticleListImage(result.__id, token);
             }
             $('#' + divId).html(list.join(''));
         })
@@ -250,7 +250,7 @@ function getArticleList(divId) {
     }, divId);
 }
 
-function getArticleImage(id, token) {
+function getArticleListImage(id, token) {
     var base = 'https://demo.personium.io';
     var box = 'fst-community-organization';
     var cell = 'app-fst-community-user';
