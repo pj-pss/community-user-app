@@ -391,9 +391,6 @@ function getArticleDetail(id) {
             $('#articleDetail .date').html(term);
             $('#articleDetail .text').html(article.detail);
 
-            $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')")
-            $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')")
-            
             var reader = new FileReader();
             reader.onloadend = $.proxy(function (event) {
                 var binary = '';
@@ -408,6 +405,38 @@ function getArticleDetail(id) {
                 $('#articleDetail .img').html(img_src);
             }, this);
             reader.readAsArrayBuffer(image[0]);
+
+            $.ajax({
+                type: 'GET',
+                url: Common.getCellUrl() + box + "/test_reply/reply_history?%24filter=provide_id+eq+'" + article.__id + "'",
+                headers: {
+                    "Authorization": "Bearer " + Common.getToken(),
+                    "Accept": "application/json"
+                }
+            })
+            .done(function(res){
+                if (res.d.results[0]){
+                    switch(res.d.results[0].entry_flag){
+                        case REPLY.CONSIDER:
+                            $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')");
+                            $('#considerEvent').attr('href', "javascript:void(0)");
+                            break;
+
+                        case REPLY.JOIN:
+                            $('#joinEvent').attr('href', "javascript:void(0)");
+                            $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')");
+                            break;
+
+                        default:
+                            // data is not exist
+                            alert('error: read reply information');
+                            break;
+                    }
+                } else {
+                    $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')");
+                    $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')");
+                }
+            });
 
             view('articleDetail');
 
@@ -438,6 +467,14 @@ function callArticleFunction(callback, id) {
 
 
 function joinEvent(articleId) {
+    hoge(REPLY.JOIN, articleId);
+}
+
+function considerEvent(articleId) {
+    // hoge(REPLY.CONSIDER, articleId);
+}
+
+function hoge(tmp, articleId) {
     var base = Common.getCellUrl();
     var box = 'app-fst-community-user';
     var oData = 'test_reply';
@@ -453,14 +490,13 @@ function joinEvent(articleId) {
             // 'update_user_id'
             'user_id': box, // dummy ID
             'provide_id': articleId,
-            'entry_flag': REPLY.JOIN
+            'entry_flag': tmp
         })
     })
-    .done(function() {
-        alert('hoge');
+    .done(function () {
+        alert('done');
     })
-}
-
-function considerEvent(id) {
-    alert('foo');
+    .fail(function () {
+        alert('failed to send reply');
+    })
 }
