@@ -415,16 +415,17 @@ function getArticleDetail(id) {
                 }
             })
             .done(function(res){
-                if (res.d.results[0]){
-                    switch(res.d.results[0].entry_flag){
-                        case REPLY.CONSIDER:
-                            $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')");
-                            $('#considerEvent').attr('href', "javascript:void(0)");
+                var reply = res.d.results[0];
+                var argJoin = '';
+                var argConsider = '';
+                if (reply){
+                    switch(reply.entry_flag){
+                        case REPLY.JOIN:
+                            argConsider += REPLY.CONSIDER + ",'" + article.__id + "', '" + reply.__id + "'" ;
                             break;
 
-                        case REPLY.JOIN:
-                            $('#joinEvent').attr('href', "javascript:void(0)");
-                            $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')");
+                        case REPLY.CONSIDER:
+                            argJoin += REPLY.JOIN + ",'" + article.__id + "', '" + reply.__id + "'";
                             break;
 
                         default:
@@ -432,9 +433,11 @@ function getArticleDetail(id) {
                             alert('error: read reply information');
                             break;
                     }
+                    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
+                    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
                 } else {
-                    $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')");
-                    $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')");
+                    $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
+                    $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
                 }
             });
 
@@ -465,24 +468,27 @@ function callArticleFunction(callback, id) {
     }
 }
 
+function replyEvent(reply, articleId, id) {
+    if(reply == null) {
+        alert('already done it');
+        return;
+    }
 
-function joinEvent(articleId) {
-    hoge(REPLY.JOIN, articleId);
-}
-
-function considerEvent(articleId) {
-    // hoge(REPLY.CONSIDER, articleId);
-}
-
-function hoge(tmp, articleId) {
     var base = Common.getCellUrl();
     var box = 'app-fst-community-user';
     var oData = 'test_reply';
     var entityType = 'reply_history';
 
+    var method = 'POST';
+    var url = base + box + '/' + oData + '/' + entityType;
+    if(id) {
+        method = 'PUT';
+        url += "('" + id + "')";
+    }
+
     $.ajax({
-        type: 'POST',
-        url: base + box + '/' + oData + '/' + entityType,
+        type: method,
+        url: url,
         headers: {
             "Authorization": "Bearer " + Common.getToken()
         },
@@ -490,7 +496,7 @@ function hoge(tmp, articleId) {
             // 'update_user_id'
             'user_id': box, // dummy ID
             'provide_id': articleId,
-            'entry_flag': tmp
+            'entry_flag': reply
         })
     })
     .done(function () {
