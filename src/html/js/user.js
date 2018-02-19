@@ -385,6 +385,9 @@ function getArticleDetail(id) {
             $('#articleDetail .venue').html(venue);
             $('#articleDetail .date').html(term);
             $('#articleDetail .text').html(article.detail);
+
+            $('#joinEvent').attr('href', "javascript:joinEvent('" + article.__id + "')")
+            $('#considerEvent').attr('href', "javascript:considerEvent('" + article.__id + "')")
             
             var reader = new FileReader();
             reader.onloadend = $.proxy(function (event) {
@@ -426,4 +429,13 @@ function callArticleFunction(callback, id) {
                 alert('failed to get token');
             });
     }
+}
+
+
+function joinEvent(id) {
+    alert('hoge');
+}
+
+function considerEvent(id) {
+    alert('foo');
 }
