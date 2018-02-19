@@ -216,8 +216,8 @@ $(function() {
 function getArticleList(divId) {
     callArticleFunction(function (token){
         var base = 'https://demo.personium.io';
-        var box = 'fst-community-organization';
-        var cell = 'app-fst-community-user';
+        var cell = 'fst-community-organization';
+        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
 
@@ -228,7 +228,7 @@ function getArticleList(divId) {
         }).done(function(res){
             $.ajax({
                 type: "GET",
-                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType,
+                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType,
                 headers: {
                     "Authorization": "Bearer " + token,
                     "Accept" : "application/json"
@@ -283,13 +283,13 @@ function getArticleList(divId) {
 
 function getArticleListImage(id, token) {
     var base = 'https://demo.personium.io';
-    var box = 'fst-community-organization';
-    var cell = 'app-fst-community-user';
+    var cell = 'fst-community-organization';
+    var box = 'app-fst-community-user';
     var DAV = 'test_article_image';
 
     $.ajax({
         type: 'GET',
-        url: base + '/' + box + '/' + cell + '/' + DAV + '/' + id,
+        url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
         dataType: 'binary',
         processData: false,
         responseType: 'blob',
@@ -321,8 +321,8 @@ function getArticleDetail(id) {
 
     callArticleFunction(function (token) {
         var base = 'https://demo.personium.io';
-        var box = 'fst-community-organization';
-        var cell = 'app-fst-community-user';
+        var cell = 'fst-community-organization';
+        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
         var DAV = 'test_article_image';
@@ -333,7 +333,7 @@ function getArticleDetail(id) {
             // get text
             $.ajax({
                 type: 'GET',
-                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType + "('" + id + "')",
+                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType + "('" + id + "')",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -349,7 +349,7 @@ function getArticleDetail(id) {
             // get image
             $.ajax({
                 type: 'GET',
-                url: base + '/' + box + '/' + cell + '/' + DAV + '/' + id,
+                url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
                 dataType: 'binary',
                 processData: false,
                 responseType: 'blob',
@@ -432,8 +432,28 @@ function callArticleFunction(callback, id) {
 }
 
 
-function joinEvent(id) {
-    alert('hoge');
+function joinEvent(articleId) {
+    var base = Common.getCellUrl();
+    var box = 'app-fst-community-user';
+    var oData = 'test_reply';
+    var entityType = 'reply_history';
+
+    $.ajax({
+        type: 'POST',
+        url: base + box + '/' + oData + '/' + entityType,
+        headers: {
+            "Authorization": "Bearer " + Common.getToken()
+        },
+        data: JSON.stringify({
+            // 'update_user_id'
+            'user_id': box, // dummy ID
+            'provide_id': articleId,
+            'entry_flag': REPLY.JOIN
+        })
+    })
+    .done(function() {
+        alert('hoge');
+    })
 }
 
 function considerEvent(id) {
