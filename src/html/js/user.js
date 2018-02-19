@@ -266,7 +266,7 @@ function getArticleList(divId) {
                     getArticleListImage(result.__id, token);
                 }
                 $('#' + divId).html(list.join(''));
-                
+
                 // Add a link to the table row
                 $(function ($) {
                     $('div[data-href]').addClass('clickable').click(function () {
@@ -372,19 +372,18 @@ function getArticleDetail(id) {
         )
         .done(function (text, image) {
             var article = text[0].d.results;
-            
+
             if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
                 var term = article.start_date + ' ' + article.start_time + ' ~ ' + (article.end_date == article.start_date ? '' : article.end_date) + ' ' + article.end_time;
             }
-            
+
             link = $('<a></a>').attr('href', article.url);
             link.text(article.url);
-            
+
             var venue = article.venue ? '開催場所: ' + article.venue : '';
             $('#articleDetail .term')[0].style.display = venue ? '' : 'none';
-            
+
             var img = $('<img>').attr('src', article.previewImg).addClass('thumbnail');
-            
 
             $('#articleDetail .title').html(article.title);
             $('#articleDetail .url').html(link);
