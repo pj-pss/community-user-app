@@ -408,10 +408,13 @@ function getArticleDetail(id) {
 
             $.ajax({
                 type: 'GET',
-                url: Common.getCellUrl() + box + "/test_reply/reply_history?%24filter=provide_id+eq+'" + article.__id + "'",
+                url: Common.getCellUrl() + box + "/test_reply/reply_history",
                 headers: {
                     "Authorization": "Bearer " + Common.getToken(),
                     "Accept": "application/json"
+                },
+                data: {
+                    "\$filter": "provide_id eq '" + article.__id + "'"
                 }
             })
             .done(function(res){
