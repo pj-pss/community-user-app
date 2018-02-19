@@ -222,53 +222,58 @@ function getArticleList(divId) {
         var entityType = 'provide_information';
 
         $.ajax({
-            type: "GET",
-            url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType,
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Accept" : "application/json"
-            }
-        }).done(function(data) {
-            $('#' + divId).empty();
-            var list = [];
-            var results = data.d.results;
-            for(result of results){
-                var dateTime = new Date(parseInt(result.__updated.substr(6)));
-                var date = dateTime.getFullYear() + '/' +
-                ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
-                ('0' + (dateTime.getDate())).slice(-2);
-                var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
-                // var div = '<div>';
-                div += '<div class="col-xs-4 col-md-2 block_img">'
-                    + '<span id="' + result.__id +'" class="cover"></span>'
-                    + '</div>';
-                div += '<div class="col-xs-8 col-md-4 block_description">'
-                        + '<table class="stealth_table">'
-                            + '<tr class="date"><td>' + (result.start_date||date) + '</td></tr>'
-                            + '<tr class="title"><td>' + result.title + '</td></tr>'
-                        + '</table>'
-                    + '</div>';
-                div += '</div>';
-                list.push(div);
-                getArticleListImage(result.__id, token);
-            }
-            $('#' + divId).html(list.join(''));
-            
-            // Add a link to the table row
-            $(function ($) {
-                $('div[data-href]').addClass('clickable').click(function () {
-                    window.location = $(this).attr('data-href');
-                }).find('a').hover(function () {
-                    $(this).parents('div').unbind('click');
-                }, function () {
-                    $(this).parents('div').click(function () {
+            type: 'GET',
+            url: 'https://ntp-b1.nict.go.jp/cgi-bin/json'
+        }).done(function(res){
+            $.ajax({
+                type: "GET",
+                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType,
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Accept" : "application/json"
+                }
+            }).done(function(data) {
+                $('#' + divId).empty();
+                var list = [];
+                var results = data.d.results;
+                for(result of results){
+                    var dateTime = new Date(parseInt(result.__updated.substr(6)));
+                    var date = dateTime.getFullYear() + '/' +
+                    ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
+                    ('0' + (dateTime.getDate())).slice(-2);
+
+                    var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
+                    div += '<div class="col-xs-4 col-md-2 block_img">'
+                        + '<span id="' + result.__id +'" class="cover"></span>'
+                        + '</div>';
+                    div += '<div class="col-xs-8 col-md-4 block_description">'
+                            + '<table class="stealth_table">'
+                                + '<tr class="date"><td>' + (result.start_date||date) + '</td></tr>'
+                                + '<tr class="title"><td>' + result.title + '</td></tr>'
+                            + '</table>'
+                        + '</div>';
+                    div += '</div>';
+                    list.push(div);
+                    getArticleListImage(result.__id, token);
+                }
+                $('#' + divId).html(list.join(''));
+                
+                // Add a link to the table row
+                $(function ($) {
+                    $('div[data-href]').addClass('clickable').click(function () {
                         window.location = $(this).attr('data-href');
+                    }).find('a').hover(function () {
+                        $(this).parents('div').unbind('click');
+                    }, function () {
+                        $(this).parents('div').click(function () {
+                            window.location = $(this).attr('data-href');
+                        });
                     });
                 });
+            })
+            .fail(function() {
+                alert('failed to get article list');
             });
-        })
-        .fail(function() {
-            alert('failed to get article list');
         });
     }, divId);
 }
