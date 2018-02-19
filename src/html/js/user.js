@@ -222,6 +222,7 @@ function getArticleList(divId) {
         var entityType = 'provide_information';
 
         $.ajax({
+            // get current time on japan
             type: 'GET',
             url: 'https://ntp-b1.nict.go.jp/cgi-bin/json'
         }).done(function(res){
@@ -241,6 +242,10 @@ function getArticleList(divId) {
                     var date = dateTime.getFullYear() + '/' +
                     ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
                     ('0' + (dateTime.getDate())).slice(-2);
+
+                    if (moment(new Date(result.end_date)) < moment(new Date(res.st * 1000))) { 
+                        console.log('hoge1'); continue;
+                    }
 
                     var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
                     div += '<div class="col-xs-4 col-md-2 block_img">'
