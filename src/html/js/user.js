@@ -472,7 +472,7 @@ function getArticleDetail(id) {
                 }
             })
             .fail(function() {
-                alert('hogehoge');
+                alert('error: get reply information');
             });
 
             view('articleDetail');
