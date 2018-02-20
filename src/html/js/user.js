@@ -406,6 +406,7 @@ function getArticleDetail(id) {
             }, this);
             reader.readAsArrayBuffer(image[0]);
 
+            // get reply information
             $.ajax({
                 type: 'GET',
                 url: Common.getCellUrl() + box + "/test_reply/reply_history",
@@ -465,39 +466,103 @@ function replyEvent(reply, articleId, id) {
         alert('already done it');
         return;
     }
-
-    var base = Common.getCellUrl();
     var box = 'app-fst-community-user';
     var oData = 'test_reply';
     var entityType = 'reply_history';
 
-    var method = 'POST';
-    var url = base + box + '/' + oData + '/' + entityType;
-    if(id) {
-        method = 'PUT';
-        url += "('" + id + "')";
-    }
+    callArticleFunction(function(token) {
+        var err = [];
+        var saveToUserCell = function(){
+            var method = 'POST';
+            var url = Common.getCellUrl() + box + '/' + oData + '/' + entityType;
+            if(id) {
+                method = 'PUT';
+                url += "('" + id + "')";
+            }
 
-    $.ajax({
-        type: method,
-        url: url,
-        headers: {
-            "Authorization": "Bearer " + Common.getToken()
-        },
-        data: JSON.stringify({
-            // 'update_user_id'
-            'user_id': box, // dummy ID
-            'provide_id': articleId,
-            'entry_flag': reply
+            return $.ajax({
+                type: method,
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " + Common.getToken()
+                },
+                data: JSON.stringify({
+                    // 'update_user_id'
+                    'user_id': box, // dummy ID
+                    'provide_id': articleId,
+                    'entry_flag': reply
+                })
+            })
+            .then(
+                function(res) {
+                    return id || res;
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
+            )
+        };
+
+        var saveToOrganizationCell = function(res) {
+            var base = 'https://demo.personium.io';
+            var cell = 'fst-community-organization';
+
+            var method = 'POST';
+            var url = base + '/' + cell + '/' + box + '/' + oData + '/' + entityType;
+            // if (orgId) {
+            //     method = 'PUT';
+            //     url += "('" + orgId + "')";
+            // }
+
+            return $.ajax({
+                type: method,
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " +  token
+                },
+                data: JSON.stringify({
+                    // 'update_user_id'
+                    'user_id': box, // dummy ID
+                    'provide_id': articleId,
+                    'entry_flag': reply
+                })
+            })
+            .then(
+                function (res) {
+                    return res;
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+
+                    // delete the reply on user cell
+                    $.ajax({
+                        type: 'DELETE',
+                        url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + res.d.results.__id + "')",
+                        headers: {
+                            'Authorization': 'Bearer ' + Common.getToken()
+                        }
+                    })
+                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert('delete failed');
+                    })
+                    .done(function() {
+                        alert('delete done');
+                    });
+
+                    return Promise.reject();
+                }
+            )
+        }
+
+        saveToUserCell().then(saveToOrganizationCell)
+        .fail(function(){
+            alert('faild to send reply\n' + err.join('\n'));
         })
-    })
-    .done(function () {
-        alert('done');
-        updateReplyLink(reply, articleId, id);
-    })
-    .fail(function () {
-        alert('failed to send reply');
-    })
+        .done(function() {
+            alert('done');
+            updateReplyLink(reply, articleId, id);
+        })
+    }, id);
 }
 
 
