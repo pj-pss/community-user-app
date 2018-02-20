@@ -613,6 +613,18 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
             var orgId = orgReplyId || res.d.results.__id;
             alert('done');
             updateReplyLink(reply, articleId, userId, orgId);
+
+            var join = $('#joinNum').html();
+            var consider = $('#considerNum').html();
+            if(reply == REPLY.JOIN) {
+                join++;
+                consider--;
+            } else {
+                join--;
+                consider++;
+            }
+            $('#joinNum').html(join);
+            $('#considerNum').html(consider);
         })
     }, userReplyId);
 }
