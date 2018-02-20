@@ -419,25 +419,8 @@ function getArticleDetail(id) {
             })
             .done(function(res){
                 var reply = res.d.results[0];
-                var argJoin = '';
-                var argConsider = '';
                 if (reply){
-                    switch(reply.entry_flag){
-                        case REPLY.JOIN:
-                            argConsider += REPLY.CONSIDER + ",'" + article.__id + "', '" + reply.__id + "'" ;
-                            break;
-
-                        case REPLY.CONSIDER:
-                            argJoin += REPLY.JOIN + ",'" + article.__id + "', '" + reply.__id + "'";
-                            break;
-
-                        default:
-                            // data is not exist
-                            alert('error: read reply information');
-                            break;
-                    }
-                    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
-                    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
+                    updateReplyLink(reply.entry_flag, article.__id, reply.__id);
                 } else {
                     $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
                     $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
@@ -471,6 +454,12 @@ function callArticleFunction(callback, id) {
     }
 }
 
+/**
+ *
+ * @param reply REPLY.JOIN or REPLY.CONSIDER
+ * @param articleId
+ * @param id if id is exist, this func's role is the update
+ */
 function replyEvent(reply, articleId, id) {
     if(reply == null) {
         alert('already done it');
@@ -504,8 +493,31 @@ function replyEvent(reply, articleId, id) {
     })
     .done(function () {
         alert('done');
+        updateReplyLink(reply, articleId, id);
     })
     .fail(function () {
         alert('failed to send reply');
     })
+}
+
+
+function updateReplyLink(reply, articleId, replyId){
+    var argJoin = '';
+    var argConsider = '';
+    switch (reply) {
+        case REPLY.JOIN:
+            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + replyId + "'";
+            break;
+
+        case REPLY.CONSIDER:
+            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + replyId + "'";
+            break;
+
+        default:
+            // data is not exist
+            alert('error: read reply information');
+            break;
+    }
+    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
+    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
 }
