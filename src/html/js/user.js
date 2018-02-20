@@ -368,9 +368,28 @@ function getArticleDetail(id) {
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
                 }
+            }),
+
+            // get reply info
+            $.ajax({
+                type: 'GET',
+                url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                },
+                data: {
+                    "\$filter": "provide_id eq '" + id + "'"
+                },
+                success: function (res) {
+                    return res;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
             })
         )
-        .done(function (text, image) {
+        .done(function (text, image, reply) {
             var article = text[0].d.results;
 
             if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
@@ -405,6 +424,17 @@ function getArticleDetail(id) {
                 $('#articleDetail .img').html(img_src);
             }, this);
             reader.readAsArrayBuffer(image[0]);
+
+            var replys = reply[0].d.results
+            var join = 0, consider = 0;
+            for(reply of replys) {
+                switch(reply.entry_flag){
+                    case REPLY.JOIN: join++; break;
+                    case REPLY.CONSIDER: consider++; break;
+                }
+            }
+            $('#joinNum').html(join);
+            $('#considerNum').html(consider);
 
             // get reply information
             $.when(
