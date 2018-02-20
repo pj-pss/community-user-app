@@ -457,7 +457,7 @@ function getArticleDetail(id) {
                         "Accept": "application/json"
                     },
                     data: {
-                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + box /* dummy ID */ + "'"
+                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + Common.getCellUrl() /* dummy ID */ + "'"
                     }
                 })
             )
@@ -536,7 +536,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': box, // dummy ID
+                    'user_id': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply
                 })
@@ -571,7 +571,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': box, // dummy ID
+                    'user_id': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply,
                     'user_reply_id': res
