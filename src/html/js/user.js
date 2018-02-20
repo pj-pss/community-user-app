@@ -407,25 +407,42 @@ function getArticleDetail(id) {
             reader.readAsArrayBuffer(image[0]);
 
             // get reply information
-            $.ajax({
-                type: 'GET',
-                url: Common.getCellUrl() + box + "/test_reply/reply_history",
-                headers: {
-                    "Authorization": "Bearer " + Common.getToken(),
-                    "Accept": "application/json"
-                },
-                data: {
-                    "\$filter": "provide_id eq '" + article.__id + "'"
-                }
-            })
-            .done(function(res){
-                var reply = res.d.results[0];
-                if (reply){
-                    updateReplyLink(reply.entry_flag, article.__id, reply.__id);
+            $.when(
+                $.ajax({
+                    type: 'GET',
+                    url: Common.getCellUrl() + box + "/test_reply/reply_history",
+                    headers: {
+                        "Authorization": "Bearer " + Common.getToken(),
+                        "Accept": "application/json"
+                    },
+                    data: {
+                        "\$filter": "provide_id eq '" + article.__id + "'"
+                    }
+                }),
+                $.ajax({
+                    type: 'GET',
+                    url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                        "Accept": "application/json"
+                    },
+                    data: {
+                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + box /* dummy ID */ + "'"
+                    }
+                })
+            )
+            .done(function(res1, res2) {
+                var userCell = res1[0].d ? res1[0].d.results[0] : null;
+                var orgCell = res2[0].d ? res2[0].d.results[0] : null;
+                if (userCell && orgCell){
+                    updateReplyLink(userCell.entry_flag, article.__id, userCell.__id, orgCell.__id);
                 } else {
                     $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
                     $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
                 }
+            })
+            .fail(function() {
+                alert('hogehoge');
             });
 
             view('articleDetail');
@@ -459,9 +476,10 @@ function callArticleFunction(callback, id) {
  *
  * @param reply REPLY.JOIN or REPLY.CONSIDER
  * @param articleId
- * @param id if id is exist, this func's role is the update
+ * @param userReplyId if id is exist, this func's role is the update
+ * @param orgReplyId
  */
-function replyEvent(reply, articleId, id) {
+function replyEvent(reply, articleId, userReplyId, orgReplyId) {
     if(reply == null) {
         alert('already done it');
         return;
@@ -475,9 +493,9 @@ function replyEvent(reply, articleId, id) {
         var saveToUserCell = function(){
             var method = 'POST';
             var url = Common.getCellUrl() + box + '/' + oData + '/' + entityType;
-            if(id) {
+            if(userReplyId) {
                 method = 'PUT';
-                url += "('" + id + "')";
+                url += "('" + userReplyId + "')";
             }
 
             return $.ajax({
@@ -495,7 +513,7 @@ function replyEvent(reply, articleId, id) {
             })
             .then(
                 function(res) {
-                    return id || res;
+                    return userReplyId || res;
                 },
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
@@ -506,13 +524,14 @@ function replyEvent(reply, articleId, id) {
         var saveToOrganizationCell = function(res) {
             var base = 'https://demo.personium.io';
             var cell = 'fst-community-organization';
+            var res = res.d ? res.d.results.__id : res;
 
             var method = 'POST';
             var url = base + '/' + cell + '/' + box + '/' + oData + '/' + entityType;
-            // if (orgId) {
-            //     method = 'PUT';
-            //     url += "('" + orgId + "')";
-            // }
+            if (orgReplyId) {
+                method = 'PUT';
+                url += "('" + orgReplyId + "')";
+            }
 
             return $.ajax({
                 type: method,
@@ -524,7 +543,8 @@ function replyEvent(reply, articleId, id) {
                     // 'update_user_id'
                     'user_id': box, // dummy ID
                     'provide_id': articleId,
-                    'entry_flag': reply
+                    'entry_flag': reply,
+                    'user_reply_id': res
                 })
             })
             .then(
@@ -537,7 +557,7 @@ function replyEvent(reply, articleId, id) {
                     // delete the reply on user cell
                     $.ajax({
                         type: 'DELETE',
-                        url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + res.d.results.__id + "')",
+                        url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + res + "')",
                         headers: {
                             'Authorization': 'Bearer ' + Common.getToken()
                         }
@@ -558,24 +578,26 @@ function replyEvent(reply, articleId, id) {
         .fail(function(){
             alert('faild to send reply\n' + err.join('\n'));
         })
-        .done(function() {
+        .done(function(res) {
+            var userId = userReplyId || res.d.results.user_reply_id;
+            var orgId = orgReplyId || res.d.results.__id;
             alert('done');
-            updateReplyLink(reply, articleId, id);
+            updateReplyLink(reply, articleId, userId, orgId);
         })
-    }, id);
+    }, userReplyId);
 }
 
 
-function updateReplyLink(reply, articleId, replyId){
+function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     var argJoin = '';
     var argConsider = '';
     switch (reply) {
         case REPLY.JOIN:
-            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + replyId + "'";
+            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         case REPLY.CONSIDER:
-            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + replyId + "'";
+            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         default:
