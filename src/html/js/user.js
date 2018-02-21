@@ -47,6 +47,11 @@ const APP_URL = "https://demo.personium.io/app-fst-community-user/";
 const APP_BOX_NAME = 'io_personium_demo_app-fst-community-user';
 const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organization/'
 
+var articleList = [];
+var imageList = {};
+var sort_key = 'updated';
+var filter = null;
+
 getEngineEndPoint = function () {
     return Common.getAppCellUrl() + "__/html/Engine/getAppAuthToken";
 };
@@ -59,6 +64,18 @@ additionalCallback = function () {
 getNamesapces = function () {
     return ['common', 'glossary'];
 };
+
+var cs = {};
+
+cs.openSlide = function () {
+    $(".overlay").toggleClass('overlay-on');
+    $(".slide-menu").toggleClass('slide-on');
+}
+
+cs.closeSlide = function () {
+    $(".overlay").removeClass('overlay-on');
+    $(".slide-menu").removeClass('slide-on');
+}
 
 var nowViewMenu = "top";
 
@@ -141,7 +158,10 @@ function openInforDisclosureHistoryPer(type) {
 
 // load html
 $(function() {
-    $("#top").load("top.html");
+    $("#top").load("top.html", function() {
+        $('#filterInfo').attr('onclick',"sortArticle('" + sort_key + "', false, " + TYPE.INFO + ')')
+        $('#filterEvent').attr('onclick', "sortArticle('" + sort_key + "', false, " + TYPE.EVENT + ')')
+    });
     $("#monitoring").load("monitoring.html", function () {
         $("#myhealth").load("myhealth.html", function() {
             var topBtn = $('.scrollToTop');
@@ -181,12 +201,6 @@ $(function() {
     $("#viewDataExport").load("viewDataExport.html");
     $("#viewQRCode").load("viewQRCode.html");
     $("#articleDetail").load("articleDetail.html");
-    $("#articleComment").load("articleComment.html", function(){
-        $("#modal-comment").load("modal-comment.html");
-    });
-    $("#eventList").load("eventList.html");
-    $("#infoList").load("infoList.html");
-    $("#eventHistoryList").load("eventHistoryList.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
@@ -243,42 +257,25 @@ function getArticleList(divId) {
                 $('#' + divId).empty();
                 var list = [];
                 var results = data.d.results;
-                for(result of results){
-                    var dateTime = new Date(parseInt(result.__updated.substr(6)));
-                    var date = dateTime.getFullYear() + '/' +
-                    ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
-                    ('0' + (dateTime.getDate())).slice(-2);
-
+                articleList = [];
+                for(result of results.reverse()){
                     if (moment(result.end_date) < moment(res.st * 1000)) continue;
 
-                    var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
-                    div += '<div class="col-xs-4 col-md-2 block_img">'
-                        + '<span id="' + result.__id +'" class="cover"></span>'
-                        + '</div>';
-                    div += '<div class="col-xs-8 col-md-4 block_description">'
-                            + '<table class="stealth_table">'
-                                + '<tr class="date"><td>' + (result.start_date||date) + '</td></tr>'
-                                + '<tr class="title"><td>' + result.title + '</td></tr>'
-                            + '</table>'
-                        + '</div>';
-                    div += '</div>';
+                    var div = createArticleGrid(result.__id, result.title, result.start_date);
                     list.push(div);
                     getArticleListImage(result.__id, token);
+
+                    articleList.push({
+                        id: result.__id,
+                        type: result.type,
+                        title: result.title,
+                        updated: result.__updated,
+                        start_date: result.start_date
+                    });
                 }
                 $('#' + divId).html(list.join(''));
 
-                // Add a link to the table row
-                $(function ($) {
-                    $('div[data-href]').addClass('clickable').click(function () {
-                        window.location = $(this).attr('data-href');
-                    }).find('a').hover(function () {
-                        $(this).parents('div').unbind('click');
-                    }, function () {
-                        $(this).parents('div').click(function () {
-                            window.location = $(this).attr('data-href');
-                        });
-                    });
-                });
+                addLinkToGrid();
             })
             .fail(function() {
                 alert('failed to get article list');
@@ -314,7 +311,8 @@ function getArticleListImage(id, token) {
             }
             window.btoa(binary);
             image =  "data:image/jpg;base64," + btoa(binary);
-            $('#' + id).css('background-image', 'url(\'' + image + '\')');
+            $('#' + id).css('background-image', "url('" + image + "')");
+            imageList[id] = image;
         }, this);
         reader.readAsArrayBuffer(res);
     })
@@ -671,4 +669,59 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     }
     $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
     $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
+}
+
+function sortArticle(key, reverse, type){
+    aList = _.sortBy(articleList, function(item){return item[key]});
+    if(reverse) aList = aList.reverse();
+    if(type != null) filter = type;
+    sort_key = key;
+
+    var list = [];
+    for(article of aList){
+        if((filter != null) && article.type != filter) continue;
+        var div = createArticleGrid(article.id, article.title, article.start_date);
+        list.push(div);
+    }
+    $('#topEvent').empty();
+    $('#topEvent').html(list.join(''));
+
+    $.each(imageList, function(key, value) {
+        $('#' + key).css('background-image', "url('" + value + "')");
+    })
+
+    addLinkToGrid();
+}
+
+function clearSort() {
+    filter = null;
+    sortArticle('updated', true);
+}
+
+function createArticleGrid(id, title, date){
+    var div = '<div data-href="javascript:getArticleDetail(\'' + id + '\')">';
+    div += '<div class="col-xs-4 col-md-2 block_img">'
+        + '<span id="' + id + '" class="cover"></span>'
+        + '</div>';
+    div += '<div class="col-xs-8 col-md-4 block_description">'
+        + '<table class="stealth_table">'
+        + '<tr class="date"><td>' + date + '</td></tr>'
+        + '<tr class="title"><td>' + title + '</td></tr>'
+        + '</table>'
+        + '</div>';
+    div += '</div>';
+
+    return div;
+}
+
+function addLinkToGrid() {
+    $('div[data-href]').addClass('clickable').click(function () {
+        window.location = $(this).attr('data-href');
+    }).find('a').hover(function () {
+        $(this).parents('div').unbind('click');
+    }, function () {
+        $(this).parents('div').click(function () {
+            window.location = $(this).attr('data-href');
+        });
+    });
 }
