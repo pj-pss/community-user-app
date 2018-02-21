@@ -47,6 +47,8 @@ const APP_URL = "https://demo.personium.io/app-fst-community-user/";
 const APP_BOX_NAME = 'io_personium_demo_app-fst-community-user';
 const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organization/'
 
+var articleList = [];
+
 getEngineEndPoint = function () {
     return Common.getAppCellUrl() + "__/html/Engine/getAppAuthToken";
 };
@@ -237,6 +239,7 @@ function getArticleList(divId) {
                 $('#' + divId).empty();
                 var list = [];
                 var results = data.d.results;
+                articleList = [];
                 for(result of results){
                     var dateTime = new Date(parseInt(result.__updated.substr(6)));
                     var date = dateTime.getFullYear() + '/' +
@@ -245,19 +248,17 @@ function getArticleList(divId) {
 
                     if (moment(result.end_date) < moment(res.st * 1000)) continue;
 
-                    var div = '<div data-href="javascript:getArticleDetail(\'' + result.__id + '\')">';
-                    div += '<div class="col-xs-4 col-md-2 block_img">'
-                        + '<span id="' + result.__id +'" class="cover"></span>'
-                        + '</div>';
-                    div += '<div class="col-xs-8 col-md-4 block_description">'
-                            + '<table class="stealth_table">'
-                                + '<tr class="date"><td>' + (result.start_date||date) + '</td></tr>'
-                                + '<tr class="title"><td>' + result.title + '</td></tr>'
-                            + '</table>'
-                        + '</div>';
-                    div += '</div>';
+                    var div = createArticleGrid(result.__id, result.title, result.start_date || date);
                     list.push(div);
                     getArticleListImage(result.__id, token);
+
+                    articleList.push({
+                        id: result.__id,
+                        type: result.type,
+                        title: result.title,
+                        updated: date,
+                        start_date: result.start_date
+                    });
                 }
                 $('#' + divId).html(list.join(''));
 
@@ -665,4 +666,52 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     }
     $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
     $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
+}
+
+function sortArticle(key, reverse){
+    aList = _.sortBy(articleList, function(item){return item[key]});
+    if(reverse) aList = aList.reverse();
+
+    var list = [];
+    var imgList = {};
+    for(article of aList){
+        var div = createArticleGrid(article.id, article.title, article.start_date);
+        list.push(div);
+        imgList[article.id] = ($('#' + article.id).css('background-image'));
+    }
+    $('#topEvent').empty();
+    $('#topEvent').html(list.join(''));
+
+    $.each(imgList, function(key, value) {
+        $('#' + key).css('background-image', value);
+    })
+
+    // Add a link to the table row
+    $(function ($) {
+        $('div[data-href]').addClass('clickable').click(function () {
+            window.location = $(this).attr('data-href');
+        }).find('a').hover(function () {
+            $(this).parents('div').unbind('click');
+        }, function () {
+            $(this).parents('div').click(function () {
+                window.location = $(this).attr('data-href');
+            });
+        });
+    });
+}
+
+function createArticleGrid(id, title, date){
+    var div = '<div data-href="javascript:getArticleDetail(\'' + id + '\')">';
+    div += '<div class="col-xs-4 col-md-2 block_img">'
+        + '<span id="' + id + '" class="cover"></span>'
+        + '</div>';
+    div += '<div class="col-xs-8 col-md-4 block_description">'
+        + '<table class="stealth_table">'
+        + '<tr class="date"><td>' + date + '</td></tr>'
+        + '<tr class="title"><td>' + title + '</td></tr>'
+        + '</table>'
+        + '</div>';
+    div += '</div>';
+
+    return div;
 }
