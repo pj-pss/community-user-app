@@ -259,14 +259,9 @@ function getArticleList(divId) {
                 var results = data.d.results;
                 articleList = [];
                 for(result of results.reverse()){
-                    var dateTime = new Date(parseInt(result.__updated.substr(6)));
-                    var date = dateTime.getFullYear() + '/' +
-                    ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
-                    ('0' + (dateTime.getDate())).slice(-2);
-
                     if (moment(result.end_date) < moment(res.st * 1000)) continue;
 
-                    var div = createArticleGrid(result.__id, result.title, result.start_date || date);
+                    var div = createArticleGrid(result.__id, result.title, result.start_date);
                     list.push(div);
                     getArticleListImage(result.__id, token);
 
@@ -274,7 +269,7 @@ function getArticleList(divId) {
                         id: result.__id,
                         type: result.type,
                         title: result.title,
-                        updated: date,
+                        updated: result.__updated,
                         start_date: result.start_date
                     });
                 }
