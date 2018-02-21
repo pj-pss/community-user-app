@@ -33,9 +33,15 @@ const AGE = {
     UNDER_FIFTY: 4
 }
 
+const REPLY = {
+    CONSIDER: 0,
+    JOIN: 1
+}
+
 Object.freeze(TYPE);
 Object.freeze(SEX);
 Object.freeze(AGE);
+Object.freeze(REPLY);
 
 const APP_URL = "https://demo.personium.io/app-fst-community-user/";
 const APP_BOX_NAME = 'io_personium_demo_app-fst-community-user';
@@ -216,8 +222,8 @@ $(function() {
 function getArticleList(divId) {
     callArticleFunction(function (token){
         var base = 'https://demo.personium.io';
-        var box = 'fst-community-organization';
-        var cell = 'app-fst-community-user';
+        var cell = 'fst-community-organization';
+        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
 
@@ -228,7 +234,7 @@ function getArticleList(divId) {
         }).done(function(res){
             $.ajax({
                 type: "GET",
-                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType,
+                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType,
                 headers: {
                     "Authorization": "Bearer " + token,
                     "Accept" : "application/json"
@@ -260,7 +266,7 @@ function getArticleList(divId) {
                     getArticleListImage(result.__id, token);
                 }
                 $('#' + divId).html(list.join(''));
-                
+
                 // Add a link to the table row
                 $(function ($) {
                     $('div[data-href]').addClass('clickable').click(function () {
@@ -283,13 +289,13 @@ function getArticleList(divId) {
 
 function getArticleListImage(id, token) {
     var base = 'https://demo.personium.io';
-    var box = 'fst-community-organization';
-    var cell = 'app-fst-community-user';
+    var cell = 'fst-community-organization';
+    var box = 'app-fst-community-user';
     var DAV = 'test_article_image';
 
     $.ajax({
         type: 'GET',
-        url: base + '/' + box + '/' + cell + '/' + DAV + '/' + id,
+        url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
         dataType: 'binary',
         processData: false,
         responseType: 'blob',
@@ -321,8 +327,8 @@ function getArticleDetail(id) {
 
     callArticleFunction(function (token) {
         var base = 'https://demo.personium.io';
-        var box = 'fst-community-organization';
-        var cell = 'app-fst-community-user';
+        var cell = 'fst-community-organization';
+        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
         var DAV = 'test_article_image';
@@ -333,7 +339,7 @@ function getArticleDetail(id) {
             // get text
             $.ajax({
                 type: 'GET',
-                url: base + '/' + box + '/' + cell + '/' + oData + '/' + entityType + "('" + id + "')",
+                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType + "('" + id + "')",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -349,7 +355,7 @@ function getArticleDetail(id) {
             // get image
             $.ajax({
                 type: 'GET',
-                url: base + '/' + box + '/' + cell + '/' + DAV + '/' + id,
+                url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
                 dataType: 'binary',
                 processData: false,
                 responseType: 'blob',
@@ -362,30 +368,48 @@ function getArticleDetail(id) {
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
                 }
+            }),
+
+            // get reply info
+            $.ajax({
+                type: 'GET',
+                url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/json'
+                },
+                data: {
+                    "\$filter": "provide_id eq '" + id + "'"
+                },
+                success: function (res) {
+                    return res;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
             })
         )
-        .done(function (text, image) {
+        .done(function (text, image, reply) {
             var article = text[0].d.results;
-            
+
             if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
                 var term = article.start_date + ' ' + article.start_time + ' ~ ' + (article.end_date == article.start_date ? '' : article.end_date) + ' ' + article.end_time;
             }
-            
+
             link = $('<a></a>').attr('href', article.url);
             link.text(article.url);
-            
+
             var venue = article.venue ? '開催場所: ' + article.venue : '';
             $('#articleDetail .term')[0].style.display = venue ? '' : 'none';
-            
+
             var img = $('<img>').attr('src', article.previewImg).addClass('thumbnail');
-            
 
             $('#articleDetail .title').html(article.title);
             $('#articleDetail .url').html(link);
             $('#articleDetail .venue').html(venue);
             $('#articleDetail .date').html(term);
             $('#articleDetail .text').html(article.detail);
-            
+
             var reader = new FileReader();
             reader.onloadend = $.proxy(function (event) {
                 var binary = '';
@@ -400,6 +424,56 @@ function getArticleDetail(id) {
                 $('#articleDetail .img').html(img_src);
             }, this);
             reader.readAsArrayBuffer(image[0]);
+
+            var replys = reply[0].d.results
+            var join = 0, consider = 0;
+            for(reply of replys) {
+                switch(reply.entry_flag){
+                    case REPLY.JOIN: join++; break;
+                    case REPLY.CONSIDER: consider++; break;
+                }
+            }
+            $('#joinNum').html(join);
+            $('#considerNum').html(consider);
+
+            // get reply information
+            $.when(
+                $.ajax({
+                    type: 'GET',
+                    url: Common.getCellUrl() + box + "/test_reply/reply_history",
+                    headers: {
+                        "Authorization": "Bearer " + Common.getToken(),
+                        "Accept": "application/json"
+                    },
+                    data: {
+                        "\$filter": "provide_id eq '" + article.__id + "'"
+                    }
+                }),
+                $.ajax({
+                    type: 'GET',
+                    url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                        "Accept": "application/json"
+                    },
+                    data: {
+                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + Common.getCellUrl() /* dummy ID */ + "'"
+                    }
+                })
+            )
+            .done(function(res1, res2) {
+                var userCell = res1[0].d ? res1[0].d.results[0] : null;
+                var orgCell = res2[0].d ? res2[0].d.results[0] : null;
+                if (userCell && orgCell){
+                    updateReplyLink(userCell.entry_flag, article.__id, userCell.__id, orgCell.__id);
+                } else {
+                    $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
+                    $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
+                }
+            })
+            .fail(function() {
+                alert('error: get reply information');
+            });
 
             view('articleDetail');
 
@@ -426,4 +500,175 @@ function callArticleFunction(callback, id) {
                 alert('failed to get token');
             });
     }
+}
+
+/**
+ *
+ * @param reply REPLY.JOIN or REPLY.CONSIDER
+ * @param articleId
+ * @param userReplyId if id is exist, this func's role is the update
+ * @param orgReplyId
+ */
+function replyEvent(reply, articleId, userReplyId, orgReplyId) {
+    if(reply == null) {
+        alert('already done it');
+        return;
+    }
+    var box = 'app-fst-community-user';
+    var oData = 'test_reply';
+    var entityType = 'reply_history';
+
+    callArticleFunction(function(token) {
+        var err = [];
+        var saveToUserCell = function(){
+            var method = 'POST';
+            var url = Common.getCellUrl() + box + '/' + oData + '/' + entityType;
+            if(userReplyId) {
+                method = 'PUT';
+                url += "('" + userReplyId + "')";
+            }
+
+            return $.ajax({
+                type: method,
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " + Common.getToken()
+                },
+                data: JSON.stringify({
+                    // 'update_user_id'
+                    'user_id': Common.getCellUrl(), // dummy ID
+                    'provide_id': articleId,
+                    'entry_flag': reply
+                })
+            })
+            .then(
+                function(res) {
+                    return userReplyId || res;
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+                }
+            )
+        };
+
+        var saveToOrganizationCell = function(res) {
+            var base = 'https://demo.personium.io';
+            var cell = 'fst-community-organization';
+            var id = res.d ? res.d.results.__id : res;
+
+            var method = 'POST';
+            var url = base + '/' + cell + '/' + box + '/' + oData + '/' + entityType;
+            if (orgReplyId) {
+                method = 'PUT';
+                url += "('" + orgReplyId + "')";
+            }
+
+            return $.ajax({
+                type: method,
+                url: url,
+                headers: {
+                    "Authorization": "Bearer " +  token
+                },
+                data: JSON.stringify({
+                    // 'update_user_id'
+                    'user_id': Common.getCellUrl(), // dummy ID
+                    'provide_id': articleId,
+                    'entry_flag': reply,
+                    'user_reply_id': id
+                })
+            })
+            .then(
+                function (res) {
+                    return res;
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+
+                    // delete/change the reply on user cell
+                    if(!userReplyId){
+                        $.ajax({
+                            type: 'DELETE',
+                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            headers: {
+                                'Authorization': 'Bearer ' + Common.getToken()
+                            }
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('delete failed');
+                        })
+                        .done(function() {
+                            alert('delete done');
+                        });
+                    } else {
+                        $.ajax({
+                            type: 'PUT',
+                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            headers: {
+                                'Authorization': 'Bearer ' + Common.getToken()
+                            },
+                            data: JSON.stringify({
+                                // 'update_user_id'
+                                'user_id': Common.getCellUrl(), // dummy ID
+                                'provide_id': articleId,
+                                'entry_flag': reply == REPLY.JOIN ? REPLY.CONSIDER : REPLY.JOIN
+                            })
+                        })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('change failed');
+                            })
+                            .done(function () {
+                                alert('change done');
+                            });
+                    }
+
+                    return Promise.reject();
+                }
+            )
+        }
+
+        saveToUserCell().then(saveToOrganizationCell)
+        .fail(function(){
+            alert('faild to send reply\n' + err.join('\n'));
+        })
+        .done(function(res) {
+            var userId = userReplyId || res.d.results.user_reply_id;
+            var orgId = orgReplyId || res.d.results.__id;
+            alert('done');
+            updateReplyLink(reply, articleId, userId, orgId);
+
+            var join = $('#joinNum').html();
+            var consider = $('#considerNum').html();
+            if(reply == REPLY.JOIN) {
+                join++;
+                consider = --consider < 0 ? 0 : consider;
+            } else {
+                join = --join < 0 ? 0 : join;
+                consider++;
+            }
+            $('#joinNum').html(join);
+            $('#considerNum').html(consider);
+        })
+    }, userReplyId);
+}
+
+
+function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
+    var argJoin = '';
+    var argConsider = '';
+    switch (reply) {
+        case REPLY.JOIN:
+            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+            break;
+
+        case REPLY.CONSIDER:
+            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+            break;
+
+        default:
+            // data is not exist
+            alert('error: read reply information');
+            break;
+    }
+    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
+    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
 }
