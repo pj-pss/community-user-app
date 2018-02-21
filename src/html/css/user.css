@@ -886,15 +886,6 @@ table.tbl_prof input[type="text"] {
   display: inline-block;
 }
 
-.comment_box {
-  width: 90%;
-  overflow: auto;
-}
-
-.comment_button {
-  margin: 10px;
-}
-
 .report_icon {
   margin: 0px 5px;
   color: red;
@@ -904,7 +895,7 @@ table.tbl_prof input[type="text"] {
   font-size: 32px;
 }
 
-.comment_icon {
+.join_icon {
   font-size: 24px;
   color: black;
   margin: 10px 0px;
@@ -1002,12 +993,6 @@ table.tbl_prof input[type="text"] {
 
 .modal_title .close_button{
   width: 32px;
-}
-
-.read_more {
-  font-size: 15px;
-  margin: 10px;
-  text-align: right;
 }
 
 .panel-default > div.profile-parent {

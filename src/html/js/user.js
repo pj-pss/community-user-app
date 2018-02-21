@@ -181,12 +181,6 @@ $(function() {
     $("#viewDataExport").load("viewDataExport.html");
     $("#viewQRCode").load("viewQRCode.html");
     $("#articleDetail").load("articleDetail.html");
-    $("#articleComment").load("articleComment.html", function(){
-        $("#modal-comment").load("modal-comment.html");
-    });
-    $("#eventList").load("eventList.html");
-    $("#infoList").load("infoList.html");
-    $("#eventHistoryList").load("eventHistoryList.html");
 
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
