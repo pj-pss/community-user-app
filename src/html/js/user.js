@@ -258,7 +258,7 @@ function getArticleList(divId) {
                 var list = [];
                 var results = data.d.results;
                 articleList = [];
-                for(result of results){
+                for(result of results.reverse()){
                     var dateTime = new Date(parseInt(result.__updated.substr(6)));
                     var date = dateTime.getFullYear() + '/' +
                     ('0' + (dateTime.getMonth() + 1)).slice(-2) + '/' +
@@ -700,7 +700,7 @@ function sortArticle(key, reverse, type){
 
 function clearSort() {
     filter = null;
-    sortArticle('updated', false);
+    sortArticle('updated', true);
 }
 
 function createArticleGrid(id, title, date){
