@@ -618,9 +618,9 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
             var consider = $('#considerNum').html();
             if(reply == REPLY.JOIN) {
                 join++;
-                consider--;
+                consider = --consider < 0 ? 0 : consider;
             } else {
-                join--;
+                join = --join < 0 ? 0 : join;
                 consider++;
             }
             $('#joinNum').html(join);
