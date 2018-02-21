@@ -554,7 +554,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
         var saveToOrganizationCell = function(res) {
             var base = 'https://demo.personium.io';
             var cell = 'fst-community-organization';
-            var res = res.d ? res.d.results.__id : res;
+            var id = res.d ? res.d.results.__id : res;
 
             var method = 'POST';
             var url = base + '/' + cell + '/' + box + '/' + oData + '/' + entityType;
@@ -574,7 +574,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     'user_id': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply,
-                    'user_reply_id': res
+                    'user_reply_id': id
                 })
             })
             .then(
@@ -584,20 +584,42 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     err.push(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
 
-                    // delete the reply on user cell
-                    $.ajax({
-                        type: 'DELETE',
-                        url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + res + "')",
-                        headers: {
-                            'Authorization': 'Bearer ' + Common.getToken()
-                        }
-                    })
-                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert('delete failed');
-                    })
-                    .done(function() {
-                        alert('delete done');
-                    });
+                    // delete/change the reply on user cell
+                    if(!userReplyId){
+                        $.ajax({
+                            type: 'DELETE',
+                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            headers: {
+                                'Authorization': 'Bearer ' + Common.getToken()
+                            }
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('delete failed');
+                        })
+                        .done(function() {
+                            alert('delete done');
+                        });
+                    } else {
+                        $.ajax({
+                            type: 'PUT',
+                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            headers: {
+                                'Authorization': 'Bearer ' + Common.getToken()
+                            },
+                            data: JSON.stringify({
+                                // 'update_user_id'
+                                'user_id': Common.getCellUrl(), // dummy ID
+                                'provide_id': articleId,
+                                'entry_flag': reply == REPLY.JOIN ? REPLY.CONSIDER : REPLY.JOIN
+                            })
+                        })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('change failed');
+                            })
+                            .done(function () {
+                                alert('change done');
+                            });
+                    }
 
                     return Promise.reject();
                 }
