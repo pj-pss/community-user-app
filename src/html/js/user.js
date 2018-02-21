@@ -65,6 +65,18 @@ getNamesapces = function () {
     return ['common', 'glossary'];
 };
 
+var cs = {};
+
+cs.openSlide = function () {
+    $(".overlay").toggleClass('overlay-on');
+    $(".slide-menu").toggleClass('slide-on');
+}
+
+cs.closeSlide = function () {
+    $(".overlay").removeClass('overlay-on');
+    $(".slide-menu").removeClass('slide-on');
+}
+
 var nowViewMenu = "top";
 
 function view(menuId) {
