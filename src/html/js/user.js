@@ -48,6 +48,9 @@ const APP_BOX_NAME = 'io_personium_demo_app-fst-community-user';
 const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organization/'
 
 var articleList = [];
+var imageList = {};
+var sort_key = 'updated';
+var filter = null;
 
 getEngineEndPoint = function () {
     return Common.getAppCellUrl() + "__/html/Engine/getAppAuthToken";
@@ -143,7 +146,10 @@ function openInforDisclosureHistoryPer(type) {
 
 // load html
 $(function() {
-    $("#top").load("top.html");
+    $("#top").load("top.html", function() {
+        $('#filterInfo').attr('onclick',"sortArticle('" + sort_key + "', false, " + TYPE.INFO + ')')
+        $('#filterEvent').attr('onclick', "sortArticle('" + sort_key + "', false, " + TYPE.EVENT + ')')
+    });
     $("#monitoring").load("monitoring.html", function () {
         $("#myhealth").load("myhealth.html", function() {
             var topBtn = $('.scrollToTop');
@@ -262,18 +268,7 @@ function getArticleList(divId) {
                 }
                 $('#' + divId).html(list.join(''));
 
-                // Add a link to the table row
-                $(function ($) {
-                    $('div[data-href]').addClass('clickable').click(function () {
-                        window.location = $(this).attr('data-href');
-                    }).find('a').hover(function () {
-                        $(this).parents('div').unbind('click');
-                    }, function () {
-                        $(this).parents('div').click(function () {
-                            window.location = $(this).attr('data-href');
-                        });
-                    });
-                });
+                addLinkToGrid();
             })
             .fail(function() {
                 alert('failed to get article list');
@@ -309,7 +304,8 @@ function getArticleListImage(id, token) {
             }
             window.btoa(binary);
             image =  "data:image/jpg;base64," + btoa(binary);
-            $('#' + id).css('background-image', 'url(\'' + image + '\')');
+            $('#' + id).css('background-image', "url('" + image + "')");
+            imageList[id] = image;
         }, this);
         reader.readAsArrayBuffer(res);
     })
@@ -668,36 +664,31 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
 }
 
-function sortArticle(key, reverse){
+function sortArticle(key, reverse, type){
     aList = _.sortBy(articleList, function(item){return item[key]});
     if(reverse) aList = aList.reverse();
+    if(type != null) filter = type;
+    sort_key = key;
 
     var list = [];
-    var imgList = {};
     for(article of aList){
+        if((filter != null) && article.type != filter) continue;
         var div = createArticleGrid(article.id, article.title, article.start_date);
         list.push(div);
-        imgList[article.id] = ($('#' + article.id).css('background-image'));
     }
     $('#topEvent').empty();
     $('#topEvent').html(list.join(''));
 
-    $.each(imgList, function(key, value) {
-        $('#' + key).css('background-image', value);
+    $.each(imageList, function(key, value) {
+        $('#' + key).css('background-image', "url('" + value + "')");
     })
 
-    // Add a link to the table row
-    $(function ($) {
-        $('div[data-href]').addClass('clickable').click(function () {
-            window.location = $(this).attr('data-href');
-        }).find('a').hover(function () {
-            $(this).parents('div').unbind('click');
-        }, function () {
-            $(this).parents('div').click(function () {
-                window.location = $(this).attr('data-href');
-            });
-        });
-    });
+    addLinkToGrid();
+}
+
+function clearSort() {
+    filter = null;
+    sortArticle('updated', false);
 }
 
 function createArticleGrid(id, title, date){
@@ -714,4 +705,16 @@ function createArticleGrid(id, title, date){
     div += '</div>';
 
     return div;
+}
+
+function addLinkToGrid() {
+    $('div[data-href]').addClass('clickable').click(function () {
+        window.location = $(this).attr('data-href');
+    }).find('a').hover(function () {
+        $(this).parents('div').unbind('click');
+    }, function () {
+        $(this).parents('div').click(function () {
+            window.location = $(this).attr('data-href');
+        });
+    });
 }
