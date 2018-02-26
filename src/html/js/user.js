@@ -259,7 +259,7 @@ function getArticleList(divId) {
                 var results = data.d.results;
                 articleList = [];
                 for(result of results.reverse()){
-                    if (moment(result.end_date) < moment(res.st * 1000)) continue;
+                    if (result.type == TYPE.EVENT && moment(result.end_date) < moment(res.st * 1000)) continue;
 
                     var div = createArticleGrid(result.__id, result.title, result.start_date);
                     list.push(div);
@@ -699,6 +699,7 @@ function clearSort() {
 }
 
 function createArticleGrid(id, title, date){
+    date = date || "";
     var div = '<div data-href="javascript:getArticleDetail(\'' + id + '\')">';
     div += '<div class="col-xs-4 col-md-2 block_img">'
         + '<span id="' + id + '" class="cover"></span>'
