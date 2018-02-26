@@ -358,10 +358,10 @@ function getJoinInfoList(token) {
 
             }
         }
-        for (val of res.d.results) {
-            var hoge = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: ' + count[val.provide_id].join;
-            hoge += '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: ' + count[val.provide_id].consider;
-            $('#join_' + val.provide_id).html(hoge);
+        for (key in count) {
+            var hoge = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: ' + count[key].join;
+            hoge += '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: ' + count[key].consider;
+            $('#join_' + key).html(hoge);
         }
     })
     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -756,7 +756,7 @@ function createArticleGrid(id, title, date){
         + '<table class="stealth_table">'
         + '<tr class="date"><td>' + date + '</td></tr>'
         + '<tr class="title"><td>' + title + '</td></tr>'
-        + '<tr class="join"><td id="join_' + id + '"></td></tr>'
+        + '<tr class="join"><td id="join_' + id + '"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>:0 <i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>:0</td></tr>'
         + '</table>'
         + '</div>';
     div += '</div>';
