@@ -49,6 +49,7 @@ const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organizat
 
 var articleList = [];
 var imageList = {};
+var joinList = {};
 var sort_key = 'updated';
 var filter = null;
 
@@ -275,9 +276,9 @@ function getArticleList(divId) {
                 }
                 $('#' + divId).html(list.join(''));
 
-                getJoinInfoList(token);
+                clearSort();
 
-                addLinkToGrid();
+                getJoinInfoList(token);
             })
             .fail(function() {
                 alert('failed to get article list');
@@ -359,9 +360,12 @@ function getJoinInfoList(token) {
             }
         }
         for (key in count) {
-            var hoge = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: ' + count[key].join;
-            hoge += '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: ' + count[key].consider;
-            $('#join_' + key).html(hoge);
+            var joinHtml = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: '
+                + count[key].join
+                + '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: '
+                + count[key].consider;
+            joinList[key] = joinHtml;
+            $('#join_' + key).html(joinHtml);
         }
     })
     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -736,6 +740,12 @@ function sortArticle(key, reverse, type){
 
     $.each(imageList, function(key, value) {
         $('#' + key).css('background-image', "url('" + value + "')");
+    })
+
+    $.each(joinList, function(key, value) {
+        if ($('#join_' + key)[0]){
+            $('#join_' + key).html(value);
+        }
     })
 
     addLinkToGrid();
