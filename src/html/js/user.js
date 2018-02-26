@@ -765,11 +765,14 @@ function createArticleGrid(id, title, date){
     div += '<div class="col-xs-8 col-md-4 block_description">'
         + '<table class="stealth_table">'
         + '<tr class="date"><td>' + date + '</td></tr>'
-        + '<tr class="title"><td>' + title + '</td></tr>'
-        + '<tr class="join"><td id="join_' + id + '"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>:0 <i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>:0</td></tr>'
-        + '</table>'
-        + '</div>';
-    div += '</div>';
+        + '<tr class="title"><td>' + title + '</td></tr>';
+
+    // article is event
+    if(date != ""){
+        div += '<tr class="join"><td id="join_' + id + '"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>:0 <i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>:0</td></tr>';
+    }
+
+    div += '</table></div></div>';
 
     return div;
 }
