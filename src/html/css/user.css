@@ -437,6 +437,7 @@ header > a {
 }
 
 .stealth_table .join td {
+  font-size: 90%;
   text-align: right;
 }
 
@@ -475,7 +476,8 @@ header > a {
 .stealth_table .title {
   font-size: 5vmin;
 }
-.stealth_table .date {
+.stealth_table .date,
+.stealth_table .join {
   font-size: 4.5vmin;
   color: black;
 }
@@ -496,7 +498,8 @@ header > a {
     font-size: 18px;
   }
   .top_menu button,
-  .stealth_table .date {
+  .stealth_table .date,
+  .stealth_table .join {
     font-size: 17px;
   }
 }
@@ -513,7 +516,8 @@ header > a {
     font-size: 24px;
   }
   .top_menu button,
-  .stealth_table .date {
+  .stealth_table .date,
+  .stealth_table .join {
     font-size: 23px;
   }
 }
@@ -837,7 +841,7 @@ table.tbl_prof input[type="text"] {
 
 .p_modal_title{
 	text-align: center;
-	margin: 0;
+	margin: 0;font-size: 24px;
 }
 
 .infor_disc_person_list_top{

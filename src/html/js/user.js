@@ -359,7 +359,9 @@ function getJoinInfoList(token) {
             }
         }
         for (val of res.d.results) {
-            $('#join_' + val.provide_id).html(count[val.provide_id].join + ", " + count[val.provide_id].consider);
+            var hoge = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: ' + count[val.provide_id].join;
+            hoge += '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: ' + count[val.provide_id].consider;
+            $('#join_' + val.provide_id).html(hoge);
         }
     })
     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
