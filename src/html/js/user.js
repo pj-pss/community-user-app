@@ -275,6 +275,8 @@ function getArticleList(divId) {
                 }
                 $('#' + divId).html(list.join(''));
 
+                getJoinInfoList(token);
+
                 addLinkToGrid();
             })
             .fail(function() {
@@ -315,6 +317,50 @@ function getArticleListImage(id, token) {
             imageList[id] = image;
         }, this);
         reader.readAsArrayBuffer(res);
+    })
+    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        alert(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+    });
+}
+
+function getJoinInfoList(token) {
+    // get reply list
+    var base = 'https://demo.personium.io';
+    var cell = 'fst-community-organization';
+    var box = 'app-fst-community-user';
+    var oData = 'test_reply';
+    var entityType = 'reply_history';
+
+    $.ajax({
+        type: "GET",
+        url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType,
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json"
+        }
+    })
+    .done(function(res) {
+        // set num
+        var count = {}
+        for (val of res.d.results) {
+            if($('#join_' + val.provide_id)[0]) {
+                if(count[val.provide_id] == null) {
+                    count[val.provide_id] = {}
+                    count[val.provide_id].join = 0;
+                    count[val.provide_id].consider = 0;
+                }
+
+                switch(parseInt(val.entry_flag)) {
+                    case REPLY.JOIN: count[val.provide_id].join++; break;
+                    case REPLY.CONSIDER: count[val.provide_id].consider++; break;
+                    default: alert('error: get reply information'); berak;
+                }
+
+            }
+        }
+        for (val of res.d.results) {
+            $('#join_' + val.provide_id).html(count[val.provide_id].join + ", " + count[val.provide_id].consider);
+        }
     })
     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
         alert(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
@@ -708,6 +754,7 @@ function createArticleGrid(id, title, date){
         + '<table class="stealth_table">'
         + '<tr class="date"><td>' + date + '</td></tr>'
         + '<tr class="title"><td>' + title + '</td></tr>'
+        + '<tr class="join"><td id="join_' + id + '"></td></tr>'
         + '</table>'
         + '</div>';
     div += '</div>';

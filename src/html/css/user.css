@@ -432,6 +432,13 @@ header > a {
   margin: auto;
 }
 
+.stealth_table .join {
+  height: 20%;
+}
+
+.stealth_table .join td {
+  text-align: right;
+}
 
 .stealth_table .title td{
   text-align: center;
