@@ -767,7 +767,7 @@ function createArticleGrid(id, title, date){
         + '<tr class="date"><td>' + date + '</td></tr>'
         + '<tr class="title"><td>' + title + '</td></tr>';
 
-    // article is event
+    // article type is event
     if(date != ""){
         div += '<tr class="join"><td id="join_' + id + '"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>:0 <i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>:0</td></tr>';
     }
