@@ -432,6 +432,10 @@ function getArticleDetail(id) {
 
             if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
                 var term = article.start_date + ' ' + article.start_time + ' ~ ' + (article.end_date == article.start_date ? '' : article.end_date) + ' ' + article.end_time;
+
+                $('#replyContainer').css('display', '');
+            } else {
+                $('#replyContainer').css('display', 'none');
             }
 
             link = $('<a></a>').attr('href', article.url);
