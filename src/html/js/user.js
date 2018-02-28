@@ -613,6 +613,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 method = 'PUT';
                 url += "('" + orgReplyId + "')";
             }
+            var annonymous = $('[name=checkAnonymous]').prop('checked')
 
             return $.ajax({
                 type: method,
@@ -625,7 +626,8 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply,
-                    'user_reply_id': id
+                    'user_reply_id': id,
+                    'annonymous': annonymous
                 })
             })
             .then(
@@ -707,11 +709,13 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     var argConsider = '';
     switch (reply) {
         case REPLY.JOIN:
+            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         case REPLY.CONSIDER:
             argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         default:
