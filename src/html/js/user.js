@@ -499,7 +499,7 @@ function getArticleDetail(id) {
                         "Accept": "application/json"
                     },
                     data: {
-                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + Common.getCellUrl() /* dummy ID */ + "'"
+                        "\$filter": "provide_id eq '" + article.__id + "' and user_cell_url eq '" + Common.getCellUrl() /* dummy ID */ + "'"
                     }
                 })
             )
@@ -578,7 +578,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': Common.getCellUrl(), // dummy ID
+                    'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply
                 })
@@ -611,7 +611,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': Common.getCellUrl(), // dummy ID
+                    'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply,
                     'user_reply_id': id
@@ -648,7 +648,6 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                             },
                             data: JSON.stringify({
                                 // 'update_user_id'
-                                'user_id': Common.getCellUrl(), // dummy ID
                                 'provide_id': articleId,
                                 'entry_flag': reply == REPLY.JOIN ? REPLY.CONSIDER : REPLY.JOIN
                             })
