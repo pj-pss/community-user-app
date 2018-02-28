@@ -158,7 +158,11 @@ function openInforDisclosureHistoryPer(type) {
 }
 
 function openSendReplyModal(reply, articleId, userReplyId, orgReplyId) {
-    var arg = reply + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+    var arg = reply + ",'" + articleId + "'";
+    if(userReplyId && orgReplyId) {
+        arg += ", '" + userReplyId + "', '" + orgReplyId + "'";
+    }
+
     $('#sendReplyButton').attr('onclick', 'replyEvent(' + arg + ')');
     $('#modal-sendReply').modal('show');
 }
@@ -516,8 +520,8 @@ function getArticleDetail(id) {
                 if (userCell && orgCell){
                     updateReplyLink(userCell.entry_flag, article.__id, userCell.__id, orgCell.__id);
                 } else {
-                    $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
-                    $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
+                    $('#joinEvent').attr('href', "javascript:openSendReplyModal(" + REPLY.JOIN + ", '" + article.__id + "')");
+                    $('#considerEvent').attr('href', "javascript:openSendReplyModal(" + REPLY.CONSIDER + ", '" + article.__id + "')");
                 }
             })
             .fail(function() {
