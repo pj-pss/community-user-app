@@ -157,6 +157,12 @@ function openInforDisclosureHistoryPer(type) {
     $('#modal-inforDisclosureHistoryPer').modal('show');
 }
 
+function openSendReplyModal(reply, articleId, userReplyId, orgReplyId) {
+    var arg = reply + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+    $('#sendReplyButton').attr('onclick', 'replyEvent(' + arg + ')');
+    $('#modal-sendReply').modal('show');
+}
+
 // load html
 $(function() {
     $("#top").load("top.html", function() {
@@ -210,6 +216,7 @@ $(function() {
     $("#modal-personalInfo3").load("modal-personalInfo3.html");
     $("#modal-startHelpOp").load("modal-startHelpOp.html");
     $("#modal-clubHistory").load("modal-clubHistory.html");
+    $("#modal-sendReply").load("modal-sendReply.html");
 
 	$('#modal-nfcReader').on('hidden.bs.modal', function () {
 		if(helpAuthorized) {
@@ -708,8 +715,9 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
             alert('error: read reply information');
             break;
     }
-    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
-    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
+
+    $('#joinEvent').attr('href', "javascript:openSendReplyModal(" + argJoin + ")");
+    $('#considerEvent').attr('href', "javascript:openSendReplyModal(" + argConsider + ")");
 }
 
 function sortArticle(key, reverse, type){
