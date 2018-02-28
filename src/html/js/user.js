@@ -613,7 +613,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 method = 'PUT';
                 url += "('" + orgReplyId + "')";
             }
-            var annonymous = $('[name=checkAnonymous]').prop('checked')
+            var anonymous = $('[name=checkAnonymous]').prop('checked')
 
             return $.ajax({
                 type: method,
@@ -627,7 +627,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     'provide_id': articleId,
                     'entry_flag': reply,
                     'user_reply_id': id,
-                    'annonymous': annonymous
+                    'anonymous': anonymous
                 })
             })
             .then(
