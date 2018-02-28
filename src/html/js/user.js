@@ -49,6 +49,7 @@ const ORGANIZATION_CELL_URL = 'https://demo.personium.io/fst-community-organizat
 
 var articleList = [];
 var imageList = {};
+var joinList = {};
 var sort_key = 'updated';
 var filter = null;
 
@@ -235,9 +236,6 @@ $(function() {
 
 function getArticleList(divId) {
     callArticleFunction(function (token){
-        var base = 'https://demo.personium.io';
-        var cell = 'fst-community-organization';
-        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
 
@@ -248,7 +246,7 @@ function getArticleList(divId) {
         }).done(function(res){
             $.ajax({
                 type: "GET",
-                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType,
+                url: Common.getToCellBoxUrl() + oData + '/' + entityType,
                 headers: {
                     "Authorization": "Bearer " + token,
                     "Accept" : "application/json"
@@ -259,7 +257,7 @@ function getArticleList(divId) {
                 var results = data.d.results;
                 articleList = [];
                 for(result of results.reverse()){
-                    if (moment(result.end_date) < moment(res.st * 1000)) continue;
+                    if (result.type == TYPE.EVENT && moment(result.end_date) < moment(res.st * 1000)) continue;
 
                     var div = createArticleGrid(result.__id, result.title, result.start_date);
                     list.push(div);
@@ -275,7 +273,9 @@ function getArticleList(divId) {
                 }
                 $('#' + divId).html(list.join(''));
 
-                addLinkToGrid();
+                clearSort();
+
+                getJoinInfoList(token);
             })
             .fail(function() {
                 alert('failed to get article list');
@@ -285,14 +285,11 @@ function getArticleList(divId) {
 }
 
 function getArticleListImage(id, token) {
-    var base = 'https://demo.personium.io';
-    var cell = 'fst-community-organization';
-    var box = 'app-fst-community-user';
     var DAV = 'test_article_image';
 
     $.ajax({
         type: 'GET',
-        url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
+        url: Common.getToCellBoxUrl() + DAV + '/' + id,
         dataType: 'binary',
         processData: false,
         responseType: 'blob',
@@ -321,12 +318,55 @@ function getArticleListImage(id, token) {
     });
 }
 
+function getJoinInfoList(token) {
+    // get reply list
+    var oData = 'test_reply';
+    var entityType = 'reply_history';
+
+    $.ajax({
+        type: "GET",
+        url: Common.getToCellBoxUrl() + oData + '/' + entityType,
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json"
+        }
+    })
+    .done(function(res) {
+        // set num
+        var count = {}
+        for (val of res.d.results) {
+            if($('#join_' + val.provide_id)[0]) {
+                if(count[val.provide_id] == null) {
+                    count[val.provide_id] = {}
+                    count[val.provide_id].join = 0;
+                    count[val.provide_id].consider = 0;
+                }
+
+                switch(parseInt(val.entry_flag)) {
+                    case REPLY.JOIN: count[val.provide_id].join++; break;
+                    case REPLY.CONSIDER: count[val.provide_id].consider++; break;
+                    default: alert('error: get reply information'); berak;
+                }
+
+            }
+        }
+        for (key in count) {
+            var joinHtml = '<i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>: '
+                + count[key].join
+                + '<i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>: '
+                + count[key].consider;
+            joinList[key] = joinHtml;
+            $('#join_' + key).html(joinHtml);
+        }
+    })
+    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        alert(XMLHttpRequest.status + ' ' + textStatus + ' ' + errorThrown);
+    });
+}
+
 function getArticleDetail(id) {
 
     callArticleFunction(function (token) {
-        var base = 'https://demo.personium.io';
-        var cell = 'fst-community-organization';
-        var box = 'app-fst-community-user';
         var oData = 'test_article';
         var entityType = 'provide_information';
         var DAV = 'test_article_image';
@@ -337,7 +377,7 @@ function getArticleDetail(id) {
             // get text
             $.ajax({
                 type: 'GET',
-                url: base + '/' + cell + '/' + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                url: Common.getToCellBoxUrl() + oData + '/' + entityType + "('" + id + "')",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -353,7 +393,7 @@ function getArticleDetail(id) {
             // get image
             $.ajax({
                 type: 'GET',
-                url: base + '/' + cell + '/' + box + '/' + DAV + '/' + id,
+                url: Common.getToCellBoxUrl() + DAV + '/' + id,
                 dataType: 'binary',
                 processData: false,
                 responseType: 'blob',
@@ -371,7 +411,7 @@ function getArticleDetail(id) {
             // get reply info
             $.ajax({
                 type: 'GET',
-                url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                url: Common.getToCellBoxUrl() + "test_reply/reply_history",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -438,7 +478,7 @@ function getArticleDetail(id) {
             $.when(
                 $.ajax({
                     type: 'GET',
-                    url: Common.getCellUrl() + box + "/test_reply/reply_history",
+                    url: Common.getBoxUrl() + "test_reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + Common.getToken(),
                         "Accept": "application/json"
@@ -449,7 +489,7 @@ function getArticleDetail(id) {
                 }),
                 $.ajax({
                     type: 'GET',
-                    url: base + '/' + cell + '/' + box + "/test_reply/reply_history",
+                    url: Common.getToCellBoxUrl() + "test_reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + token,
                         "Accept": "application/json"
@@ -520,7 +560,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
         var err = [];
         var saveToUserCell = function(){
             var method = 'POST';
-            var url = Common.getCellUrl() + box + '/' + oData + '/' + entityType;
+            var url = Common.getBoxUrl() + oData + '/' + entityType;
             if(userReplyId) {
                 method = 'PUT';
                 url += "('" + userReplyId + "')";
@@ -550,12 +590,10 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
         };
 
         var saveToOrganizationCell = function(res) {
-            var base = 'https://demo.personium.io';
-            var cell = 'fst-community-organization';
             var id = res.d ? res.d.results.__id : res;
 
             var method = 'POST';
-            var url = base + '/' + cell + '/' + box + '/' + oData + '/' + entityType;
+            var url = Common.getToCellBoxUrl() + oData + '/' + entityType;
             if (orgReplyId) {
                 method = 'PUT';
                 url += "('" + orgReplyId + "')";
@@ -586,7 +624,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     if(!userReplyId){
                         $.ajax({
                             type: 'DELETE',
-                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            url: Common.getBoxUrl() + oData + '/' + entityType + "('" + id + "')",
                             headers: {
                                 'Authorization': 'Bearer ' + Common.getToken()
                             }
@@ -600,7 +638,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     } else {
                         $.ajax({
                             type: 'PUT',
-                            url: Common.getCellUrl() + box + '/' + oData + '/' + entityType + "('" + id + "')",
+                            url: Common.getBoxUrl() + oData + '/' + entityType + "('" + id + "')",
                             headers: {
                                 'Authorization': 'Bearer ' + Common.getToken()
                             },
@@ -690,6 +728,12 @@ function sortArticle(key, reverse, type){
         $('#' + key).css('background-image', "url('" + value + "')");
     })
 
+    $.each(joinList, function(key, value) {
+        if ($('#join_' + key)[0]){
+            $('#join_' + key).html(value);
+        }
+    })
+
     addLinkToGrid();
 }
 
@@ -699,6 +743,7 @@ function clearSort() {
 }
 
 function createArticleGrid(id, title, date){
+    date = date || "";
     var div = '<div data-href="javascript:getArticleDetail(\'' + id + '\')">';
     div += '<div class="col-xs-4 col-md-2 block_img">'
         + '<span id="' + id + '" class="cover"></span>'
@@ -706,10 +751,14 @@ function createArticleGrid(id, title, date){
     div += '<div class="col-xs-8 col-md-4 block_description">'
         + '<table class="stealth_table">'
         + '<tr class="date"><td>' + date + '</td></tr>'
-        + '<tr class="title"><td>' + title + '</td></tr>'
-        + '</table>'
-        + '</div>';
-    div += '</div>';
+        + '<tr class="title"><td>' + title + '</td></tr>';
+
+    // article type is event
+    if(date != ""){
+        div += '<tr class="join"><td id="join_' + id + '"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i>:0 <i class="fa fa-fw fa-check-square-o" aria-hidden="true"></i>:0</td></tr>';
+    }
+
+    div += '</table></div></div>';
 
     return div;
 }

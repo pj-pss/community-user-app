@@ -432,6 +432,14 @@ header > a {
   margin: auto;
 }
 
+.stealth_table .join {
+  height: 20%;
+}
+
+.stealth_table .join td {
+  font-size: 90%;
+  text-align: right;
+}
 
 .stealth_table .title td{
   text-align: center;
@@ -468,7 +476,8 @@ header > a {
 .stealth_table .title {
   font-size: 5vmin;
 }
-.stealth_table .date {
+.stealth_table .date,
+.stealth_table .join {
   font-size: 4.5vmin;
   color: black;
 }
@@ -489,7 +498,8 @@ header > a {
     font-size: 18px;
   }
   .top_menu button,
-  .stealth_table .date {
+  .stealth_table .date,
+  .stealth_table .join {
     font-size: 17px;
   }
 }
@@ -506,7 +516,8 @@ header > a {
     font-size: 24px;
   }
   .top_menu button,
-  .stealth_table .date {
+  .stealth_table .date,
+  .stealth_table .join {
     font-size: 23px;
   }
 }
