@@ -573,6 +573,8 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
 
     callArticleFunction(function(token) {
         var err = [];
+        var anonymous = $('[name=checkAnonymous]').prop('checked');
+
         var saveToUserCell = function(){
             var method = 'POST';
             var url = Common.getBoxUrl() + oData + '/' + entityType;
@@ -591,7 +593,8 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                     // 'update_user_id'
                     'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
-                    'entry_flag': reply
+                    'entry_flag': reply,
+                    'anonymous': anonymous
                 })
             })
             .then(
@@ -613,7 +616,6 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 method = 'PUT';
                 url += "('" + orgReplyId + "')";
             }
-            var anonymous = $('[name=checkAnonymous]').prop('checked')
 
             return $.ajax({
                 type: method,
