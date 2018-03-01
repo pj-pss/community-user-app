@@ -814,11 +814,21 @@ function getUserProfile() {
                 "Authorization": "Bearer " + Common.getToken(),
                 "Accept": "application/json"
             }
+        }),
+        $.ajax({
+            type: 'GET',
+            url: Common.getBoxUrl() + "test_user_info/user_vital",
+            headers: {
+                "Authorization": "Bearer " + Common.getToken(),
+                "Accept": "application/json"
+            }
         })
     )
-    .done(function(res1, res2){
+    .done(function(res1, res2, res3){
         var basicInfo = res1[0].d.results[0];
         var healthInfo = res2[0].d.results[0];
+        var vital = res3[0].d.results[0];
+        var preVital = res3[0].d.results[1];
 
         var basicInfoHtml = '<dt>'
             + '<dt>姓名:</dt>'
@@ -840,25 +850,22 @@ function getUserProfile() {
 
         var healthInfoHtml = '<dt>'
             + '<dt>身長:</dt>'
-            + '<dd>' + healthInfo.height + 'cm</dd>'
+            + '<dd>' + healthInfo.height + ' cm</dd>'
             + '<dt>体重:</dt>'
-            + '<dd>' + healthInfo.weight + 'kg</dd>'
+            + '<dd>' + healthInfo.weight + ' kg</dd>'
             + '<dt>BMI:</dt>'
             + '<dd>' + healthInfo.bmi + '</dd>'
             + '<dt>腹囲:</dt>'
-            + '<dd>' + healthInfo.grith_abdomen + 'cm</dd>'
+            + '<dd>' + healthInfo.grith_abdomen + ' cm</dd>'
             + '</dt>';
         $('#healthInfo').html(healthInfoHtml);
 
         var vitalHtml = '<dt>'
             + '<dt>体温 (℃):</dt>'
-            + '<dd>' + healthInfo.temperature + '</dd>'
-            + '<dt>血圧 左 (mmHg):</dt>'
-            + '<dd>' + healthInfo.pressure_left + '</dd>'
-            + '<dt>血圧 右(mmHg):</dt>'
-            + '<dd>' + healthInfo.pressure_right + '</dd>'
-            + '<dt>血圧 左右2回目(mmHg):</dt>'
-            + '<dd>' + healthInfo.pressure_second + '</dd>'
+            + '<dd>' + vital.temperature + '</dd>'
+            + '<dt>血圧:</dt>'
+            + '<dd>' + vital.max_pressure + ' mmHg' + ' (-)' + '</dd>'
+            + '<dd>' + vital.min_pressure + ' mmHg' + ' (-)' + '</dd>'
             + '</dt>';
         $('#vital').html(vitalHtml);
 
