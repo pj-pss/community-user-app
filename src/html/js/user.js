@@ -825,10 +825,25 @@ function getUserProfile() {
         })
     )
     .done(function(res1, res2, res3){
+        vitalList = _.sortBy(res3[0].d.results, function(item){return item.__updated});
+        vitalList.reverse();
+
         var basicInfo = res1[0].d.results[0];
         var healthInfo = res2[0].d.results[0];
-        var vital = res3[0].d.results[0];
-        var preVital = res3[0].d.results[1];
+        var vital = vitalList[0];
+        var preVital = vitalList[1];
+
+        if(preVital != null) {
+            var tempDiff = Math.round((vital.temperature - preVital.temperature) * 10)/10;
+            var minDiff = vital.min_pressure - preVital.min_pressure;
+            var maxDiff = vital.max_pressure - preVital.max_pressure;
+            var pulseDiff = vital.pulse - preVital.pulse;
+
+            tempDiff = tempDiff < 0 ? tempDiff : '+' + tempDiff;
+            minDiff = minDiff < 0 ? minDiff : '+' + minDiff;
+            maxDiff = maxDiff < 0 ? maxDiff : '+' + maxDiff;
+            pulseDiff = pulseDiff < 0 ? pulseDiff : '+' + pulseDiff;
+        }
 
         var basicInfoHtml = '<dt>'
             + '<dt>姓名:</dt>'
@@ -862,10 +877,12 @@ function getUserProfile() {
 
         var vitalHtml = '<dt>'
             + '<dt>体温 (℃):</dt>'
-            + '<dd>' + vital.temperature + '</dd>'
+            + '<dd>' + vital.temperature + ' (' + (tempDiff || '-') + ')' + '</dd>'
             + '<dt>血圧:</dt>'
-            + '<dd>' + vital.max_pressure + ' mmHg' + ' (-)' + '</dd>'
-            + '<dd>' + vital.min_pressure + ' mmHg' + ' (-)' + '</dd>'
+            + '<dd>最高: ' + vital.max_pressure + ' mmHg' + ' (' + (maxDiff || '-') + ')' + '</dd>'
+            + '<dd>最低: ' + vital.min_pressure + ' mmHg' + ' (' + (minDiff || '-') + ')' + '</dd>'
+            + '<dt>脈拍:</dt>'
+            + '<dd>' + vital.pulse + ' bpm' + ' (' + (pulseDiff || '-') + ')' +  '</dd>'
             + '</dt>';
         $('#vital').html(vitalHtml);
 
