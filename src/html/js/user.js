@@ -845,13 +845,20 @@ function getUserProfile() {
             pulseDiff = pulseDiff < 0 ? pulseDiff : '+' + pulseDiff;
         }
 
+        var sex;
+        switch(basicInfo.sex) {
+            case 'male': sex = '男性'; break;
+            case 'female': sex = '女性'; break;
+            default: sex = 'その他';
+        }
+
         var basicInfoHtml = '<dt>'
             + '<dt>姓名:</dt>'
             + '<dd>' + basicInfo.name + '</dd>'
             + '<dt>ふりがな:</dt>'
             + '<dd>' + basicInfo.name_kana + '</dd>'
             + '<dt>性別:</dt>'
-            + '<dd>' + basicInfo.sex + '</dd>'
+            + '<dd>' + sex + '</dd>'
             + '<dt>生年月日:</dt>'
             + '<dd>' + basicInfo.birthday + '</dd>'
             + '<dt>郵便番号:</dt>'
