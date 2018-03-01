@@ -52,6 +52,7 @@ var imageList = {};
 var joinList = {};
 var sort_key = 'updated';
 var filter = null;
+var currentTime = moment();
 
 getEngineEndPoint = function () {
     return Common.getAppCellUrl() + "__/html/Engine/getAppAuthToken";
@@ -59,8 +60,16 @@ getEngineEndPoint = function () {
 
 additionalCallback = function () {
     Common.setIdleTime();
-    getArticleList('topEvent');
-    getUserProfile();
+    $.ajax({
+        // get current time on japan
+        type: 'GET',
+        url: 'https://ntp-b1.nict.go.jp/cgi-bin/json'
+    })
+    .done(function(res) {
+        currentTime = moment(res.st * 1000);
+        getArticleList('topEvent');
+        getUserProfile();
+    })
 }
 
 getNamesapces = function () {
@@ -252,46 +261,40 @@ function getArticleList(divId) {
         var entityType = 'provide_information';
 
         $.ajax({
-            // get current time on japan
-            type: 'GET',
-            url: 'https://ntp-b1.nict.go.jp/cgi-bin/json'
-        }).done(function(res){
-            $.ajax({
-                type: "GET",
-                url: Common.getToCellBoxUrl() + oData + '/' + entityType,
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Accept" : "application/json"
-                }
-            }).done(function(data) {
-                $('#' + divId).empty();
-                var list = [];
-                var results = data.d.results;
-                articleList = [];
-                for(result of results.reverse()){
-                    if (result.type == TYPE.EVENT && moment(result.end_date) < moment(res.st * 1000)) continue;
+            type: "GET",
+            url: Common.getToCellBoxUrl() + oData + '/' + entityType,
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Accept" : "application/json"
+            }
+        }).done(function(data) {
+            $('#' + divId).empty();
+            var list = [];
+            var results = data.d.results;
+            articleList = [];
+            for(result of results.reverse()){
+                if (result.type == TYPE.EVENT && moment(result.end_date) < currentTime) continue;
 
-                    var div = createArticleGrid(result.__id, result.title, result.start_date);
-                    list.push(div);
-                    getArticleListImage(result.__id, token);
+                var div = createArticleGrid(result.__id, result.title, result.start_date);
+                list.push(div);
+                getArticleListImage(result.__id, token);
 
-                    articleList.push({
-                        id: result.__id,
-                        type: result.type,
-                        title: result.title,
-                        updated: result.__updated,
-                        start_date: result.start_date
-                    });
-                }
-                $('#' + divId).html(list.join(''));
+                articleList.push({
+                    id: result.__id,
+                    type: result.type,
+                    title: result.title,
+                    updated: result.__updated,
+                    start_date: result.start_date
+                });
+            }
+            $('#' + divId).html(list.join(''));
 
-                clearSort();
+            clearSort();
 
-                getJoinInfoList(token);
-            })
-            .fail(function() {
-                alert('failed to get article list');
-            });
+            getJoinInfoList(token);
+        })
+        .fail(function() {
+            alert('failed to get article list');
         });
     }, divId);
 }
@@ -860,7 +863,7 @@ function getUserProfile() {
             + '<dt>性別:</dt>'
             + '<dd>' + sex + '</dd>'
             + '<dt>生年月日:</dt>'
-            + '<dd>' + basicInfo.birthday + '</dd>'
+            + '<dd>' + basicInfo.birthday + ' (' + currentTime.diff(moment(basicInfo.birthday, 'years')) + '歳)</dd>'
             + '<dt>郵便番号:</dt>'
             + '<dd>' + basicInfo.postal_code + '</dd>'
             + '<dt>住所:</dt>'
