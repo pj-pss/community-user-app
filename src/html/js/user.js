@@ -852,13 +852,13 @@ function getUserProfile() {
 
         var vitalHtml = '<dt>'
             + '<dt>体温 (℃):</dt>'
-            + '<dd>' + healthInfo.height + 'cm</dd>'
+            + '<dd>' + healthInfo.temperature + '</dd>'
             + '<dt>血圧 左 (mmHg):</dt>'
-            + '<dd>' + healthInfo.weight + 'kg</dd>'
+            + '<dd>' + healthInfo.pressure_left + '</dd>'
             + '<dt>血圧 右(mmHg):</dt>'
-            + '<dd>' + healthInfo.bmi + '</dd>'
+            + '<dd>' + healthInfo.pressure_right + '</dd>'
             + '<dt>血圧 左右2回目(mmHg):</dt>'
-            + '<dd>' + healthInfo.grith_abdomen + 'cm</dd>'
+            + '<dd>' + healthInfo.pressure_second + '</dd>'
             + '</dt>';
         $('#vital').html(vitalHtml);
 
