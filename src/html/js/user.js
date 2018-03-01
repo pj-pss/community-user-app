@@ -60,6 +60,7 @@ getEngineEndPoint = function () {
 additionalCallback = function () {
     Common.setIdleTime();
     getArticleList('topEvent');
+    getUserProfile();
 }
 
 getNamesapces = function () {
@@ -246,7 +247,7 @@ $(function() {
 });
 
 function getArticleList(divId) {
-    callArticleFunction(function (token){
+    getTokenCallback(function (token){
         var oData = 'test_article';
         var entityType = 'provide_information';
 
@@ -377,7 +378,7 @@ function getJoinInfoList(token) {
 
 function getArticleDetail(id) {
 
-    callArticleFunction(function (token) {
+    getTokenCallback(function (token) {
         var oData = 'test_article';
         var entityType = 'provide_information';
         var DAV = 'test_article_image';
@@ -537,7 +538,7 @@ function getArticleDetail(id) {
     }, id);
 }
 
-function callArticleFunction(callback, id) {
+function getTokenCallback(callback, id) {
     if (Common.getCellUrl() == ORGANIZATION_CELL_URL) {
         callback(Common.getToken(), id);
     } else {
@@ -571,7 +572,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
     var oData = 'test_reply';
     var entityType = 'reply_history';
 
-    callArticleFunction(function(token) {
+    getTokenCallback(function(token) {
         var err = [];
         var anonymous = $('[name=checkAnonymous]').prop('checked');
 
@@ -794,4 +795,76 @@ function addLinkToGrid() {
             window.location = $(this).attr('data-href');
         });
     });
+}
+
+function getUserProfile() {
+    $.when(
+        $.ajax({
+            type: 'GET',
+            url: Common.getBoxUrl() + "test_user_info/user_basic_information",
+            headers: {
+                "Authorization": "Bearer " + Common.getToken(),
+                "Accept": "application/json"
+            }
+        }),
+        $.ajax({
+            type: 'GET',
+            url: Common.getBoxUrl() + "test_user_info/user_health_information",
+            headers: {
+                "Authorization": "Bearer " + Common.getToken(),
+                "Accept": "application/json"
+            }
+        })
+    )
+    .done(function(res1, res2){
+        var basicInfo = res1[0].d.results[0];
+        var healthInfo = res2[0].d.results[0];
+
+        var basicInfoHtml = '<dt>'
+            + '<dt>姓名:</dt>'
+            + '<dd>' + basicInfo.name + '</dd>'
+            + '<dt>ふりがな:</dt>'
+            + '<dd>' + basicInfo.name_kana + '</dd>'
+            + '<dt>性別:</dt>'
+            + '<dd>' + basicInfo.sex + '</dd>'
+            + '<dt>生年月日:</dt>'
+            + '<dd>' + basicInfo.birthday + '</dd>'
+            + '<dt>郵便番号:</dt>'
+            + '<dd>' + basicInfo.postal_code + '</dd>'
+            + '<dt>住所:</dt>'
+            + '<dd>' + basicInfo.address + '</dd>'
+            + '<dt>コメント:</dt>'
+            + '<dd>' + basicInfo.comment + '</dd>'
+            + '</dt>';
+        $('#basicInfo').html(basicInfoHtml);
+
+        var healthInfoHtml = '<dt>'
+            + '<dt>身長:</dt>'
+            + '<dd>' + healthInfo.height + 'cm</dd>'
+            + '<dt>体重:</dt>'
+            + '<dd>' + healthInfo.weight + 'kg</dd>'
+            + '<dt>BMI:</dt>'
+            + '<dd>' + healthInfo.bmi + '</dd>'
+            + '<dt>腹囲:</dt>'
+            + '<dd>' + healthInfo.grith_abdomen + 'cm</dd>'
+            + '</dt>';
+        $('#healthInfo').html(healthInfoHtml);
+
+        var vitalHtml = '<dt>'
+            + '<dt>体温 (℃):</dt>'
+            + '<dd>' + healthInfo.height + 'cm</dd>'
+            + '<dt>血圧 左 (mmHg):</dt>'
+            + '<dd>' + healthInfo.weight + 'kg</dd>'
+            + '<dt>血圧 右(mmHg):</dt>'
+            + '<dd>' + healthInfo.bmi + '</dd>'
+            + '<dt>血圧 左右2回目(mmHg):</dt>'
+            + '<dd>' + healthInfo.grith_abdomen + 'cm</dd>'
+            + '</dt>';
+        $('#vital').html(vitalHtml);
+
+    })
+    .fail(function() {
+        alert('error: get user profile');
+    });
+
 }
