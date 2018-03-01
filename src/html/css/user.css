@@ -916,13 +916,13 @@ table.tbl_prof input[type="text"] {
   background-color: #bddbbc;
   border-radius: 10px;
   margin: 0px 20px;
-  padding: 5px;
+  padding: 1px;
 }
 
 .article_body {
   background-color: white;
   border-radius: 5px;
-  margin-top: 5px;
+  margin: 4px;
   padding: 10px;
   font-size: 18px;
 }

@@ -157,6 +157,16 @@ function openInforDisclosureHistoryPer(type) {
     $('#modal-inforDisclosureHistoryPer').modal('show');
 }
 
+function openSendReplyModal(reply, articleId, userReplyId, orgReplyId) {
+    var arg = reply + ",'" + articleId + "'";
+    if(userReplyId && orgReplyId) {
+        arg += ", '" + userReplyId + "', '" + orgReplyId + "'";
+    }
+
+    $('#sendReplyButton').attr('onclick', 'replyEvent(' + arg + ')');
+    $('#modal-sendReply').modal('show');
+}
+
 // load html
 $(function() {
     $("#top").load("top.html", function() {
@@ -210,6 +220,7 @@ $(function() {
     $("#modal-personalInfo3").load("modal-personalInfo3.html");
     $("#modal-startHelpOp").load("modal-startHelpOp.html");
     $("#modal-clubHistory").load("modal-clubHistory.html");
+    $("#modal-sendReply").load("modal-sendReply.html");
 
 	$('#modal-nfcReader').on('hidden.bs.modal', function () {
 		if(helpAuthorized) {
@@ -432,6 +443,10 @@ function getArticleDetail(id) {
 
             if (article.type == TYPE.EVENT && article.start_date && article.end_date) {
                 var term = article.start_date + ' ' + article.start_time + ' ~ ' + (article.end_date == article.start_date ? '' : article.end_date) + ' ' + article.end_time;
+
+                $('#replyContainer').css('display', '');
+            } else {
+                $('#replyContainer').css('display', 'none');
             }
 
             link = $('<a></a>').attr('href', article.url);
@@ -495,7 +510,7 @@ function getArticleDetail(id) {
                         "Accept": "application/json"
                     },
                     data: {
-                        "\$filter": "provide_id eq '" + article.__id + "' and user_id eq '" + Common.getCellUrl() /* dummy ID */ + "'"
+                        "\$filter": "provide_id eq '" + article.__id + "' and user_cell_url eq '" + Common.getCellUrl() /* dummy ID */ + "'"
                     }
                 })
             )
@@ -505,8 +520,8 @@ function getArticleDetail(id) {
                 if (userCell && orgCell){
                     updateReplyLink(userCell.entry_flag, article.__id, userCell.__id, orgCell.__id);
                 } else {
-                    $('#joinEvent').attr('href', "javascript:replyEvent(" + REPLY.JOIN + ", '" + article.__id + "')");
-                    $('#considerEvent').attr('href', "javascript:replyEvent(" + REPLY.CONSIDER + ", '" + article.__id + "')");
+                    $('#joinEvent').attr('href', "javascript:openSendReplyModal(" + REPLY.JOIN + ", '" + article.__id + "')");
+                    $('#considerEvent').attr('href', "javascript:openSendReplyModal(" + REPLY.CONSIDER + ", '" + article.__id + "')");
                 }
             })
             .fail(function() {
@@ -558,6 +573,8 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
 
     callArticleFunction(function(token) {
         var err = [];
+        var anonymous = $('[name=checkAnonymous]').prop('checked');
+
         var saveToUserCell = function(){
             var method = 'POST';
             var url = Common.getBoxUrl() + oData + '/' + entityType;
@@ -574,9 +591,10 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': Common.getCellUrl(), // dummy ID
+                    'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
-                    'entry_flag': reply
+                    'entry_flag': reply,
+                    'anonymous': anonymous
                 })
             })
             .then(
@@ -607,10 +625,11 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                 },
                 data: JSON.stringify({
                     // 'update_user_id'
-                    'user_id': Common.getCellUrl(), // dummy ID
+                    'user_cell_url': Common.getCellUrl(), // dummy ID
                     'provide_id': articleId,
                     'entry_flag': reply,
-                    'user_reply_id': id
+                    'user_reply_id': id,
+                    'anonymous': anonymous
                 })
             })
             .then(
@@ -644,7 +663,6 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
                             },
                             data: JSON.stringify({
                                 // 'update_user_id'
-                                'user_id': Common.getCellUrl(), // dummy ID
                                 'provide_id': articleId,
                                 'entry_flag': reply == REPLY.JOIN ? REPLY.CONSIDER : REPLY.JOIN
                             })
@@ -693,11 +711,13 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
     var argConsider = '';
     switch (reply) {
         case REPLY.JOIN:
+            argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         case REPLY.CONSIDER:
             argJoin += REPLY.JOIN + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
+            argConsider += REPLY.CONSIDER + ",'" + articleId + "', '" + userReplyId + "', '" + orgReplyId + "'";
             break;
 
         default:
@@ -705,8 +725,9 @@ function updateReplyLink(reply, articleId, userReplyId, orgReplyId){
             alert('error: read reply information');
             break;
     }
-    $('#joinEvent').attr('href', "javascript:replyEvent(" + argJoin + ")");
-    $('#considerEvent').attr('href', "javascript:replyEvent(" + argConsider + ")");
+
+    $('#joinEvent').attr('href', "javascript:openSendReplyModal(" + argJoin + ")");
+    $('#considerEvent').attr('href', "javascript:openSendReplyModal(" + argConsider + ")");
 }
 
 function sortArticle(key, reverse, type){
