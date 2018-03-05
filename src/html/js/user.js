@@ -256,7 +256,7 @@ $(function() {
 });
 
 function getArticleList(divId) {
-    getTokenCallback(function (token){
+    getExCellToken(function (token){
         var oData = 'test_article';
         var entityType = 'provide_information';
 
@@ -381,7 +381,7 @@ function getJoinInfoList(token) {
 
 function getArticleDetail(id) {
 
-    getTokenCallback(function (token) {
+    getExCellToken(function (token) {
         var oData = 'test_article';
         var entityType = 'provide_information';
         var DAV = 'test_article_image';
@@ -541,7 +541,7 @@ function getArticleDetail(id) {
     }, id);
 }
 
-function getTokenCallback(callback, id) {
+function getExCellToken(callback, id) {
     if (Common.getCellUrl() == ORGANIZATION_CELL_URL) {
         callback(Common.getToken(), id);
     } else {
@@ -575,7 +575,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
     var oData = 'test_reply';
     var entityType = 'reply_history';
 
-    getTokenCallback(function(token) {
+    getExCellToken(function(token) {
         var err = [];
         var anonymous = $('[name=checkAnonymous]').prop('checked');
 
