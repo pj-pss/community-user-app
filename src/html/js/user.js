@@ -212,7 +212,7 @@ $(function() {
     $("#viewDataExport").load("viewDataExport.html");
     $("#viewQRCode").load("viewQRCode.html");
     $("#articleDetail").load("articleDetail.html");
-
+    $("#entryList").load("entryList.html");
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
     $("#modal-personalInfo").load("modal-personalInfo.html");
@@ -375,6 +375,87 @@ function getJoinInfoList(token) {
     });
 }
 
+function formatDate(date) {
+	var yyyymmdd =  date.getFullYear() + '/' +
+	          ('0' + (date.getMonth() + 1)).slice(-2) + '/' +
+	          ('0' + (date.getDate())).slice(-2);
+	return yyyymmdd;
+}
+
+function viewJoinConsiderList(entryFlag,articleId){
+    callArticleFunction(function (token,arg) {
+	    var oData = 'test_reply';
+	    var entityType = 'reply_history';
+
+	    $.ajax({
+	        type: "GET",
+	        url: Common.getToCellBoxUrl() + oData + '/' + entityType + '?\$filter=entry_flag eq ' + arg[0] + ' and provide_id eq \'' + arg[1] + '\'&\$orderby=__updated desc',
+	        headers: {
+	            "Authorization": "Bearer " + token,
+	            "Accept": "application/json"
+	        }
+	    })
+	    .done(function(res) {
+			var list = [];
+			this.entryDatas = res.d.results;
+			_.each(this.entryDatas, $.proxy(function(entryData){
+			    list.push($.ajax({
+			        type: "GET",
+					dataType: 'json',
+			        url : entryData.user_cell_url + '__/profile.json',
+			        headers: {
+			            "Authorization": "Bearer " + token,
+			            "Accept" : "application/json"
+			        }
+		    	}));
+			},this));
+
+			this.multi = list.length !== 1 ? true : false;
+			$.when.apply($, list).done($.proxy(function () {
+				var profiles = arguments;
+				if(!this.multi){
+					profiles = {0:arguments}
+				}
+				$("#entry-list table").children().remove();
+				if(arg[0] === REPLY.JOIN){
+					$("#entry-list-title").attr("data-i18n", "pageTitle.participate");
+				}else{
+					$("#entry-list-title").attr("data-i18n", "pageTitle.consider");
+				}
+
+				$("#entry-list-count").text(this.entryDatas.length.toString());
+
+				for(var i = 0; i < this.entryDatas.length; i++){
+					var updated = formatDate(new Date(parseInt(this.entryDatas[i].__updated.match(/\/Date\((.*)\)\//i)[1],10)));
+					var dispname = '<td data-i18n=\"entry.anonymous\"></td>';
+					var dispdescription = "";
+					var	imgsrc = "image/user-circle.png";
+					if(!this.entryDatas[i].anonymous){
+						dispname = '<td>' + profiles[i][0].DisplayName + '</td>';
+						dispdescription = profiles[i][0].Description;
+						if(profiles[i][0].Image !== ""){
+							imgsrc = profiles[i][0].Image;
+						}
+					}
+
+					var img = '<img class=\"image-circle-large\" src=\"' + imgsrc + '\" alt=\"image\"></img>';
+					var elem = '<tr><td rowspan="3" class="td-bd">' + img + '</td>' + dispname + '<td rowspan="3" class="td-bd"><i class="fa fa-fw fa-angle-right icon" aria-hidden="true"></i></td></tr><tr><td>' + dispdescription + '</td></tr><tr><td class="td-bd">' + updated + '</td></tr>';
+
+					$("#entry-list table").append(elem);
+				}
+				view('entryList');
+
+			},this)).fail(function() {
+				console.log('error: get profile.json');
+			});
+	    })
+	    .fail(function() {
+	        alert('error: get reply_history');
+	    });
+
+    }, [entryFlag,articleId]);
+}
+
 function getArticleDetail(id) {
 
     callArticleFunction(function (token) {
@@ -488,7 +569,8 @@ function getArticleDetail(id) {
             }
             $('#joinNum').html(join);
             $('#considerNum').html(consider);
-
+            $('#join-link').attr('href', "javascript:viewJoinConsiderList(" + REPLY.JOIN + ", '" + article.__id + "')");
+            $('#consider-link').attr('href', "javascript:viewJoinConsiderList(" + REPLY.CONSIDER + ", '" + article.__id  + "')");
             // get reply information
             $.when(
                 $.ajax({
