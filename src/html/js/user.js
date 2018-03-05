@@ -247,7 +247,7 @@ $(function() {
 
 function getArticleList(divId) {
     callArticleFunction(function (token){
-        var oData = 'test_article';
+        var oData = 'article';
         var entityType = 'provide_information';
 
         $.ajax({
@@ -296,7 +296,7 @@ function getArticleList(divId) {
 }
 
 function getArticleListImage(id, token) {
-    var DAV = 'test_article_image';
+    var DAV = 'article_image';
 
     $.ajax({
         type: 'GET',
@@ -331,7 +331,7 @@ function getArticleListImage(id, token) {
 
 function getJoinInfoList(token) {
     // get reply list
-    var oData = 'test_reply';
+    var oData = 'reply';
     var entityType = 'reply_history';
 
     $.ajax({
@@ -375,16 +375,9 @@ function getJoinInfoList(token) {
     });
 }
 
-function formatDate(date) {
-	var yyyymmdd =  date.getFullYear() + '/' +
-	          ('0' + (date.getMonth() + 1)).slice(-2) + '/' +
-	          ('0' + (date.getDate())).slice(-2);
-	return yyyymmdd;
-}
-
 function viewJoinConsiderList(entryFlag,articleId){
     callArticleFunction(function (token,arg) {
-	    var oData = 'test_reply';
+	    var oData = 'reply';
 	    var entityType = 'reply_history';
 
 	    $.ajax({
@@ -426,7 +419,7 @@ function viewJoinConsiderList(entryFlag,articleId){
 				$("#entry-list-count").text(this.entryDatas.length.toString());
 
 				for(var i = 0; i < this.entryDatas.length; i++){
-					var updated = formatDate(new Date(parseInt(this.entryDatas[i].__updated.match(/\/Date\((.*)\)\//i)[1],10)));
+					var updated = moment(new Date(parseInt(this.entryDatas[i].__updated.match(/\/Date\((.*)\)\//i)[1],10)));
 					var dispname = '<td data-i18n=\"entry.anonymous\"></td>';
 					var dispdescription = "";
 					var	imgsrc = "image/user-circle.png";
@@ -439,7 +432,7 @@ function viewJoinConsiderList(entryFlag,articleId){
 					}
 
 					var img = '<img class=\"image-circle-large\" src=\"' + imgsrc + '\" alt=\"image\"></img>';
-					var elem = '<tr><td rowspan="3" class="td-bd">' + img + '</td>' + dispname + '<td rowspan="3" class="td-bd"><i class="fa fa-fw fa-angle-right icon" aria-hidden="true"></i></td></tr><tr><td>' + dispdescription + '</td></tr><tr><td class="td-bd">' + updated + '</td></tr>';
+					var elem = '<tr><td rowspan="3" class="td-bd">' + img + '</td>' + dispname + '<td rowspan="3" class="td-bd"><i class="fa fa-fw fa-angle-right icon" aria-hidden="true"></i></td></tr><tr><td>' + dispdescription + '</td></tr><tr><td class="td-bd">' + updated.format("YYYY/MM/DD") + '</td></tr>';
 
 					$("#entry-list table").append(elem);
 				}
@@ -459,9 +452,9 @@ function viewJoinConsiderList(entryFlag,articleId){
 function getArticleDetail(id) {
 
     callArticleFunction(function (token) {
-        var oData = 'test_article';
+        var oData = 'article';
         var entityType = 'provide_information';
-        var DAV = 'test_article_image';
+        var DAV = 'article_image';
 
         var err = [];
 
@@ -503,7 +496,7 @@ function getArticleDetail(id) {
             // get reply info
             $.ajax({
                 type: 'GET',
-                url: Common.getToCellBoxUrl() + "test_reply/reply_history",
+                url: Common.getToCellBoxUrl() + "reply/reply_history",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -569,13 +562,13 @@ function getArticleDetail(id) {
             }
             $('#joinNum').html(join);
             $('#considerNum').html(consider);
-            $('#join-link').attr('href', "javascript:viewJoinConsiderList(" + REPLY.JOIN + ", '" + article.__id + "')");
-            $('#consider-link').attr('href', "javascript:viewJoinConsiderList(" + REPLY.CONSIDER + ", '" + article.__id  + "')");
+            $('#join-link').attr('onclick', "javascript:viewJoinConsiderList(" + REPLY.JOIN + ", '" + article.__id + "');return false;");
+            $('#consider-link').attr('onclick', "javascript:viewJoinConsiderList(" + REPLY.CONSIDER + ", '" + article.__id  + "');return false;");
             // get reply information
             $.when(
                 $.ajax({
                     type: 'GET',
-                    url: Common.getBoxUrl() + "test_reply/reply_history",
+                    url: Common.getBoxUrl() + "reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + Common.getToken(),
                         "Accept": "application/json"
@@ -586,7 +579,7 @@ function getArticleDetail(id) {
                 }),
                 $.ajax({
                     type: 'GET',
-                    url: Common.getToCellBoxUrl() + "test_reply/reply_history",
+                    url: Common.getToCellBoxUrl() + "reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + token,
                         "Accept": "application/json"
@@ -650,7 +643,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
         return;
     }
     var box = 'app-fst-community-user';
-    var oData = 'test_reply';
+    var oData = 'reply';
     var entityType = 'reply_history';
 
     callArticleFunction(function(token) {
