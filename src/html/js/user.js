@@ -222,7 +222,7 @@ $(function() {
     $("#viewDataExport").load("viewDataExport.html");
     $("#viewQRCode").load("viewQRCode.html");
     $("#articleDetail").load("articleDetail.html");
-
+    $("#entryList").load("entryList.html");
     $("#modal-nfcReader").load("modal-nfcReader.html");
     $("#modal-helpConfirm").load("modal-helpConfirm.html");
     $("#modal-personalInfo").load("modal-personalInfo.html");
@@ -257,7 +257,7 @@ $(function() {
 
 function getArticleList(divId) {
     getExCellToken(function (token){
-        var oData = 'test_article';
+        var oData = 'article';
         var entityType = 'provide_information';
 
         $.ajax({
@@ -300,7 +300,7 @@ function getArticleList(divId) {
 }
 
 function getArticleListImage(id, token) {
-    var DAV = 'test_article_image';
+    var DAV = 'article_image';
 
     $.ajax({
         type: 'GET',
@@ -335,7 +335,7 @@ function getArticleListImage(id, token) {
 
 function getJoinInfoList(token) {
     // get reply list
-    var oData = 'test_reply';
+    var oData = 'reply';
     var entityType = 'reply_history';
 
     $.ajax({
@@ -379,12 +379,86 @@ function getJoinInfoList(token) {
     });
 }
 
+function viewJoinConsiderList(entryFlag,articleId){
+    getExCellToken(function (token,arg) {
+	    var oData = 'reply';
+	    var entityType = 'reply_history';
+
+	    $.ajax({
+	        type: "GET",
+	        url: Common.getToCellBoxUrl() + oData + '/' + entityType + '?\$filter=entry_flag eq ' + arg[0] + ' and provide_id eq \'' + arg[1] + '\'&\$orderby=__updated desc',
+	        headers: {
+	            "Authorization": "Bearer " + token,
+	            "Accept": "application/json"
+	        }
+	    })
+	    .done(function(res) {
+			var list = [];
+			this.entryDatas = res.d.results;
+			_.each(this.entryDatas, $.proxy(function(entryData){
+			    list.push($.ajax({
+			        type: "GET",
+					dataType: 'json',
+			        url : entryData.user_cell_url + '__/profile.json',
+			        headers: {
+			            "Authorization": "Bearer " + token,
+			            "Accept" : "application/json"
+			        }
+		    	}));
+			},this));
+
+			this.multi = list.length !== 1 ? true : false;
+			$.when.apply($, list).done($.proxy(function () {
+				var profiles = arguments;
+				if(!this.multi){
+					profiles = {0:arguments}
+				}
+				$("#entry-list table").children().remove();
+				if(arg[0] === REPLY.JOIN){
+					$("#entry-list-title").attr("data-i18n", "pageTitle.participate");
+				}else{
+					$("#entry-list-title").attr("data-i18n", "pageTitle.consider");
+				}
+
+				$("#entry-list-count").text(this.entryDatas.length.toString());
+
+				for(var i = 0; i < this.entryDatas.length; i++){
+					var updated = moment(new Date(parseInt(this.entryDatas[i].__updated.match(/\/Date\((.*)\)\//i)[1],10)));
+					var dispname = '<td data-i18n=\"entry.anonymous\"></td>';
+					var dispdescription = "";
+					var	imgsrc = "image/user-circle.png";
+					if(!this.entryDatas[i].anonymous){
+						dispname = '<td>' + profiles[i][0].DisplayName + '</td>';
+						dispdescription = profiles[i][0].Description;
+						if(profiles[i][0].Image !== ""){
+							imgsrc = profiles[i][0].Image;
+						}
+					}
+
+					var img = '<img class=\"image-circle-large\" src=\"' + imgsrc + '\" alt=\"image\"></img>';
+					var elem = '<tr><td rowspan="3" class="td-bd">' + img + '</td>' + dispname + '<td rowspan="3" class="td-bd"><i class="fa fa-fw fa-angle-right icon" aria-hidden="true"></i></td></tr><tr><td>' + dispdescription + '</td></tr><tr><td class="td-bd">' + updated.format("YYYY/MM/DD") + '</td></tr>';
+
+					$("#entry-list table").append(elem);
+				}
+				view('entryList');
+
+			},this)).fail(function() {
+				console.log('error: get profile.json');
+			});
+	    })
+	    .fail(function() {
+	        alert('error: get reply_history');
+	    });
+
+    }, [entryFlag,articleId]);
+}
+
 function getArticleDetail(id) {
 
     getExCellToken(function (token) {
-        var oData = 'test_article';
+        var oData = 'article';
         var entityType = 'provide_information';
-        var DAV = 'test_article_image';
+        var DAV = 'article_image';
 
         var err = [];
 
@@ -426,7 +500,7 @@ function getArticleDetail(id) {
             // get reply info
             $.ajax({
                 type: 'GET',
-                url: Common.getToCellBoxUrl() + "test_reply/reply_history",
+                url: Common.getToCellBoxUrl() + "reply/reply_history",
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'Accept': 'application/json'
@@ -492,12 +566,13 @@ function getArticleDetail(id) {
             }
             $('#joinNum').html(join);
             $('#considerNum').html(consider);
-
+            $('#join-link').attr('onclick', "javascript:viewJoinConsiderList(" + REPLY.JOIN + ", '" + article.__id + "');return false;");
+            $('#consider-link').attr('onclick', "javascript:viewJoinConsiderList(" + REPLY.CONSIDER + ", '" + article.__id  + "');return false;");
             // get reply information
             $.when(
                 $.ajax({
                     type: 'GET',
-                    url: Common.getBoxUrl() + "test_reply/reply_history",
+                    url: Common.getBoxUrl() + "reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + Common.getToken(),
                         "Accept": "application/json"
@@ -508,7 +583,7 @@ function getArticleDetail(id) {
                 }),
                 $.ajax({
                     type: 'GET',
-                    url: Common.getToCellBoxUrl() + "test_reply/reply_history",
+                    url: Common.getToCellBoxUrl() + "reply/reply_history",
                     headers: {
                         "Authorization": "Bearer " + token,
                         "Accept": "application/json"
@@ -572,7 +647,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
         return;
     }
     var box = 'app-fst-community-user';
-    var oData = 'test_reply';
+    var oData = 'reply';
     var entityType = 'reply_history';
 
     getExCellToken(function(token) {
