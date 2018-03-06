@@ -256,7 +256,7 @@ $(function() {
 });
 
 function getArticleList(divId) {
-    getExCellToken(function (token){
+    getExtCellToken(function (token){
         var oData = 'article';
         var entityType = 'provide_information';
 
@@ -380,7 +380,7 @@ function getJoinInfoList(token) {
 }
 
 function viewJoinConsiderList(entryFlag,articleId){
-    getExCellToken(function (token,arg) {
+    getExtCellToken(function (token,arg) {
 	    var oData = 'reply';
 	    var entityType = 'reply_history';
 
@@ -455,7 +455,7 @@ function viewJoinConsiderList(entryFlag,articleId){
 
 function getArticleDetail(id) {
 
-    getExCellToken(function (token) {
+    getExtCellToken(function (token) {
         var oData = 'article';
         var entityType = 'provide_information';
         var DAV = 'article_image';
@@ -616,7 +616,7 @@ function getArticleDetail(id) {
     }, id);
 }
 
-function getExCellToken(callback, id) {
+function getExtCellToken(callback, id) {
     if (Common.getCellUrl() == ORGANIZATION_CELL_URL) {
         callback(Common.getToken(), id);
     } else {
@@ -650,7 +650,7 @@ function replyEvent(reply, articleId, userReplyId, orgReplyId) {
     var oData = 'reply';
     var entityType = 'reply_history';
 
-    getExCellToken(function(token) {
+    getExtCellToken(function(token) {
         var err = [];
         var anonymous = $('[name=checkAnonymous]').prop('checked');
 
