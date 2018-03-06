@@ -879,7 +879,7 @@ function getUserProfile() {
     $.when(
         $.ajax({
             type: 'GET',
-            url: Common.getBoxUrl() + "test_user_info/user_basic_information",
+            url: Common.getBoxUrl() + "user_info/user_basic_information",
             headers: {
                 "Authorization": "Bearer " + Common.getToken(),
                 "Accept": "application/json"
@@ -887,7 +887,7 @@ function getUserProfile() {
         }),
         $.ajax({
             type: 'GET',
-            url: Common.getBoxUrl() + "test_user_info/user_health_information",
+            url: Common.getBoxUrl() + "user_info/user_health_information",
             headers: {
                 "Authorization": "Bearer " + Common.getToken(),
                 "Accept": "application/json"
@@ -895,7 +895,7 @@ function getUserProfile() {
         }),
         $.ajax({
             type: 'GET',
-            url: Common.getBoxUrl() + "test_user_info/user_vital",
+            url: Common.getBoxUrl() + "user_info/user_vital",
             headers: {
                 "Authorization": "Bearer " + Common.getToken(),
                 "Accept": "application/json"
@@ -938,7 +938,7 @@ function getUserProfile() {
             + '<dt>性別:</dt>'
             + '<dd>' + sex + '</dd>'
             + '<dt>生年月日:</dt>'
-            + '<dd>' + basicInfo.birthday + ' (' + currentTime.diff(moment(basicInfo.birthday, 'years')) + '歳)</dd>'
+            + '<dd>' + basicInfo.birthday + ' (' + currentTime.diff(moment(basicInfo.birthday), 'years') + '歳)</dd>'
             + '<dt>郵便番号:</dt>'
             + '<dd>' + basicInfo.postal_code + '</dd>'
             + '<dt>住所:</dt>'
